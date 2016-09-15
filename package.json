@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/_mocha",
     "build": "node_modules/.bin/webpack",
-    "doc": "node_modules/.bin/typedoc -out doc ts --mode modules --module commonjs --target ES5 --readme ./README.md --includes ./ts",
+    "doc": "node_modules/.bin/typedoc -out docs ts --mode modules --module commonjs --target ES5 --readme ./README.md --includes ./ts",
     "cover": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
