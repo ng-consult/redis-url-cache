@@ -1,20 +1,17 @@
-# simple-url-cache [![Build Status](https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-url-cache)  [![Coverage Status](https://coveralls.io/repos/github/a-lucas/simple-cache/badge.svg?branch=master)](https://coveralls.io/github/a-lucas/simple-cache?branch=master)  ![Coverage Status](https://img.shields.io/badge/typescript-1.8-yellowgreen.svg)
+# simple-url-cache [![Build Status](https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-url-cache)  [![Coverage Status](https://coveralls.io/repos/github/a-lucas/simple-cache/badge.svg?branch=master)](https://coveralls.io/github/a-lucas/simple-cache?branch=master)  ![TypeScript](https://img.shields.io/badge/typescript-1.8-yellowgreen.svg) ![dependencies](https://david-dm.org/a-lucas/simple-url-cache.svg)
 
 
 This is a cache library used to cache URL and HTML, that supports : 
 
 - File system storage
-- Written in typescript (1.8), compiled with webpack
 - Redis storage
+- Written in typescript (1.8), compiled with webpack
 - Cache rules definitions (regexes)
 - TTL per URLs (regexes)
-
-
 
 # API documentation
 
 You can find it under the folder `docs/index.html`, and it's been generated with `typedoc` https://github.com/TypeStrong/typedoc.
-
 
 # Installation
 
@@ -188,7 +185,7 @@ and make sure the test passes with
 
 `npm test`
 
-If you need to debug, you can use `debug` extensivly with: 
+If you need to debug, you can use `debug` extensively with: 
 
 ```bash
 DEBUG=simple-url-cache-FS,simple-url-cache-REDIS npm test
