@@ -18,7 +18,7 @@ You can find it under the folder `docs/index.html`, and it's been generated with
 
 # Installation
 
-```
+```bash
 npm install --save simple-cache
 ```
 
@@ -30,10 +30,10 @@ The usage across both storage engines is the same, only the storage config file 
 
 
 ```javascript
+
 var simpleCache = require('simple-cache');
 var storageConfig = require('./config'); // get your config file
 var cacheRules = require('./cacheRules'); //get your cache rule definition file
-
 
 var cacheEngine = new simpleCache(storageConfig, cacheRules);
 
@@ -83,7 +83,7 @@ This is an object describing which URL will be cached, which URLs won't be cache
 
 This is the same object, independently of the storage engine used.
 
-An example worth 1000 words, so here is one : 
+An example worth 1000 words : 
 
 ```javascript
 
@@ -152,7 +152,7 @@ It is easy with typescript.
 
 ###     Define a new storage file, for example `mongoStorage.ts`
 
-```javascript
+```typescript
 
 export default class RedisStorage extends CacheCategory implements CacheStorage{
     // define all required methods from the CacheStorage interface 
@@ -167,44 +167,32 @@ And compile it with : `npm run build`
 ```javascript
 
 var simpleCache = require('./../dist/simple-cache.min');
-
 var common = require('./helper/common');
+var cacheRules = require('./helper/cacheRules');
 
-var config = {
-    type: 'mongoo',
-    ... other config values here
-};
+describe('The fileStorage', function() {
 
-var urlConfig = {
-    cacheMaxAge: [
-        {
-            regex: /maxAge.html$/,
-            maxAge: 1
-        }
-    ],
-    cacheAlways: [
-        {
-            regex: /always.html$/
-        }
-    ],
-    cacheNever: [
-        {
-            regex: /never.html$/
-        }
-    ],
-    default: 'never'
-};
+    var storageConfig = {
+        type: 'mongo',
+        ... other config values here
+    };
 
-var mongooCache = new simpleCache(config, urlConfig);
+    var mongoCache = new simpleCache(storageConfig, cacheRules);
 
-describe('The mongoStorage', function () {
     common(mongoCache);
+
 });
 ```
 
 and make sure the test passes with 
 
 `npm test`
+
+If you need to debug, you can use `debug` extensivly with: 
+
+```bash
+DEBUG=simple-url-cache-FS,simple-url-cache-REDIS npm test
+```
 
 ###     Do the same with `mongoStorageWeirdUrl.js`
 

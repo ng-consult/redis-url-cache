@@ -1,7 +1,3 @@
-/**
- * Created by antoine on 15/09/16.
- */
-
 var chai = require('chai');
 var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);

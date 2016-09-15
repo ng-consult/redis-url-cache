@@ -1,10 +1,3 @@
-/**
- * Created by antoine on 15/09/16.
- */
-/**
- * Created by antoine on 15/09/16.
- */
-
 var simpleCache = require('./../dist/simple-cache.min');
 var weirdUrls = require('./helper/weirdUrls');
 
@@ -17,14 +10,14 @@ var expect = chai.expect;
 describe('The redisStorage - weirdURLs', function() {
 
 
-    var config = {
+    var storageConfig = {
         type: 'redis',
         host: '127.0.0.1',
         port: 6379,
         socket_keepalive: true
     };
 
-    var urlConfig = {
+    var cacheRules = {
         cacheMaxAge: [],
         cacheAlways: [
             {
@@ -35,7 +28,7 @@ describe('The redisStorage - weirdURLs', function() {
         default: 'never'
     };
 
-    var redisCache = new simpleCache(config, urlConfig);
+    var redisCache = new simpleCache(storageConfig, cacheRules);
 
     weirdUrls.valid.forEach(function(weirdUrl) {
         var url = redisCache.url(weirdUrl);

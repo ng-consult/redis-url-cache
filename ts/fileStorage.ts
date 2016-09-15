@@ -4,6 +4,9 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as shell from 'shelljs';
 import {polyfill} from 'es6-promise';
+import * as dbug from 'debug';
+let debug = dbug('simple-url-cache-FS');
+
 polyfill();
 
 export default class FileStorage extends CacheCategory implements CacheStorage{
@@ -17,6 +20,8 @@ export default class FileStorage extends CacheCategory implements CacheStorage{
         let escaped = this.escape();
         this._validFile = this.validate(escaped);
         this._currentFilePath = path.join( this._storageConfig.dir, escaped );
+        debug('FileStorage instanciated with url: '+ this._url);
+        debug('_currentFilePath = ', this._currentFilePath);
     }
 
     private escape = (): string => {
@@ -47,30 +52,37 @@ export default class FileStorage extends CacheCategory implements CacheStorage{
                     if (diff > 0) {
                         //the file is expired, remove it, then return false;
                         this.removeUrl();
+                        debug('This url is expired.... removing the cache. ', this._url);
                         resolve(false);
                     } else {
+                        debug('This url is cached.', this._url);
                         resolve(true);
                     }
                 }
+                debug('This url is cached ', this._url);
                 resolve(true);
             } else {
+                debug('This url is not cached ', this._url);
                 resolve(false);
             }
         });
     };
 
     removeUrl = (): Promise<boolean> => {
+        debug('removing url cache: ', this._url);
         return new Promise((resolve, reject) => {
             try {
                 fs.unlinkSync( this._currentFilePath );
                 resolve(true);
             } catch (e) {
+                debug('Error while removing url: ', this._url , e);
                 reject(false);
             }
         });
     };
 
     getUrl = (): Promise<string> => {
+        debug('Retrieving url cache: ', this._url);
         return new Promise((resolve, reject) => {
             this.isCached().then((isCached) => {
                 if(!isCached) {
@@ -84,19 +96,21 @@ export default class FileStorage extends CacheCategory implements CacheStorage{
 
     cache = (html:string, force?: boolean): Promise<boolean> => {
 
+        debug('Caching url ', this._url);
         return new Promise((resolve, reject) => {
             if (!this._validFile ) {
-                console.log('FILE -> ' + 'invalid REJECTED');
+                debug('FILE -> ' + 'invalid REJECTED', this._url);
                 reject('invalid URL');
                 return;
             }
             else {
                 if (force === true) {
-                    fs.writeFile( this._currentFilePath, html, 'utf8' , function(err) {
+                    fs.writeFile( this._currentFilePath, html, 'utf8' , (err) => {
                         if (err) {
-                            console.error(err);
+                            debug('Error while writing cache.', this._url, err);
                             reject('invalid URL');
                         } else {
+                            debug('URL cached sucessfully: ', this._url);
                             resolve(true);
                         }
                     });
@@ -108,25 +122,22 @@ export default class FileStorage extends CacheCategory implements CacheStorage{
                         resolve(false);
                     } else{
                         if (this._currentCategory === 'never') {
-                            console.log('FILE -> ' + 'NEVER = resolved');
+                            debug('Won\'t cache the url - category is never.', this._url)
                             resolve(false);
                             return;
                         }
-                        fs.writeFile( this._currentFilePath, html, 'utf8', function(err) {
+                        fs.writeFile( this._currentFilePath, html, 'utf8', (err) => {
                             if (err) {
-                                console.error(err);
-                                console.log('FILE -> ' + err);
+                                debug('Error while writing cache.', this._url, err);
                                 reject('invalid URL');
                             } else {
+                                debug('URL cached sucessfully: ', this._url);
                                 resolve(true);
                             }
                         } );
                     }
                 });
-
             }
-
-
         });
     };
 }

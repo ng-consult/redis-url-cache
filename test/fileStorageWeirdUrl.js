@@ -13,12 +13,12 @@ var expect = chai.expect;
 
 describe('The fileStorage - weirdURLs', function() {
 
-    var config = {
+    var storageConfig = {
         type: 'file',
         dir: './cache'
     };
 
-    var urlConfig = {
+    var cacheRules = {
         cacheMaxAge: [],
         cacheAlways: [
             {
@@ -29,7 +29,7 @@ describe('The fileStorage - weirdURLs', function() {
         default: 'never'
     };
 
-    var fileCache = new simpleCache(config, urlConfig);
+    var fileCache = new simpleCache(storageConfig, cacheRules);
 
     weirdUrls.valid.forEach(function(weirdUrl) {
         var url = fileCache.url(weirdUrl);

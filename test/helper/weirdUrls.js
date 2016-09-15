@@ -1,7 +1,3 @@
-/**
- * Created by antoine on 15/09/16.
- */
-
 module.exports.valid =
     [
     "the quick brown fox jumped over the lazy dog",
