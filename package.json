@@ -4,7 +4,7 @@
   "description": "A simple cache engine used to store html document with URL keys",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha --recursive test",
+    "test": "node_modules/.bin/mocha",
     "build": "node_modules/.bin/webpack && node_modules/.bin/uglifyjs ./dist/simple-cache.js -c -m -o ./dist/simple-cache.min.js --source-map ./dist/simple-cache.min.js.map"
   },
   "repository": {
