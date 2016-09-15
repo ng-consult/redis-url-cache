@@ -13,7 +13,7 @@ This is a cache library used to cache URL and HTML, that supports :
 
 # API documentation
 
-You can find it under the folder `doc/index.html`, and it's been generated with 
+You can find it under the folder `docs/index.html`, and it's been generated with `typedoc` https://github.com/TypeStrong/typedoc.
 
 
 # Installation
@@ -26,7 +26,7 @@ npm install --save simple-cache
 
 So far, we support two storage engines : file system, and redis.
 
-The usage accross both storage engines is the same, only the storage config file differs.
+The usage across both storage engines is the same, only the storage config file differs.
 
 
 ```javascript
@@ -79,7 +79,7 @@ cacheUrl.removeUrl().then(function(res) {
 
 ## Regex Rules
 
-This is an object describe which URL will be cached, which URLs won't be cached, and which ones will have a ttl expiration.
+This is an object describing which URL will be cached, which URLs won't be cached, and which ones will have a ttl expiration.
 
 This is the same object, independently of the storage engine used.
 
@@ -95,7 +95,7 @@ exports.cacheConfig = {
             maxAge: 3600
         }
     ],
-    // Will cache about-use.html, contact-us.html and /prices.html indefinitively
+    // Will cache about-us.html, contact-us.html and /prices.html indefinitively
     cacheAlways: [  
         {
             regex: /about-us.html$/, 
@@ -117,7 +117,7 @@ exports.cacheConfig = {
 
 ## FileStorage config
 
-The simplest config ou there
+The simplest config file out there.
 
 ```javascript
 
@@ -130,14 +130,13 @@ export.fileStorageCOnfig = {
 
 ## Redis Stoarge config
 
-A bit more complex. The library node_redis is used here, so a valid redis node config fle is needed. You can see it here : https://github.com/NodeRedis/node_redis 
+A bit more complex. The library node_redis is used here, so a valid redis node config file is needed. You can see more about it here : https://github.com/NodeRedis/node_redis 
 
 As an example : 
 
 ```javascript
 
 export.redisStorageConfig = {
-    type: 'redis',
     type: 'redis',
     host: '127.0.0.1',
     port: 6379,
