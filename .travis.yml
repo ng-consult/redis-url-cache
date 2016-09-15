@@ -25,3 +25,5 @@ notifications:
       - cooluhuru@gmail.com
     on_success: always
     on_failure: always
+after_success:
+  - npm run coveralls

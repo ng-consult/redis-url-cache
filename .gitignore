@@ -39,3 +39,5 @@ jspm_packages
 .idea
 typings
 cache
+coverage
+.coveralls.yml
