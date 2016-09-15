@@ -1,5 +1,5 @@
 {
-  "name": "simple-cache",
+  "name": "simple-url-cache",
   "version": "1.0.0",
   "description": "A simple cache engine used to store html document with URL keys",
   "main": "index.js",
@@ -16,11 +16,13 @@
   },
   "keywords": [
     "node.js",
-    "ache",
-    "file",
-    "caching",
+    "cache",
+    "file caching",
+    "url caching",
+    "file cache",
+    "url cache",
     "Redis",
-    "caching"
+    "FileStorage"
   ],
   "author": "Antoine lUCAS",
   "license": "MIT",
