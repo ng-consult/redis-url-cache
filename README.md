@@ -147,7 +147,7 @@ export.redisStorageConfig = {
 ```
 
 
-## Adding file Storages
+## Adding Storages
 
 It is easy with typescript.
 
@@ -209,4 +209,4 @@ and make sure the test passes with
 
 ###     Do the same with `mongoStorageWeirdUrl.js`
 
-###     Send me oru Pull Request
+###     Send me your Pull Request
