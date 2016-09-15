@@ -15,7 +15,7 @@ fs.readdirSync('node_modules')
     });
 
 module.exports = {
-    entry: './ts/index.ts',
+    entry: './ts/cacheEngine.ts',
     externals: nodeModules,
     target: 'node',
     output: {
@@ -27,9 +27,9 @@ module.exports = {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
     },
     devtool: 'source-map',
-    /*plugins: [
-        new webpack.optimize.UglifyJsPlugin({ minimize: true })
-    ],*/
+    plugins: [
+        //new webpack.optimize.UglifyJsPlugin({ minimize: true })
+    ],
     module: {
         loaders: [
             { test: /\.ts$/, loader: 'ts-loader' }

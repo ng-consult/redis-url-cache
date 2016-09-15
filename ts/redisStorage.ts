@@ -21,11 +21,11 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
 
     }
 
-    isRedisOnline = () => {
+    isRedisOnline = (): boolean => {
         return this._redisOnline;
     };
 
-    isCached = () => {
+    isCached = ():Promise<boolean> => {
         return new Promise((resolve, reject) =>{
            this._redisConnection.get(this._url, (err, data) => {
                if (err) {
@@ -40,7 +40,7 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
         });
     };
 
-    removeUrl = () => {
+    removeUrl = (): Promise<boolean> => {
         return new Promise((resolve, reject) =>{
             this._redisConnection.del(this._url, (err, data) => {
                 if (err) {
@@ -52,7 +52,7 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
         });
     };
 
-    getUrl = () => {
+    getUrl = (): Promise<string> => {
         return new Promise((resolve, reject) =>{
             this._redisConnection.get(this._url, (err, data) => {
                 if(err) {
@@ -68,7 +68,7 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
         });
     };
 
-    cache = (html, force) => {
+    cache = (html: string, force?: boolean): Promise<boolean> => {
         return new Promise((resolve, reject) =>{
             if (force === true) {
                 this._redisConnection.set(this._url, html, (err, result) => {

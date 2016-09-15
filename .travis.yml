@@ -16,7 +16,7 @@ before_install:
   - sudo apt-get -qq update
   - npm install
 install:
-  npm run build
+  - npm run build
 node_js:
   - "5.11"
 notifications:

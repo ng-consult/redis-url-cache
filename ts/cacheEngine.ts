@@ -3,9 +3,9 @@ import RedisStorage from './redisStorage';
 
 import {StorageConfig, CacheRules} from './interfaces';
 
-class CacheEngine {
+module.exports = class CacheEngine {
 
-    constructor( private storageConfig: any, private cacheRules: CacheRules) {}
+    constructor( private storageConfig: StorageConfig, private cacheRules: CacheRules) {}
 
     url(url: string) {
         switch(this.storageConfig.type) {
@@ -18,5 +18,3 @@ class CacheEngine {
         }
     }
 }
-
-module.exports = CacheEngine;
