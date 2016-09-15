@@ -1,4 +1,5 @@
-# simple-cache
+# simple-cache [![Build Status](https://travis-ci.org/a-lucas/simple-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-cache)  [![Coverage Status](https://coveralls.io/repos/github/a-lucas/simple-cache/badge.svg?branch=master)](https://coveralls.io/github/a-lucas/simple-cache?branch=master)  ![Coverage Status](https://img.shields.io/badge/typescript-1.8-yellowgreen.svg)
+
 
 This is a cache library used to cache URL and HTML, that supports : 
 
@@ -8,9 +9,7 @@ This is a cache library used to cache URL and HTML, that supports :
 - Cache rules definitions (regexes)
 - TTL per URLs (regexes)
 
-[![Build Status](https://travis-ci.org/a-lucas/simple-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-cache)
 
-[![Coverage Status](https://coveralls.io/repos/github/a-lucas/simple-cache/badge.svg?branch=master)](https://coveralls.io/github/a-lucas/simple-cache?branch=master)
 
 # API documentation
 
