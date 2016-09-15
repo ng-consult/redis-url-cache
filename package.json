@@ -1,0 +1,43 @@
+{
+  "name": "simple-cache",
+  "version": "0.0.1",
+  "description": "A simple cache engine used to store html document with URL keys",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --recursive test",
+    "build": "node_modules/.bin/webpack && node_modules/.bin/uglifyjs ./dist/simple-cache.js -c -m -o ./dist/simple-cache.min.js --source-map ./dist/simple-cache.min.js.map"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-lucas/simple-cache.git"
+  },
+  "keywords": [
+    "node.js",
+    "ache",
+    "file",
+    "caching",
+    "Redis",
+    "caching"
+  ],
+  "author": "Antoine lUCAS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/a-lucas/simple-cache/issues"
+  },
+  "homepage": "https://github.com/a-lucas/simple-cache#readme",
+  "dependencies": {
+    "es6-promise": "^3.3.1",
+    "redis": "^2.6.2",
+    "shelljs": "^0.7.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "mocha": "^3.0.2",
+    "node-loader": "^0.5.0",
+    "sinon-chai": "^2.8.0",
+    "typescript": "^1.8.10",
+    "uglify-js": "^2.7.3",
+    "webpack": "^1.13.2"
+  }
+}
