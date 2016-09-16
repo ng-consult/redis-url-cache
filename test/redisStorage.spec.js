@@ -1,5 +1,5 @@
 
-var simpleCache = require('./../dist/simple-cache.min');
+var simpleCache = require('./../dist/simple-cache.min').CacheEngine;
 var cacheRules = require('./helper/cacheRules');
 var common = require('./helper/common');
 

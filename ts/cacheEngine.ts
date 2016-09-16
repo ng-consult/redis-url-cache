@@ -3,11 +3,12 @@ import RedisStorage from './redisStorage';
 
 import {StorageConfig, CacheRules} from './interfaces';
 
-module.exports = class CacheEngine {
 
-    constructor( private storageConfig: StorageConfig, private cacheRules: CacheRules) {}
+export class CacheEngine {
 
-    url(url: string) {
+    constructor( private storageConfig: any, private cacheRules: CacheRules) {}
+
+    url(url: string): FileStorage|RedisStorage {
         switch(this.storageConfig.type) {
             case 'file':
                 return new FileStorage(url, this.storageConfig, this.cacheRules);
@@ -17,4 +18,9 @@ module.exports = class CacheEngine {
                 throw new Error('Unknown Storage config type value. Only file|redis allowed');
         }
     }
-}
+};
+
+export {FileStorage};
+
+export {RedisStorage};
+

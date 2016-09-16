@@ -1,6 +1,3 @@
-/**
- * Created by antoine on 11/09/16.
- */
 var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
@@ -19,7 +16,7 @@ module.exports = {
     externals: nodeModules,
     target: 'node',
     output: {
-        library: 'simple-cache',
+        library: 'simple-url-cache',
         filename: 'dist/simple-cache.min.js',
         libraryTarget: 'commonjs2'
     },
@@ -28,7 +25,7 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
-        //new webpack.optimize.UglifyJsPlugin({ minimize: true })
+        new webpack.optimize.UglifyJsPlugin({ minimize: true })
     ],
     module: {
         loaders: [

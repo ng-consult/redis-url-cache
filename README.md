@@ -16,7 +16,7 @@ You can find it under the folder `docs/index.html`, and it's been generated with
 # Installation
 
 ```bash
-npm install --save simple-cache
+npm install --save simple-url-cache
 ```
 
 # Usage
@@ -28,7 +28,7 @@ The usage across both storage engines is the same, only the storage config file 
 
 ```javascript
 
-var simpleCache = require('simple-cache');
+var simpleCache = require('simple-cache').cacheEngine;
 var storageConfig = require('./config'); // get your config file
 var cacheRules = require('./cacheRules'); //get your cache rule definition file
 
@@ -68,6 +68,10 @@ cacheUrl.getUrl().then(function(res) {
 cacheUrl.removeUrl().then(function(res) {
     console.log(res); // -> true
 });
+
+// Close the session: 
+
+cacheUrl.destroy();
 
 
 ```
@@ -163,7 +167,7 @@ And compile it with : `npm run build`
  
 ```javascript
 
-var simpleCache = require('./../dist/simple-cache.min');
+var simpleCache = require('./../dist/simple-cache.min').CacheEngine;
 var common = require('./helper/common');
 var cacheRules = require('./helper/cacheRules');
 

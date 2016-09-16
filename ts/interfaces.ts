@@ -14,7 +14,6 @@ export interface CacheRules{
     default: string
 }
 
-
 export interface StorageConfig {
     type: string
 }
@@ -33,10 +32,10 @@ export interface RedisStorageConfig  extends StorageConfig{
     db?: string;
 }
 
-
 export interface CacheStorage {
     isCached(): Promise<boolean>;
     removeUrl(): Promise<boolean>;
     getUrl(): Promise<string>;
     cache(html:string, force: boolean): Promise<boolean>;
+    destroy(): void;
 }

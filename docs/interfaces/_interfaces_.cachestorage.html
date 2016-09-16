@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CacheStorage | simple-cache</title>
+	<title>CacheStorage | simple-url-cache</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">simple-cache</a>
+					<a href="../index.html" class="title">simple-url-cache</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -93,6 +93,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cachestorage.html#cache" class="tsd-kind-icon">cache</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cachestorage.html#destroy" class="tsd-kind-icon">destroy</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cachestorage.html#geturl" class="tsd-kind-icon">get<wbr>Url</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cachestorage.html#iscached" class="tsd-kind-icon">is<wbr>Cached</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cachestorage.html#removeurl" class="tsd-kind-icon">remove<wbr>Url</a></li>
@@ -113,7 +114,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/eacc139/ts/interfaces.ts#L41">interfaces.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/interfaces.ts#L41">interfaces.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -130,6 +131,23 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+					<a name="destroy" class="tsd-anchor"></a>
+					<h3>destroy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">destroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/interfaces.ts#L42">interfaces.ts:42</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
 					<a name="geturl" class="tsd-anchor"></a>
 					<h3>get<wbr>Url</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
@@ -139,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/eacc139/ts/interfaces.ts#L40">interfaces.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/interfaces.ts#L40">interfaces.ts:40</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -156,7 +174,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/eacc139/ts/interfaces.ts#L38">interfaces.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/interfaces.ts#L38">interfaces.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -173,7 +191,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/eacc139/ts/interfaces.ts#L39">interfaces.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/interfaces.ts#L39">interfaces.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -192,10 +210,7 @@
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_filestorage_.html">"file<wbr>Storage"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_redisstorage_.html">"redis<wbr>Storage"</a>
+						<a href="../modules/_cacheengine_.html">"cache<wbr>Engine"</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
@@ -203,11 +218,17 @@
 					<li class=" tsd-kind-external-module tsd-is-external">
 						<a href="../modules/_abstract_.html">"abstract"</a>
 					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_filestorage_.html">"file<wbr>Storage"</a>
+					</li>
 					<li class="current tsd-kind-external-module tsd-is-external">
 						<a href="../modules/_interfaces_.html">"interfaces"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
 						<a href="../modules/_redispool_.html">"redis<wbr>Pool"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_redisstorage_.html">"redis<wbr>Storage"</a>
 					</li>
 				</ul>
 			</nav>
@@ -223,6 +244,9 @@
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
 								<a href="_interfaces_.cachestorage.html#cache" class="tsd-kind-icon">cache</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+								<a href="_interfaces_.cachestorage.html#destroy" class="tsd-kind-icon">destroy</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
 								<a href="_interfaces_.cachestorage.html#geturl" class="tsd-kind-icon">get<wbr>Url</a>

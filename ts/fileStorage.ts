@@ -140,4 +140,7 @@ export default class FileStorage extends CacheCategory implements CacheStorage{
             }
         });
     };
+
+
+    destroy = ():void => {}
 }

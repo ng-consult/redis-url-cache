@@ -2,7 +2,7 @@
  * Created by antoine on 15/09/16.
  */
 
-var simpleCache = require('./../dist/simple-cache.min');
+var simpleCache = require('./../dist/simple-cache.min').CacheEngine;
 var weirdUrls = require('./helper/weirdUrls');
 
 var chai = require('chai');

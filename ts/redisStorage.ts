@@ -1,34 +1,29 @@
 import {CacheCategory} from './abstract';
 import {RedisStorageConfig, CacheRules, CacheStorage} from './interfaces';
-import {redis_connection} from './redisPool';
 import {polyfill} from 'es6-promise';
+import * as  redis from 'redis';
 import * as dbug from 'debug';
+import {RedisPool} from './redisPool';
 
 polyfill();
 let debug = dbug('simple-url-cache-REDIS');
 
-export default class RedisStorage extends CacheCategory implements CacheStorage{
+class RedisStorage extends CacheCategory implements CacheStorage{
 
-    private _redisConnection: any;
-    private _redisOnline: boolean;
-
+    static _redisPool = RedisPool;
+    private _conn: redis.RedisClient;
     constructor( private _url: string, private _storageConfig: RedisStorageConfig, private _regexRules: CacheRules) {
         super(_url, _regexRules);
-        this._redisOnline = false;
-        this._redisConnection = redis_connection('CACHE', this._storageConfig);
-        this._redisConnection.on('connect', () => {
-            this._redisOnline = true;
-            debug('REDIS CONNECTED');
-        });
+        this._conn = RedisPool.connect(this._storageConfig);
     }
 
     isRedisOnline = (): boolean => {
-        return this._redisOnline;
+        return RedisPool.isOnline();
     };
 
     isCached = ():Promise<boolean> => {
         return new Promise((resolve, reject) =>{
-           this._redisConnection.get(this._url, (err, data) => {
+           this._conn.get(this._url, (err, data) => {
                if (err) {
                    debug('Error while querying is cached on redis: ', this._url, err);
                    reject(err);
@@ -44,7 +39,7 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
     removeUrl = (): Promise<boolean> => {
         debug('removing url cache: ', this._url);
         return new Promise((resolve, reject) =>{
-            this._redisConnection.del(this._url, (err, data) => {
+            this._conn.del(this._url, (err, data) => {
                 if (err) {
                     debug('Error while removing url: ', this._url, err);
                     reject(err);
@@ -57,7 +52,7 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
     getUrl = (): Promise<string> => {
         debug('Retrieving url cache: ', this._url);
         return new Promise((resolve, reject) =>{
-            this._redisConnection.get(this._url, (err, data) => {
+            this._conn.get(this._url, (err, data) => {
                 if(err) {
                     debug('Error while retrieving url: ', this._url, err);
                     reject(err);
@@ -76,13 +71,13 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
         debug('Caching url ', this._url);
         return new Promise((resolve, reject) =>{
             if (force === true) {
-                this._redisConnection.set(this._url, html, (err, result) => {
+                this._conn.set(this._url, html, (err, result) => {
                     if (err) {
                         debug('Error while storing url in redis: ', this._url, err);
                         reject(err);
                     }
                     if( this._currentCategory === 'maxAge') {
-                        this._redisConnection.expires(this._url, this._currentMaxAge, (err) =>{
+                        this._conn.expire(this._url, this._currentMaxAge, (err) =>{
                             if (err) {
                                 debug('Error while setting ttl in redis: ', this._url, err);
                                 reject(err);
@@ -110,12 +105,12 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
                         resolve(false);
                     }
                     else{
-                        this._redisConnection.set(this._url, html, (err, result) => {
+                        this._conn.set(this._url, html, (err, result) => {
                             if (err) {
                                 debug('Error while storing url in redis: ', this._url, err);                                reject(err);
                             }
                             if( this._currentCategory === 'maxAge') {
-                                this._redisConnection.expire(this._url, this._currentMaxAge, (err) => {
+                                this._conn.expire(this._url, this._currentMaxAge, (err) => {
                                     if (err) {
                                         debug('Error while setting ttl in redis: ', this._url, err);
                                         reject(err);
@@ -136,4 +131,11 @@ export default class RedisStorage extends CacheCategory implements CacheStorage{
             }
         });
     };
+
+
+    destroy = (): void => {
+        RedisPool.kill();
+    };
 }
+
+export default RedisStorage;

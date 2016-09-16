@@ -1,6 +1,5 @@
 import {CacheRules, RegexRule} from './interfaces';
 
-
 export abstract class CacheCategory {
 
     protected _currentCategory:string;
@@ -10,7 +9,7 @@ export abstract class CacheCategory {
         this.getCacheCategory();
     }
 
-    private getRegexTest = (u: RegexRule) => {
+    private getRegexTest = (u: RegexRule): boolean => {
         return u.regex.test(this.currentUrl);
     };
 
@@ -27,7 +26,7 @@ export abstract class CacheCategory {
         for (i in this._config.cacheAlways) {
             if (this.getRegexTest (this._config.cacheAlways[i]) === true) {
                 this._currentCategory = 'always';
-                return true;
+                return;
             }
         }
 
@@ -35,18 +34,19 @@ export abstract class CacheCategory {
             if (this.getRegexTest (this._config.cacheMaxAge[i]) === true) {
                 this._currentCategory = 'maxAge';
                 this._currentMaxAge = this._config.cacheMaxAge[i].maxAge;
-                return true;
+                return;
             }
         }
 
         this._currentCategory = this._config.default;
+        return;
     };
 
-    public getCategory() {
+    public getCategory(): string  {
         return this._currentCategory;
     }
 
-    public getCurrentUrl() {
+    public getCurrentUrl(): string {
         return this.currentUrl;
     }
 

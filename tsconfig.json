@@ -1,13 +1,10 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "commonjs",
-        "sourceMap": true,
-        "outDir": "dist"
+        "module": "commonjs"
     },
     "files": [
-        "./typings/tsd.d.ts",
-        "ts/redisStorage.ts",
-        "ts/fileStorage.ts"
+        "./typings/index.d.ts",
+        "ts/cacheEngine.ts"
     ]
 }

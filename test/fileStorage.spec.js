@@ -1,4 +1,4 @@
-var simpleCache = require('./../dist/simple-cache.min');
+var simpleCache = require('./../dist/simple-cache.min').CacheEngine;
 var common = require('./helper/common');
 var cacheRules = require('./helper/cacheRules');
 
@@ -8,6 +8,8 @@ describe('The fileStorage', function() {
         type: 'file',
         dir: './cache'
     };
+
+    console.log('simpleCcahe', simpleCache);
 
     var fileCache = new simpleCache(storageConfig, cacheRules);
 
