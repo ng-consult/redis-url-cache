@@ -25,7 +25,7 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({ minimize: true })
+        //new webpack.optimize.UglifyJsPlugin({ minimize: true })
     ],
     module: {
         loaders: [

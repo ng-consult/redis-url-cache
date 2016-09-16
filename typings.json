@@ -1,7 +1,6 @@
 {
   "globalDependencies": {
     "debug": "registry:dt/debug#0.0.0+20160317120654",
-    "es6-promise": "registry:dt/es6-promise#0.0.0+20160614011821",
     "node": "registry:dt/node#6.0.0+20160915134512",
     "redis": "registry:dt/redis#0.12.1+20160818110030",
     "shelljs": "registry:dt/shelljs#0.0.0+20160526131156"

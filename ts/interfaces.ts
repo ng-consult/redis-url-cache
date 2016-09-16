@@ -25,9 +25,9 @@ export interface FileStorageConfig extends StorageConfig{
 export interface RedisStorageConfig  extends StorageConfig{
     host: string;
     port: number;
-    path: string;
+    path?: string;
     url?: string;
-    socket_keepalive: boolean;
+    socket_keepalive?: boolean;
     password?: string;
     db?: string;
 }

@@ -9,8 +9,6 @@ describe('The fileStorage', function() {
         dir: './cache'
     };
 
-    console.log('simpleCcahe', simpleCache);
-
     var fileCache = new simpleCache(storageConfig, cacheRules);
 
     common(fileCache);

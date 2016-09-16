@@ -20,7 +20,3 @@ export class CacheEngine {
     }
 };
 
-export {FileStorage};
-
-export {RedisStorage};
-

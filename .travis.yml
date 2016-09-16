@@ -1,10 +1,6 @@
 sudo: required
 dist: trusty
 language: node_js
-addons:
-  apt:
-    sources:
-      - google-chrome
 env:
   - CXX=g++-4.8
 services:
@@ -16,6 +12,7 @@ before_install:
   - sudo apt-get -qq update
   - npm install
 install:
+  - npm run typings
   - npm run build
 node_js:
   - "5.11"
@@ -23,7 +20,7 @@ notifications:
   email:
     recipients:
       - cooluhuru@gmail.com
-    on_success: always
+    on_success: never
     on_failure: always
 after_success:
   - npm run coveralls
