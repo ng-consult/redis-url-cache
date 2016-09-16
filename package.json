@@ -2,7 +2,7 @@
   "name": "simple-url-cache",
   "version": "1.0.6",
   "description": "A simple cache engine used to store html document with URL keys",
-  "main": "index.js",
+  "main": "dist/simple-cache.min.js",
   "scripts": {
     "test": "./node_modules/.bin/_mocha",
     "build": "node_modules/.bin/tsd install ; node_modules/.bin/webpack",
@@ -43,7 +43,6 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
     "mocha-lcov-reporter": "^1.2.0",
-    "node-loader": "^0.5.0",
     "sinon-chai": "^2.8.0",
     "ts-loader": "^0.8.2",
     "tsd": "^0.6.5",
