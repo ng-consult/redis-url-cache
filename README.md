@@ -197,4 +197,6 @@ DEBUG=simple-url-cache-FS,simple-url-cache-REDIS npm test
 
 ###     Do the same with `mongoStorageWeirdUrl.js`
 
+##      Update te index.d.ts to file include your new typing definitions
+
 ###     Send me your Pull Request
