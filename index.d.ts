@@ -1,91 +1,92 @@
 // Type definitions for simple-url-cache
 // Project: https://github.com/a-lucas/simple-url-cache
 // Definitions by: Antoine LUCAS <https://github.com/a-lucas>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-declare module 'simple-url-cache' {
-    import redis = require("redis");
+export class CacheEngine {
+    constructor(storageConfig:FileStorageConfig, cacheRules:CacheRules);
+    constructor(storageConfig:RedisStorageConfig, cacheRules:CacheRules);
 
-    export class CacheEngine {
-        constructor(storageConfig: FileStorageConfig, cacheRules: CacheRules);
-        constructor(storageConfig: RedisStorageConfig, cacheRules: CacheRules);
-        url(url: string): FileStorage;
-        url(url: string): RedisStorage;
-    }
+    url(url:string):FileStorage;
+    url(url:string):RedisStorage;
+}
 
-    export interface RegexRule {
-        regex:RegExp
-    }
 
-    export interface MaxAgeRegexRule extends RegexRule {
-        maxAge:number
-    }
+export class FileStorage implements CacheStorage {
+    constructor(_url:string, _storageConfig:FileStorageConfig, _regexRules:CacheRules);
 
-    export interface CacheRules {
-        cacheMaxAge:MaxAgeRegexRule[],
-        cacheAlways:RegexRule[],
-        cacheNever:RegexRule[],
-        default:string
-    }
+    isCached():Promise<boolean>;
 
-    export interface FileStorageConfig extends privateN.StorageConfig {
-        dir:string;
-    }
+    removeUrl():Promise<boolean>;
 
-    export interface RedisStorageConfig extends privateN.StorageConfig {
-        host:string;
-        port:number;
-        path?:string;
-        url?:string;
-        socket_keepalive?:boolean;
-        password?:string;
-        db?:string;
-    }
+    getUrl():Promise<string>;
 
-    namespace privateN {
-        interface StorageConfig {
-            type:string
-        }
+    cache(html:string):Promise<boolean>
+    cache(html:string, force:boolean):Promise<boolean>;
 
-        interface CacheStorage {
-            isCached():Promise<boolean>;
-            removeUrl():Promise<boolean>;
-            getUrl():Promise<string>;
-            cache(html:string):Promise<boolean>;
-            cache(html:string, force:boolean):Promise<boolean>;
-            destroy(): void;
-        }
+    destroy():void;
 
-        abstract class CacheCategory {
-            constructor(currentUrl:string, _config:CacheRules) ;
-            public getCategory():string;
-            public getCurrentUrl():string;
-        }
+    getCategory():string;
 
-        module RedisPool {
-            export function connect(config:RedisStorageConfig): redis.RedisClient;
-            export function isOnline():boolean;
-            export function kill():void;
-        }
-    }
+    getCurrentUrl():string;
+}
 
-    export class FileStorage extends privateN.CacheCategory implements privateN.CacheStorage {
-        constructor(_url:string, _storageConfig: FileStorageConfig, _regexRules: CacheRules);
-        isCached():Promise<boolean>;
-        removeUrl():Promise<boolean>;
-        getUrl():Promise<string>;
-        cache(html:string):Promise<boolean>
-        cache(html:string, force:boolean):Promise<boolean>;
-        destroy(): void;
-    }
+export class RedisStorage implements CacheStorage {
+    constructor(_url:string, _storageConfig:RedisStorageConfig, _regexRules:CacheRules);
 
-    export class RedisStorage extends privateN.CacheCategory implements privateN.CacheStorage {
-        constructor(_url:string, _storageConfig: RedisStorageConfig, _regexRules: CacheRules);
-        isCached():Promise<boolean>;
-        removeUrl():Promise<boolean>;
-        getUrl():Promise<string>;
-        cache(html:string):Promise<boolean>;
-        cache(html:string, force:boolean):Promise<boolean>;
-        destroy(): void;
-    }
+    isCached():Promise<boolean>;
+
+    removeUrl():Promise<boolean>;
+
+    getUrl():Promise<string>;
+
+    cache(html:string):Promise<boolean>;
+    cache(html:string, force:boolean):Promise<boolean>;
+
+    destroy():void;
+
+    getCategory():string;
+
+    getCurrentUrl():string;
+}
+
+export interface CacheRules {
+    cacheMaxAge:MaxAgeRegexRule[],
+    cacheAlways:RegexRule[],
+    cacheNever:RegexRule[],
+    default:string
+}
+
+export interface FileStorageConfig extends StorageConfig {
+    dir:string;
+}
+
+export interface RedisStorageConfig extends StorageConfig {
+    host:string;
+    port:number;
+    path?:string;
+    url?:string;
+    socket_keepalive?:boolean;
+    password?:string;
+    db?:string;
+}
+
+interface StorageConfig {
+    type:string
+}
+
+interface CacheStorage {
+    isCached():Promise<boolean>;
+    removeUrl():Promise<boolean>;
+    getUrl():Promise<string>;
+    cache(html:string):Promise<boolean>;
+    cache(html:string, force:boolean):Promise<boolean>;
+    destroy():void;
+}
+
+interface RegexRule {
+    regex:RegExp
+}
+
+interface MaxAgeRegexRule extends RegexRule {
+    maxAge:number
 }
