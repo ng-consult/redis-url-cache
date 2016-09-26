@@ -88,16 +88,19 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_cacheengine_.cacheengine.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_cacheengine_.cacheengine.html#_conn" class="tsd-kind-icon">_conn</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_cacheengine_.cacheengine.html#cacherules" class="tsd-kind-icon">cache<wbr>Rules</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_cacheengine_.cacheengine.html#storageconfig" class="tsd-kind-icon">storage<wbr>Config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_cacheengine_.cacheengine.html#_redispool" class="tsd-kind-icon">_redis<wbr>Pool</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_cacheengine_.cacheengine.html#clearallcache" class="tsd-kind-icon">clear<wbr>All<wbr>Cache</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_cacheengine_.cacheengine.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
@@ -116,7 +119,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/cacheEngine.ts#L7">cacheEngine.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/76c5d3d/ts/cacheEngine.ts#L17">cacheEngine.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -133,15 +136,25 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_conn" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _conn</h3>
+					<div class="tsd-signature tsd-kind-icon">_conn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RedisClient</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/76c5d3d/ts/cacheEngine.ts#L17">cacheEngine.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="cacherules" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> cache<wbr>Rules</h3>
 					<div class="tsd-signature tsd-kind-icon">cache<wbr>Rules<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_.cacherules.html" class="tsd-signature-type">CacheRules</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/cacheEngine.ts#L9">cacheEngine.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/76c5d3d/ts/cacheEngine.ts#L20">cacheEngine.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -151,13 +164,40 @@
 					<div class="tsd-signature tsd-kind-icon">storage<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/cacheEngine.ts#L9">cacheEngine.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/76c5d3d/ts/cacheEngine.ts#L20">cacheEngine.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="_redispool" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> _redis<wbr>Pool</h3>
+					<div class="tsd-signature tsd-kind-icon">_redis<wbr>Pool<span class="tsd-signature-symbol">:</span> <a href="../modules/_redispool_.redispool.html" class="tsd-signature-type">RedisPool</a><span class="tsd-signature-symbol"> =&nbsp;RedisPool</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/76c5d3d/ts/cacheEngine.ts#L16">cacheEngine.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="clearallcache" class="tsd-anchor"></a>
+					<h3>clear<wbr>All<wbr>Cache</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>All<wbr>Cache<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/76c5d3d/ts/cacheEngine.ts#L26">cacheEngine.ts:26</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="url" class="tsd-anchor"></a>
 					<h3>url</h3>
@@ -168,7 +208,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/99c3667/ts/cacheEngine.ts#L11">cacheEngine.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/76c5d3d/ts/cacheEngine.ts#L58">cacheEngine.ts:58</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -229,10 +269,19 @@
 								<a href="_cacheengine_.cacheengine.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_cacheengine_.cacheengine.html#_conn" class="tsd-kind-icon">_conn</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_cacheengine_.cacheengine.html#cacherules" class="tsd-kind-icon">cache<wbr>Rules</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_cacheengine_.cacheengine.html#storageconfig" class="tsd-kind-icon">storage<wbr>Config</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_cacheengine_.cacheengine.html#_redispool" class="tsd-kind-icon">_redis<wbr>Pool</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_cacheengine_.cacheengine.html#clearallcache" class="tsd-kind-icon">clear<wbr>All<wbr>Cache</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_cacheengine_.cacheengine.html#url" class="tsd-kind-icon">url</a>
@@ -241,6 +290,9 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_cacheengine_.html#debug" class="tsd-kind-icon">debug</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

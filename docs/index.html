@@ -65,7 +65,7 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="simple-url-cache-build-status-https-travis-ci-org-a-lucas-simple-url-cache-svg-branch-master-https-travis-ci-org-a-lucas-simple-url-cache-coverage-status-https-coveralls-io-repos-github-a-lucas-simple-cache-badge-svg-branch-master-https-coveralls-io-github-a-lucas-simple-cache-branch-master-typescript-https-img-shields-io-badge-typescript-1-8-yellowgreen-svg-dependencies-https-david-dm-org-a-lucas-simple-url-cache-svg-">simple-url-cache <a href="https://travis-ci.org/a-lucas/simple-url-cache"><img src="https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master" alt="Build Status"></a>  <a href="https://coveralls.io/github/a-lucas/simple-cache?branch=master"><img src="https://coveralls.io/repos/github/a-lucas/simple-cache/badge.svg?branch=master" alt="Coverage Status"></a>  <img src="https://img.shields.io/badge/typescript-1.8-yellowgreen.svg" alt="TypeScript"> <img src="https://david-dm.org/a-lucas/simple-url-cache.svg" alt="dependencies"></h1>
+				<h1 id="simple-url-cache-build-status-https-travis-ci-org-a-lucas-simple-url-cache-svg-branch-master-https-travis-ci-org-a-lucas-simple-url-cache-codecov-https-codecov-io-gh-a-lucas-simple-url-cache-branch-master-graph-badge-svg-https-codecov-io-gh-a-lucas-simple-url-cache-">simple-url-cache <a href="https://travis-ci.org/a-lucas/simple-url-cache"><img src="https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master" alt="Build Status"></a>  <a href="https://codecov.io/gh/a-lucas/simple-url-cache"><img src="https://codecov.io/gh/a-lucas/simple-url-cache/branch/master/graph/badge.svg" alt="codecov"></a></h1>
 				<p>This is a cache library used to cache URL and HTML, that supports : </p>
 				<ul>
 					<li>File system storage</li>
@@ -77,17 +77,41 @@
 				<h1 id="api-documentation">API documentation</h1>
 				<p>You can find it under the folder <code>docs/index.html</code>, and it&#39;s been generated with <code>typedoc</code> <a href="https://github.com/TypeStrong/typedoc">https://github.com/TypeStrong/typedoc</a>.</p>
 				<h1 id="installation">Installation</h1>
-				<pre><code class="lang-bash">npm install --save simple-cache
+				<pre><code class="lang-bash">npm install --save simple-url-cache
 </code></pre>
+				<!--
+# Api
+
+
+##EngineCache
+
+constructor
+clearAllCache
+url
+
+
+##url
+
+isCached
+cache
+getUrl
+removeUrl
+-->
 				<h1 id="usage">Usage</h1>
 				<p>So far, we support two storage engines : file system, and redis.</p>
 				<p>The usage across both storage engines is the same, only the storage config file differs.</p>
 				<pre><code class="lang-javascript">
-<span class="hljs-keyword">var</span> simpleCache = <span class="hljs-built_in">require</span>(<span class="hljs-string">'simple-cache'</span>);
+<span class="hljs-keyword">var</span> simpleCache = <span class="hljs-built_in">require</span>(<span class="hljs-string">'simple-cache'</span>).cacheEngine;
 <span class="hljs-keyword">var</span> storageConfig = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./config'</span>); <span class="hljs-comment">// get your config file</span>
 <span class="hljs-keyword">var</span> cacheRules = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./cacheRules'</span>); <span class="hljs-comment">//get your cache rule definition file</span>
 
 <span class="hljs-keyword">var</span> cacheEngine = <span class="hljs-keyword">new</span> simpleCache(storageConfig, cacheRules);
+
+cacheEngine.clearAllCache().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ok</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Ccahe cleared!'</span>);
+}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(err);
+};
 
 <span class="hljs-keyword">var</span> url = <span class="hljs-string">'/someURL.html'</span>;
 <span class="hljs-keyword">var</span> html = <span class="hljs-string">'&lt;b&gt;I ama content&lt;/b&gt;'</span>;
@@ -123,6 +147,10 @@ cacheUrl.getUrl().then(<span class="hljs-function"><span class="hljs-keyword">fu
 cacheUrl.removeUrl().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
     <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// -&gt; true</span>
 });
+
+<span class="hljs-comment">// Close the session: </span>
+
+cacheUrl.destroy();
 </code></pre>
 				<h1 id="config-files">Config Files</h1>
 				<h2 id="regex-rules">Regex Rules</h2>
@@ -186,7 +214,7 @@ exports.cacheConfig = {
 				<p>And compile it with : <code>npm run build</code></p>
 				<h3 id="add-a-test-file-mongoostorage-spec-js-">Add a test file <code>mongooStorage.spec.js</code></h3>
 				<pre><code class="lang-javascript">
-<span class="hljs-keyword">var</span> simpleCache = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./../dist/simple-cache.min'</span>);
+<span class="hljs-keyword">var</span> simpleCache = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./../dist/simple-cache.min'</span>).CacheEngine;
 <span class="hljs-keyword">var</span> common = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./helper/common'</span>);
 <span class="hljs-keyword">var</span> cacheRules = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./helper/cacheRules'</span>);
 
@@ -209,6 +237,7 @@ describe(<span class="hljs-string">'The fileStorage'</span>, <span class="hljs-f
 				<pre><code class="lang-bash">DEBUG=simple-url-cache-FS,simple-url-cache-REDIS npm <span class="hljs-built_in">test</span>
 </code></pre>
 				<h3 id="do-the-same-with-mongostorageweirdurl-js-">Do the same with <code>mongoStorageWeirdUrl.js</code></h3>
+				<h2 id="update-te-index-d-ts-to-file-include-your-new-typing-definitions">Update te index.d.ts to file include your new typing definitions</h2>
 				<h3 id="send-me-your-pull-request">Send me your Pull Request</h3>
 			</div>
 		</div>

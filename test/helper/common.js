@@ -18,7 +18,10 @@ module.exports = function(cacheEngine) {
 
     describe('cacheMaxAge', function() {
 
-        urlCache1 = cacheEngine.url(cacheMaxAgeURL);
+        beforeEach(function() {
+            urlCache1 = cacheEngine.url(cacheMaxAgeURL);
+        });
+
 
         after(function() {
             urlCache1.removeUrl();
@@ -46,7 +49,14 @@ module.exports = function(cacheEngine) {
 
         it('it waits 1.1 seconds - the cache should be deleted', function(done) {
             setTimeout(function() {
-                expect(urlCache1.isCached()).to.eventually.equal(false).notify(done);
+                urlCache1.isCached().then(function(result) {
+                    expect(result).eql(false);
+                    done();
+                }, function(err) {
+                    done(err);
+                }).catch(function(err) {
+                    done(err);
+                });
             }, 1100);
         });
 
@@ -67,7 +77,6 @@ module.exports = function(cacheEngine) {
         });
 
     });
-
 
     describe('cacheNever', function() {
 
@@ -122,7 +131,6 @@ module.exports = function(cacheEngine) {
         });
 
     });
-
 
     describe('unMatchedURL', function() {
         urlCache3 = cacheEngine.url(notMatchedURL);
@@ -205,5 +213,71 @@ module.exports = function(cacheEngine) {
         });
 
     });
+
+    describe('clearAllCache()', function() {
+
+
+        var i,
+            urlCaches = [];
+
+        it('Stores 5 urls', function(done) {
+            var count = 0;
+
+            for(i=0; i<5; i++){
+                urlCaches.push(cacheEngine.url( i + 'always.html'));
+                urlCaches[i].cache('<some content').then(function(res) {
+                    //expect(res).to.eql(true);
+                    count++;
+                    if(count === 5) {
+                        done()
+                    }
+                }, function(res) {
+                    done(res);
+                }).catch(function(res) {
+                    done(res);
+                });
+            }
+
+
+
+        });
+
+        it('These URLs should be cached', function(done) {
+            var count = 0;
+            for(i=0; i<5; i++){
+                urlCaches[i].isCached().then(function(res) {
+                    count++;
+                    if(count === 5) {
+                        done()
+                    }
+                }, function(err) {
+                    done(err);
+                })
+            }
+        });
+
+        it('clears all the caches', function(done) {
+            cacheEngine.clearAllCache().then(function(res){
+                expect(res).eql(true);
+                done();
+            }, function(err){
+                done(err);
+            })
+        });
+
+        it('All caches should be cleared', function(done) {
+            var count = 0;
+            for(i=0; i<5; i++){
+                urlCaches[i].isCached().then(function(res) {
+                    expect(res).equal(false);
+                    count++;
+                    if(count === 5) {
+                        done()
+                    }
+                })
+            }
+        });
+
+    })
 
 };
