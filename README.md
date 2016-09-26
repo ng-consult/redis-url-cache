@@ -1,4 +1,4 @@
-# simple-url-cache [![Build Status](https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-url-cache)  [![Coverage Status](https://coveralls.io/repos/github/a-lucas/simple-cache/badge.svg?branch=master)](https://coveralls.io/github/a-lucas/simple-cache?branch=master)  ![TypeScript](https://img.shields.io/badge/typescript-1.8-yellowgreen.svg) ![dependencies](https://david-dm.org/a-lucas/simple-url-cache.svg)
+# simple-url-cache [![Build Status](https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-url-cache)  [![codecov](https://codecov.io/gh/a-lucas/simple-url-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/a-lucas/simple-url-cache)
 
 
 This is a cache library used to cache URL and HTML, that supports : 
@@ -19,6 +19,26 @@ You can find it under the folder `docs/index.html`, and it's been generated with
 npm install --save simple-url-cache
 ```
 
+<!--
+# Api
+
+
+##EngineCache
+
+constructor
+clearAllCache
+url
+
+
+##url
+
+isCached
+cache
+getUrl
+removeUrl
+-->
+
+
 # Usage
 
 So far, we support two storage engines : file system, and redis.
@@ -33,6 +53,12 @@ var storageConfig = require('./config'); // get your config file
 var cacheRules = require('./cacheRules'); //get your cache rule definition file
 
 var cacheEngine = new simpleCache(storageConfig, cacheRules);
+
+cacheEngine.clearAllCache().then(function(ok) {
+    console.log('Ccahe cleared!');
+}, function(err) {
+    console.log(err);
+};
 
 var url = '/someURL.html';
 var html = '<b>I ama content</b>';

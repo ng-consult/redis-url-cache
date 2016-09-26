@@ -6,6 +6,7 @@ export class CacheEngine {
     constructor(storageConfig:FileStorageConfig, cacheRules:CacheRules);
     constructor(storageConfig:RedisStorageConfig, cacheRules:CacheRules);
 
+    clearAllCache(): Promise<boolean>
     url(url:string):FileStorage;
     url(url:string):RedisStorage;
 }
