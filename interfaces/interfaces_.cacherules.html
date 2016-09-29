@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;redis/instance&quot; | simple-url-cache</title>
+	<title>CacheRules | simple-url-cache</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,44 +57,82 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_redis_instance_.html">&quot;redis/instance&quot;</a>
+					<a href="../modules/interfaces_.html">&quot;interfaces&quot;</a>
+				</li>
+				<li>
+					<a href="interfaces_.cacherules.html">CacheRules</a>
 				</li>
 			</ul>
-			<h1>External module &quot;redis/instance&quot;</h1>
+			<h1>Interface CacheRules</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">CacheRules</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
-							<h3>Classes</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-is-external"><a href="../classes/_redis_instance_.redisstorageinstance.html" class="tsd-kind-icon">Redis<wbr>Storage<wbr>Instance</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-external tsd-is-not-exported">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported"><a href="_redis_instance_.html#debug" class="tsd-kind-icon">debug</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cacherules.html#cachealways" class="tsd-kind-icon">cache<wbr>Always</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cacherules.html#cachemaxage" class="tsd-kind-icon">cache<wbr>Max<wbr>Age</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cacherules.html#cachenever" class="tsd-kind-icon">cache<wbr>Never</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_.cacherules.html#default" class="tsd-kind-icon">default</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-external tsd-is-not-exported">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
-					<a name="debug" class="tsd-anchor"></a>
-					<h3>debug</h3>
-					<div class="tsd-signature tsd-kind-icon">debug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IDebugger</span><span class="tsd-signature-symbol"> =&nbsp;debg(&#x27;simple-url-cache-REDIS&#x27;)</span></div>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="cachealways" class="tsd-anchor"></a>
+					<h3>cache<wbr>Always</h3>
+					<div class="tsd-signature tsd-kind-icon">cache<wbr>Always<span class="tsd-signature-symbol">:</span> <a href="interfaces_.regexrule.html" class="tsd-signature-type">RegexRule</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/b9fde24/ts/redis/instance.ts#L5">redis/instance.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/b9fde24/ts/interfaces.ts#L13">interfaces.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="cachemaxage" class="tsd-anchor"></a>
+					<h3>cache<wbr>Max<wbr>Age</h3>
+					<div class="tsd-signature tsd-kind-icon">cache<wbr>Max<wbr>Age<span class="tsd-signature-symbol">:</span> <a href="interfaces_.maxageregexrule.html" class="tsd-signature-type">MaxAgeRegexRule</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/b9fde24/ts/interfaces.ts#L12">interfaces.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="cachenever" class="tsd-anchor"></a>
+					<h3>cache<wbr>Never</h3>
+					<div class="tsd-signature tsd-kind-icon">cache<wbr>Never<span class="tsd-signature-symbol">:</span> <a href="_interfaces_.regexrule.html" class="tsd-signature-type">RegexRule</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/b9fde24/ts/interfaces.ts#L14">interfaces.ts:14</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="default" class="tsd-anchor"></a>
+					<h3>default</h3>
+					<div class="tsd-signature tsd-kind-icon">default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/a-lucas/simple-url-cache/blob/b9fde24/ts/interfaces.ts#L15">interfaces.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,44 +148,77 @@
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_cacheengine_.html">"cache<wbr>Engine"</a>
+						<a href="../modules/cacheengine_.html">"cache<wbr>Engine"</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_helpers_.html">"<wbr>Helpers"</a>
+						<a href="../modules/helpers_.html">"<wbr>Helpers"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_cache_.html">"cache"</a>
+						<a href="../modules/cache_.html">"cache"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_fs_instance_.html">"fs/instance"</a>
+						<a href="../modules/fs_instance_.html">"fs/instance"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_fs_storage_.html">"fs/storage"</a>
-					</li>
-					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_interfaces_.html">"interfaces"</a>
+						<a href="../modules/fs_storage_.html">"fs/storage"</a>
 					</li>
 					<li class="current tsd-kind-external-module tsd-is-external">
-						<a href="_redis_instance_.html">"redis/instance"</a>
+						<a href="../modules/_interfaces_.html">"interfaces"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_redis_pool_.html">"redis/pool"</a>
+						<a href="../modules/redis_instance_.html">"redis/instance"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_redis_storage_.html">"redis/storage"</a>
+						<a href="../modules/redis_pool_.html">"redis/pool"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/redis_storage_.html">"redis/storage"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-external">
-						<a href="../classes/_redis_instance_.redisstorageinstance.html" class="tsd-kind-icon">Redis<wbr>Storage<wbr>Instance</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_interfaces_.cacherules.html" class="tsd-kind-icon">Cache<wbr>Rules</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_interfaces_.cacherules.html#cachealways" class="tsd-kind-icon">cache<wbr>Always</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_interfaces_.cacherules.html#cachemaxage" class="tsd-kind-icon">cache<wbr>Max<wbr>Age</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_interfaces_.cacherules.html#cachenever" class="tsd-kind-icon">cache<wbr>Never</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_interfaces_.cacherules.html#default" class="tsd-kind-icon">default</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
-						<a href="_redis_instance_.html#debug" class="tsd-kind-icon">debug</a>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="interfaces_.cachestorage.html" class="tsd-kind-icon">Cache<wbr>Storage</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="interfaces_.filestorageconfig.html" class="tsd-kind-icon">File<wbr>Storage<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_interfaces_.maxageregexrule.html" class="tsd-kind-icon">Max<wbr>Age<wbr>Regex<wbr>Rule</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="interfaces_.redisstorageconfig.html" class="tsd-kind-icon">Redis<wbr>Storage<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_interfaces_.regexrule.html" class="tsd-kind-icon">Regex<wbr>Rule</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="interfaces_.storageinstance.html" class="tsd-kind-icon">Storage<wbr>Instance</a>
 					</li>
 				</ul>
 			</nav>
