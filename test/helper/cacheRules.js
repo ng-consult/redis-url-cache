@@ -1,16 +1,16 @@
 module.exports = {
-    cacheMaxAge: [
+    maxAge: [
         {
             regex: /maxAge.html$/,
             maxAge: 1
         }
     ],
-    cacheAlways: [
+    always: [
         {
             regex: /always.html$/
         }
     ],
-    cacheNever: [
+    never: [
         {
             regex: /never.html$/
         }

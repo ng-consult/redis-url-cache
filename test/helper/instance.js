@@ -21,8 +21,11 @@ var WAIT_HAS_NOT_URL = require('./common').WAIT_HAS_NOT_URL;
 var URL_NAME_IS = require('./common').URL_NAME_IS;
 var URL_CATEGORY_IS = require('./common').URL_CATEGORY_IS;
 var SET_FORCE = require('./common').SET_FORCE;
+var URL_DETAILS = require('./common').URL_DETAILS;
+var GET_URLS = require('./common').GET_URLS;
+var WAIT_GET_URLS = require('./common').WAIT_GET_URLS;
 
-module.exports = function(cacheEngine) {
+module.exports = function (cacheEngine) {
 
     var cacheMaxAgeURL = '/maxAge.html';
     var cacheAlwaysURL = '/always.html';
@@ -34,83 +37,87 @@ module.exports = function(cacheEngine) {
     var urlCache1, urlCache2, urlCache3, urlCache4;
 
 
-    describe('cacheMaxAge', function() {
+    describe('cacheMaxAge', function () {
 
         urlCache1 = cacheEngine.url(cacheMaxAgeURL);
 
-        HAS_NOT_URL(urlCache1);
         SET_URL(urlCache1, html);
-        URL_HAS_CONTENT(urlCache1, html);
+        SET_URL_FALSE(urlCache1, html);
+
         WAIT_HAS_NOT_URL(urlCache1, 1100);
 
         SET_URL(urlCache1, html);
-        URL_HAS_CONTENT(urlCache1, html);
+
         DELETE_URL(urlCache1);
-        URL_GET_REJECTED(urlCache1);
 
     });
 
-    describe('cacheNever', function() {
+
+    describe('cacheNever', function () {
 
         urlCache2 = cacheEngine.url(cacheNeverURL);
 
-        URL_NAME_IS(urlCache2, cacheNeverURL);
-        URL_CATEGORY_IS(urlCache2, 'never');
-        HAS_NOT_URL(urlCache2);
+        URL_DETAILS(urlCache2, cacheNeverURL, 'never');
+
         SET_URL_FALSE(urlCache2, html);
-        HAS_NOT_URL(urlCache2);
-        URL_GET_REJECTED(urlCache2);
+        //HAS_NOT_URL(urlCache2);
+
         SET_FORCE(urlCache2, html);
+
         DELETE_URL(urlCache2);
-        URL_GET_REJECTED(urlCache2);
 
     });
 
-    describe('unMatchedURL', function() {
+
+    describe('unMatchedURL', function () {
         urlCache3 = cacheEngine.url(notMatchedURL);
 
-        URL_NAME_IS(urlCache3, notMatchedURL);
-        URL_CATEGORY_IS(urlCache3, 'never');
-
-        HAS_NOT_URL(urlCache3);
-        DELETE_URL_REJECTED(urlCache3);
+        URL_DETAILS(urlCache3, notMatchedURL, 'never');
 
         SET_URL_FALSE(urlCache3, html);
-
-        HAS_NOT_URL(urlCache3);
-
-        URL_GET_REJECTED(urlCache3);
 
         SET_FORCE(urlCache3, html);
 
         DELETE_URL(urlCache3);
-
-        URL_GET_REJECTED(urlCache3);
+        ;
     });
 
-    describe('cacheAlways', function() {
+
+    describe('cacheAlways', function () {
 
         urlCache4 = cacheEngine.url(cacheAlwaysURL);
 
-        URL_NAME_IS(urlCache4, cacheAlwaysURL);
-        URL_CATEGORY_IS(urlCache4, 'always');
-
-        HAS_NOT_URL(urlCache4);
-        DELETE_URL_REJECTED(urlCache4);
+        URL_DETAILS(urlCache4, cacheAlwaysURL, 'always');
 
         SET_URL(urlCache4, html);
 
         SET_URL_FALSE(urlCache4, html);
 
-        URL_HAS_CONTENT(urlCache4, html);
-
         DELETE_URL(urlCache4);
-
-        URL_GET_REJECTED(urlCache4);
 
     });
 
-    describe('multiple domains', function() {
+
+    describe('clearInstance()', function () {
+        var i,
+            urlCaches = [];
+
+        for (i = 0; i < 3; i++) {
+            urlCaches.push(cacheEngine.url('http://a' + i + '.com/always.html'));
+        }
+
+        DELETE_ALL(cacheEngine);
+
+        for (i = 0; i < 3; i++) {
+            SET_URL(urlCaches[i], html);
+        }
+
+        DELETE_ALL(cacheEngine);
+        DELETE_ALL(cacheEngine);
+    });
+
+
+    describe('multiple domains', function () {
 
         var urlCaches = [];
 
@@ -118,22 +125,31 @@ module.exports = function(cacheEngine) {
         urlCaches.push(cacheEngine.url('http://b.com/always.html'));
         urlCaches.push(cacheEngine.url('always.html'));
 
+        debug('SETTING URLS', urlCaches.length);
+
+        describe('URLS should have the same instance name & storage type', function () {
+            it('Instances', function () {
+                expect(urlCaches[0].getInstanceName()).eql(urlCaches[1].getInstanceName());
+                expect(urlCaches[0].getInstanceName()).eql(urlCaches[2].getInstanceName());
+                expect(urlCaches[2].getInstanceName()).eql(urlCaches[1].getInstanceName());
+            });
+
+            it('Storage Type', function () {
+                expect(urlCaches[0].getStorageType()).eql(urlCaches[1].getStorageType());
+                expect(urlCaches[0].getStorageType()).eql(urlCaches[2].getStorageType());
+                expect(urlCaches[2].getStorageType()).eql(urlCaches[1].getStorageType());
+            });
+        });
 
 
         SET_URL(urlCaches[0], html);
         SET_URL(urlCaches[1], html);
         SET_URL(urlCaches[2], html);
 
-        HAS_URL(urlCaches[0]);
-        HAS_URL(urlCaches[1]);
-        HAS_URL(urlCaches[2]);
-
-        URL_HAS_CONTENT(urlCaches[0], html);
-        URL_HAS_CONTENT(urlCaches[1], html);
-        URL_HAS_CONTENT(urlCaches[2], html);
+        URL_DETAILS(urlCaches[0], '/always.html', 'always', 'http://a.com');
+        URL_DETAILS(urlCaches[1], '/always.html', 'always', 'http://b.com');
 
         HAS_DOMAIN('COMMON_DOMAIN', cacheEngine);
-
         HAS_DOMAIN('http://a.com', cacheEngine);
         HAS_DOMAIN('http://b.com', cacheEngine);
 
@@ -143,43 +159,46 @@ module.exports = function(cacheEngine) {
         HAS_DOMAIN('http://b.com', cacheEngine);
 
         DELETE_DOMAIN('http://whatever_should_silently_succeed', cacheEngine);
-        DELETE_DOMAIN('http://b.com', cacheEngine)
+        DELETE_DOMAIN('http://b.com', cacheEngine);
+        DELETE_DOMAIN('http://b.com', cacheEngine);
         DELETE_DOMAIN('COMMON_DOMAIN', cacheEngine);
 
-        HAS_NOT_URL(urlCaches[0]);
-        HAS_NOT_URL(urlCaches[1]);
-        HAS_NOT_URL(urlCaches[2]);
+        describe('These URLs shouldnt be cached anymore', function () {
+            HAS_NOT_URL(urlCaches[0]);
+            HAS_NOT_URL(urlCaches[1]);
+            HAS_NOT_URL(urlCaches[2]);
+        });
+
 
     });
 
-    describe('clearAllCache()', function() {
+    describe('getCachedURLs()', function () {
 
-        var i,
-            urlCaches = [];
+        var urlCaches = [];
+        urlCaches.push(cacheEngine.url('/0always.html'));
+        urlCaches.push(cacheEngine.url('http://a.com/1always.html'));
+        urlCaches.push(cacheEngine.url('http://a.com/maxAge.html'));
 
-        for(i=0; i<3; i++) {
-            urlCaches.push(cacheEngine.url('http://a' + i + '.com/always.html'));
-        }
+        GET_URLS(urlCaches[0].getDomain(), cacheEngine, []);
+        GET_URLS('http://a.com', cacheEngine, []);
 
         SET_URL(urlCaches[0], html);
         SET_URL(urlCaches[1], html);
         SET_URL(urlCaches[2], html);
 
-        HAS_URL(urlCaches[0]);
-        HAS_URL(urlCaches[1]);
-        HAS_URL(urlCaches[2]);
+        GET_URLS(urlCaches[0].getDomain(), cacheEngine, ['/0always.html']);
+        GET_URLS('http://a.com', cacheEngine, ['/1always.html', '/maxAge.html']);
 
-        URL_HAS_CONTENT(urlCaches[0], html);
-        URL_HAS_CONTENT(urlCaches[1], html);
-        URL_HAS_CONTENT(urlCaches[2], html);
+        WAIT_GET_URLS(cacheEngine, 1100, urlCaches[1].getDomain(), ['/1always.html']);
 
         DELETE_ALL(cacheEngine);
 
-        HAS_NOT_URL(urlCaches[0]);
-        HAS_NOT_URL(urlCaches[1]);
-        HAS_NOT_URL(urlCaches[2]);
+        GET_URLS(urlCaches[0].getDomain(), cacheEngine, []);
+        GET_URLS('http://a.com', cacheEngine, []);
 
+        DELETE_ALL(cacheEngine);
 
     });
+
 
 };

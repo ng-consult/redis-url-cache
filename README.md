@@ -1,12 +1,13 @@
 # simple-url-cache [![Build Status](https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-url-cache)  [![codecov](https://codecov.io/gh/a-lucas/simple-url-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/a-lucas/simple-url-cache)
 
 
-Conditionally cache your URL's content on FS or REDIS. It supports cache instance sharing or isolation.
+Conditionally cache your URL's content on REDIS with RegExp. Also supports cache instance sharing and isolation.
 
 
-## API documentation
+<!--## API documentation
 
-You can find it under the folder `docs/index.html`, and it's been generated with [typedoc](https://github.com/TypeStrong/typedoc)
+https://a-lucas.github.io/simple-url-cache
+-->
 
 ## Installation
 
@@ -15,48 +16,67 @@ You can find it under the folder `docs/index.html`, and it's been generated with
 npm install simple-url-cache
 ```
 
-## Api
+## API
 
-- CacheEngine
-    - [constructor](#constructor)
-    - [clearDomain()](#cleardomain)
-    - [clearAllDomains()](#clearalldomains)
-    - [getAllCachedURLs()](#getallcachedurl)
-    - [getCachedURLs()](#getcachedurls)
-    - [getCachedDomains()](#getcacheddomains)
-    - [url()](#url)
-- CacheStorage
-    - [delete()](#delete)
-    - [get()](#get)
-    - [has()](#has)
-    - [set()](#set)
-- StorageConfigs
+- **CacheEngine**
+    - methods
+        - [constructor](#constructor)
+        - [url()](#url)
+        - [clearDomain()](#cleardomain)
+        - [clearInstance()](#clearinstance)
+        - [getStoredHostnames()](#getstoredhostnames)
+        - [getStoredURLs()](#getstoredurls)
+    - static properties
+        - [helpers](#helpers)
+    
+- **CacheStorage**
+    - setters/getters
+        - [delete()](#delete)
+        - [get()](#get)
+        - [has()](#has)
+        - [set()](#set)
+    - methods
+        - [getCategory()](#getcategory)
+        - [getDomain()](#getdomain)
+        - [getInstanceName()](#getinstancename)
+        - [getStorageType()](#getstoragetype)
+        - [getUrl()](#geturl)
+- **Configuration**
     - [Cache config](#cache-config)
-    - [File storage config](#file-storage-config)
-    - [Redis storage config](#redis-storage-confg)
+    - [Redis storage config](#redis-storage-config)
     
 
-### Cache Engine
+## Cache Engine
 
+### setters /getters
 
 #### constructor
 
-```javascript
-constructor( defaultDomain: string, instanceName: string, storageConfig, cacheRules)
+
+```typescript
+constructor( defaultDomain: string, instanceName: string, storageConfig: Object, cacheConfig: Object)
 ```
 
-defaultDomain: Every URL that miss a hostname will get classified under this domain
+**defaultDomain** Every URL that miss a hostname will get classified under this domain
 
-instanceName: The isolated instance where this cacheEngine will store urls.
+**instanceName** The isolated instance where this cacheEngine will store urls.
 If another cacheEngine has the same storage type and the same instance name, they will share the pool.
 
+**storageConfig**  [Redis Storage Config](#redis-storage-config)
+Defines how & where url content is stored
+ 
+**cacheConfig** [Cache config](#cache-config)
+Supports TTL and inclusion/exclusion for any URL rules you need
+ 
 Example: 
 
 ```javascript
 
-var engine1 = new CachEngine('http://localhost', 'I1', {type: 'file', dir: '/var/cache'}, cacheRules); 
-var engine2 = new CachEngine('http://localhost', 'I1', {type: 'file', dir: '/var/cache'}, cacheRules);
-var engine3 = new CachEngine('http://localhost', 'I2', {type: 'file', dir: '/var/cache'}, cacheRules);
+var CacheEngine = require('simple-url-cache');
+
+var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules); 
+var engine2 = new CachEngine('http://localhost:4444', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules);
+var engine3 = new CachEngine('http://localhost:5555', 'I2', {host: '127.0.0.1',port: 6379}, cacheRules);
 
 // At this stage, engine1 and engine2 share the same pool.
 
@@ -73,64 +93,126 @@ engine3.url('http://a.com/index.html').set('some content');
 // resolve(true)
 
 engine1.url('http://b.com/index.html').get() 
-//resolve(true) -> sahred pool with engine1 
+//resolve(true) -> shared pool with engine1 
 
-engine3.url('http://b.com/index.html').set('some content');
-// resolve(false) -> not set
+engine3.url('http://b.com/index.html').get()
+// reject(false) -> not set
 
 ```
-
-The resulting folder structure is: 
-
-```bash
-# Instance 1
-/var/cache/I1/htt[://a.com/index.html
-/var/cache/I1/htt[://b.com/index.html
-
-#instance 2
-/var/cache/I2/htt[://a.com/index.html
-```
-
-#### clearDomain
-
-```javascript
-clearDomain(domain?: string): Promise<boolean>
-```
-
-#### clearAllDomains
-```javascript
-clearAllDomains(): Promise<boolean>
-```
-
-#### getAllCachedURLs
-```javascript
-getAllCachedURL(): Promise<string[][]>
-```
-
-#### getCachedURLs
-```javascript
-getCachedURLs(domain?: string): Promise<string[]>
-```
-
-#### getCachedDomains
-```javascript
-getCachedDomains(): Promise<string[]>
-```
-
 
 #### url
-```javascript
+
+
+```typescript
 url(url: string): CacheStorage
 ```
 
-Create a new `CacheStorage` instance
+**url**
+Initialize a new [CacheStorage](#cachestorage) instance ready to be [get()](#get), [set()](#set), [delete()](#delete) and [has()](#has).
+
+#### clearDomain
 
 
+```typescript
+clearDomain(domain: string): Promise<boolean>
+```
+
+Delete all the cached urls stored within this instance under the specified domain.
+
+
+#### clearInstance
+
+
+```typescript
+clearInstance(): Promise<boolean>
+```
+
+Removes all the cached URLs for all domains for this instance.
+
+#### getStoredHostnames
+
+
+```typescript
+getAllCachedURL(): Promise<string[]>
+```
+
+Retrieves an array of all the domains cached.
+ 
+example: 
+
+```javascript
+var CacheEngine = require('simple-url-cache');
+
+var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules); 
+
+engine1.url('http://a.com/index.html').set('content').then( ... )
+engine1.url('http://b.com/index.html').set('content').then( ... )
+
+CacheEngine.getStoredHostnames().then(function(results) {
+    console.log(results);
+    // ['http://a.com', 'http://b.com']
+});
+```
+
+**domain** if none provided, then the default domain will be used
+
+#### getStoredURLs
+
+
+```typescript
+getCachedDomains(idomain:string): Promise<string[]>
+```
+
+Get the array of cached URLs associated with this domain & instance
+
+**domain** All the stored URLs retrived had this domain prepended 
+
+example:
+
+
+```javascript
+var CacheEngine = require('simple-url-cache');
+
+var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules); 
+
+engine1.url('http://a.com/index.html').set('content').then( ... )
+engine1.url('http://a.com/about.html').set('content').then( ... )
+
+CacheEngine.getStoredURLs().then(function(results) {
+    console.log(results);
+    // ['/index.html', '/about.html']
+});
+```
+
+### Static helper
+
+
+The methods used to validate the CacheConfig and the RedisStorageConfig objects are exposed statically.
+
+They all throw a`TypeError` when invalid
+
+#### validateCacheConfig()
+
+
+```typescript
+validateCacheConfig(config: CacheRules)
+```
+
+#### validateRedisStorageConfig()
+
+
+```typescript
+validateRedisStorageConfig(config: RedisStorageConfig)
+```
 
 ## CacheStorage
 
+### geters & setters
+
 #### delete
-```javascript
+
+
+```typescript
 delete(): Promise<boolean>
 ```
 
@@ -139,24 +221,27 @@ Reject an Error if any
 
 #### get
 
-```javascript
+
+```typescript
 get(): Promise<string>
 ```
 
 Resolve to the url's content 
 Reject if the url wasn't cached
 
-
 #### has
-```javascript
+
+
+```typescript
 has(): Promise<boolean>
 ```
 
-Resolve to true if the url is cached, false if the file is not cached, rejected on error
-
+Resolve to true if the url is cached, false if the url is not cached, rejected on error
 
 #### set
-```javascript
+
+
+```typescript
 set(content: string [, force: boolean]) : Promise<boolean>
 ```
 
@@ -166,56 +251,75 @@ Rejects false if
     - The url has already been cached
 Rejects on Error
 
+**html**: the content of the url to be cached, must be UTF8
 
-force: 
-    <!--- Actualize the TTL for maxAge already cached urls-->
+**force**: 
+    - Actualize the TTL for maxAge already cached urls
     - Force the caching for url matching the `never` rule.
      
- 
-## Usage
+### methods
 
-Example with Fs storage
+#### getCategory()
+
+
+Returns the url's internal category name. `always`, `maxAge` or `never`
+
+#### getDomain()
+
+
+Returns the domain which the URL has been stored with.
+
+```javascript
+
+var url = CacheEngine.url('http://a.com/index.html');
+url.set('content').then()
+
+url.getDomain() // http://a.com
 
 ```
-var engine = new CachEngine('http://localhost', 'I1', {type: 'file', dir: '/var/cache'}, cacheRules); 
 
-var content ='Hello !';
+#### getInstanceName()
 
-var urls = [
-    'http://www.google.com/index.html',
-    '/index.html',
-    'http://www.google.com/about.html'
-];
 
-urls.forEach(function(url) {
-    engine.url(url).set(content, true).then(function() {
-        console.log('cached');
-    }, function(err) {
-        console.error(err);
-    });
-});
+The instanceName set when this url has been stored
+
+```javascript
+var CacheEngine = require('simple-url-cache');
+
+var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules); 
+var engine2 = new CachEngine('http://localhost:3333', 'I2', {host: '127.0.0.1',port: 6379}, cacheRules); 
+
+var url1 = engine1.url('http://a.com/index.html')
+var url2 = engine1.url('http://a.com/about.html')
+
+url1.getInstanceName() // I1
+url2.getInstanceName() // I2
+
 ```
 
-The resulting folder structure would be : 
+#### getStorageType()
 
-```bash
-#2 folders
-/var/cache/I1/http://localhost/
-#    -> /index.html
-/var/cache/I2/http://www.google.com/
-#    -> /index.html
-#    -> /about.html
-```
 
-> For readability, the folder names are unescaped.
+Same as `getInstanceName()`, will return `redis`
 
 ## Storage engines
 
-The usage across both storage engines is the same, only the storage config file differs.
+
+So far, only redis is supported, but it is not hard to add more, PR are welcome.
+
+Initially, FileSystem storage was supported, but it has been removed for several reasons : 
+
+- Performances issues.
+- Huge complexity issues when dealing with large sets of data, specially when `getStoredURLs()` is called or if a power outage happens.
+ 
+> it had to replay the whole Regex test against each stored URL, and then make a stat on the file in case it matches a maxAge rule to check the creation time.
+
+But if you need to add another storage engine, like mongo for example, the code is designed in a way were the `CacheStorage` and `CacheEngine` APIs are completly storage independent.
 
 ## Config Files
 
 ### Cache Config
+
 
 This is an object describing which URL will be cached, which URLs won't be cached, and which ones will have a ttl expiration.
 
@@ -250,19 +354,6 @@ exports.cacheConfig = {
     // If no URL is matched against these rules, then the default is to never cache it. can be 'never' or 'always'
     default: 'never' 
 };
-
-```
-
-### File storage config
-
-
-The simplest config file out there.
-
-```javascript
-
-export.fileStorageCOnfig = {
-    dir: '/var/cache'
-}
 
 ```
 

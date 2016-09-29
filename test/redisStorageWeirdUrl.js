@@ -24,13 +24,13 @@ describe('The redisStorage - weirdURLs', function() {
     };
 
     var cacheRules = {
-        cacheMaxAge: [],
-        cacheAlways: [
+        maxAge: [],
+        always: [
             {
                 regex: /.*/
             }
         ],
-        cacheNever: [],
+        never: [],
         default: 'never'
     };
 
@@ -42,31 +42,18 @@ describe('The redisStorage - weirdURLs', function() {
         weirdUrls.valid.forEach(function(weirdUrl) {
             var url = redisCache.url(weirdUrl);
 
-            describe('URL ' + weirdUrl + 'resolved to ' + url.getCurrentUrl(), function() {
+            SET_URL(url, html);
 
-                HAS_NOT_URL(url);
+            DELETE_URL(url, html);
 
-                SET_URL(url, html);
-
-                URL_HAS_CONTENT(url, html);
-
-                DELETE_URL(url);
-            });
 
         });
         weirdUrls.invalid.forEach(function(weirdUrl) {
             var url = redisCache.url(weirdUrl);
 
-            describe('URL ' + weirdUrl + 'resolved to ' + url.getCurrentUrl(), function() {
+            SET_URL(url, html);
 
-                HAS_NOT_URL(url);
-
-                SET_URL(url, html);
-
-                URL_HAS_CONTENT(url, html);
-
-                DELETE_URL(url);
-            });
+            DELETE_URL(url, html);
 
         });
 

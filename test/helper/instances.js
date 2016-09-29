@@ -9,16 +9,14 @@ var expect = chai.expect;
 var DELETE_DOMAIN = require('./common').DELETE_DOMAIN;
 var HAS_NOT_DOMAIN = require('./common').HAS_NOT_DOMAIN;
 var HAS_DOMAIN = require('./common').HAS_DOMAIN;
-var SET_URLS = require('./common').SET_URLS;
-var HAS_NOT_URLS = require('./common').HAS_NOT_URLS;
 var HAS_NOT_URL = require('./common').HAS_NOT_URL;
 var HAS_URL = require('./common').HAS_URL;
-var HAS_URLS = require('./common').HAS_URLS;
+var SET_URL = require('./common').SET_URL;
+
 var DELETE_ALL = require('./common').DELETE_ALL;
 
 module.exports = function(instance1, instance2, instance3) {
 
-    
 
     var cacheMaxAgeURL = 'maxAge.html';
     var cacheAlwaysURL = 'always.html';
@@ -45,22 +43,29 @@ module.exports = function(instance1, instance2, instance3) {
     });
 
     describe('Instance 1 ...', function () {
-        HAS_NOT_URLS(instance1Urls);
-        SET_URLS(instance1Urls);
-        HAS_URLS(instance1Urls);
+        var i;
+        for(i=0; i<3; i++) {
+            SET_URL(instance1Urls[i], html);
+        }
     });
 
     describe('Instance 2 ...', function () {
-        HAS_URL(instance2Urls[0]);
-        HAS_URL(instance2Urls[1]);
-        HAS_NOT_URL(instance2Urls[2]);
+        describe('The two a.com & b.com should be already set', function() {
+            HAS_URL(instance2Urls[0]);
+            HAS_URL(instance2Urls[1]);
+        })
+        describe('The default domain shuld not be set', function() {
+            HAS_NOT_URL(instance2Urls[2]);
+        });
     });
 
     describe('Instance 3 ...', function () {
-        HAS_NOT_URLS(instance3Urls);
-        SET_URLS(instance3Urls);
-        HAS_URLS(instance3Urls);
+        var i;
+        for(i=0; i<3; i++) {
+            SET_URL(instance3Urls[i], html);
+        }
     });
+
 
     describe('Instance 2 ...', function () {
         DELETE_DOMAIN('http://a.com', instance2);
@@ -95,4 +100,5 @@ module.exports = function(instance1, instance2, instance3) {
     describe('Removing Instance3', function() {
         DELETE_ALL(instance3);
     });
+
 };

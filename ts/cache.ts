@@ -1,56 +1,95 @@
-import { RegexRule,StorageInstance} from './interfaces';
+import { RegexRule, StorageInstance, StorageType} from './interfaces';
+import Helpers from  './helpers';
+import {Promise} from 'es6-promise';
 
 export default class Cache {
 
-    protected _currentCategory:string;
-    protected _currentMaxAge:number;
+    protected _category:string = '';
+    protected _maxAge:number = 0;
     protected _config;
 
-    constructor(protected _storageInstance: StorageInstance, protected currentUrl: string) {
+    constructor(protected _domain, protected _storageInstance: StorageInstance, protected _url: string) {
         this._config = this._storageInstance.getCacheRules();
-        this.getCacheCategory();
+        this.setCacheCategory();
     }
+
+    delete = (): Promise<boolean> => {
+        return this.getStorageInstance().delete(this._domain, this._url);
+    };
+
+    get = (): Promise<string> => {
+        return this.getStorageInstance().get(this._domain, this._url, this._category, this._maxAge);
+    };
+
+    getDomain(): string {
+        return this._domain;
+    }
+
+    getCategory(): string  {
+        return this._category;
+    }
+
+    getInstanceName(): string {
+        return this._storageInstance.getInstanceName();
+    }
+
+    getStorageType(): StorageType {
+        return this._storageInstance.getStorageType();
+    }
+
+    getUrl(): string {
+        return this._url;
+    }
+
+    has = (): Promise<boolean> => {
+        return this.getStorageInstance().has(this._domain, this._url, this._category, this._maxAge);
+    };
+
+    set = (html : string, force?: boolean): Promise<boolean> => {
+        Helpers.isStringDefined(html);
+        Helpers.isOptionalBoolean(force);
+        
+        if(typeof force === 'undefined') {
+            force = false;
+        }
+        return this.getStorageInstance().set(this._domain, this._url, html, this._category, this._maxAge, force);
+    };
 
     private getRegexTest = (u: RegexRule): boolean => {
-        return u.regex.test(this.currentUrl);
+        return u.regex.test(this._url);
     };
 
-    //return always|never|maxAge|timestamp|default
-    private getCacheCategory = () => {
-        var i;
-        for (i in this._config.cacheNever) {
-            if (this.getRegexTest (this._config.cacheNever[i]) === true) {
-                this._currentCategory = 'never';
-                return;
+    private setCacheCategory(): void  {
+        let i;
+
+        for (i in this._config.maxAge) {
+            if (this.getRegexTest (this._config.maxAge[i]) === true) {
+                this._category = 'maxAge';
+                this._maxAge = this._config.maxAge[i].maxAge;
             }
         }
 
-        for (i in this._config.cacheAlways) {
-            if (this.getRegexTest (this._config.cacheAlways[i]) === true) {
-                this._currentCategory = 'always';
-                return;
+        for (i in this._config.always) {
+            if (this.getRegexTest (this._config.always[i]) === true) {
+                if(this._category !== 'always') {
+                    console.error('And overriding maxAge with always');
+                }
+                this._category = 'always';
             }
         }
 
-        for (i in this._config.cacheMaxAge) {
-            if (this.getRegexTest (this._config.cacheMaxAge[i]) === true) {
-                this._currentCategory = 'maxAge';
-                this._currentMaxAge = this._config.cacheMaxAge[i].maxAge;
-                return;
+        for (i in this._config.never) {
+            if (this.getRegexTest (this._config.never[i]) === true) {
+                if(this._category !== 'always') {
+                    console.error('And overriding maxAge/Always with mever');
+                }
+                this._category = 'never';
             }
         }
-
-        this._currentCategory = this._config.default;
-        return;
+        if(this._category.length === 0) {
+            this._category = this._config.default;
+        }
     };
-
-    public getCategory(): string  {
-        return this._currentCategory;
-    }
-
-    public getCurrentUrl(): string {
-        return this.currentUrl;
-    }
 
     protected getStorageInstance(): StorageInstance {
         return this._storageInstance;

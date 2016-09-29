@@ -21,7 +21,7 @@ describe('REDIS storage testing', function() {
 
     describe('One Instance ', function () {
 
-        this.timeout(10000);
+        this.timeout(2000);
 
         redis1 = new simpleCache('COMMON_DOMAIN', 'INSTANCE',  storageConfig, cacheRules);
         instance(redis1);
