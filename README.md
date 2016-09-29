@@ -41,7 +41,7 @@ npm install simple-url-cache
 
 ### constructor
 
-```javascript
+```typescript
 constructor( defaultDomain: string, instanceName: string, storageConfig, cacheRules)
 ```
 
@@ -93,7 +93,7 @@ The resulting folder structure is:
 
 ### clearDomain
 
-```javascript
+```typescript
 clearDomain(domain?: string): Promise<boolean>
 ```
 
@@ -104,7 +104,7 @@ Removes all cached URLs under stored unde a domain
 
 ### clearAllDomains
 
-```javascript
+```typescript
 clearAllDomains(): Promise<boolean>
 ```
 
@@ -112,7 +112,7 @@ Clears all the URLs stored within this instance
 
 ### getAllCachedURLs
 
-```javascript
+```typescript
 getAllCachedURL(): Promise<string[][]>
 ```
 
@@ -137,7 +137,7 @@ example:
 ```
 ### getCachedURLs
 
-```javascript
+```typescript
 getCachedURLs(domain?: string): Promise<string[]>
 ```
 
@@ -147,7 +147,7 @@ Get the array of cached URLs associated with this domain & instance
 
 ### getCachedDomains
 
-```javascript
+```typescript
 getCachedDomains(): Promise<string[]>
 ```
 
@@ -155,7 +155,7 @@ Returns a list of all cached domain names (including protocol, port and authenti
 
 ### url
 
-```javascript
+```typescript
 url(url: string): CacheStorage
 ```
 
@@ -167,7 +167,7 @@ Create a new `CacheStorage` instance
 
 ### delete
 
-```javascript
+```typescript
 delete(): Promise<boolean>
 ```
 
@@ -176,7 +176,7 @@ Reject an Error if any
 
 ### get
 
-```javascript
+```typescript
 get(): Promise<string>
 ```
 
@@ -186,7 +186,7 @@ Reject if the url wasn't cached
 
 ### has
 
-```javascript
+```typescript
 has(): Promise<boolean>
 ```
 
@@ -194,7 +194,7 @@ Resolve to true if the url is cached, false if the file is not cached, rejected 
 
 ### set
 
-```javascript
+```typescript
 set(content: string [, force: boolean]) : Promise<boolean>
 ```
 
