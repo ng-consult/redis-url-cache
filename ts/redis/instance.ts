@@ -81,16 +81,26 @@ export default class RedisStorageInstance implements StorageInstance {
             client.hkeys(this.domainHashKey, (err, results) => {
                 if(err) reject(err);
                 var nb = 0;
+                if(results.length ===0) {
+                    resolve([]);
+                }
                 results.forEach( url => {
                     client.get(this.getKey(url), (err, data) => {
                         if(err) reject(err);
                         if(data !== null) {
                             urls.push(url);
+                            nb++;
+                            if( nb === results.length) {
+                                resolve(urls);
+                            }
                         } else {
-                            client.hdel(this.domainHashKey, url);
-                        }
-                        if( ++nb === results.length) {
-                            resolve(urls);
+                            client.hdel(this.domainHashKey, url, err => {
+                                if(err) reject(err);
+                                nb++;
+                                if( nb === results.length) {
+                                    resolve(urls);
+                                }
+                            });
                         }
                     });
                 });
@@ -231,14 +241,12 @@ export default class RedisStorageInstance implements StorageInstance {
                 if (err) {
                     reject(err)
                 } else{
-                    debug('REDIS SET 1');
-                    client.hset(this.domainHashKey, key, value, (err, value) => {
+                    client.hset(this.domainHashKey, key, value, (err, exists) => {
                         if (err) {
                             reject(err);
-                            return;
                         }
-                        debug('REDIS VALUE = ', value);
-                        if(value === 0) {
+                        if(exists === 0) {
+                            debug('Already set ');
                             resolve(true);
                             return;
                         }else {
@@ -249,7 +257,6 @@ export default class RedisStorageInstance implements StorageInstance {
                                     client.set(this.getKey(key), Date.now(), (err) => {
                                         if (err) {reject(err);return;}
                                         if (ttl > 0) {
-                                            debug('REDIS SETTING THE TTL to', ttl);
                                             client.expire(this.getKey(key), ttl, (err) => {
                                                 if (err) reject(err);
                                                 resolve(true);

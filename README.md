@@ -6,7 +6,8 @@ Conditionally cache your URL's content on FS or REDIS. It supports cache instanc
 
 ## API documentation
 
-You can find it under the folder `docs/index.html`, and it's been generated with [typedoc](https://github.com/TypeStrong/typedoc)
+
+https://a-lucas.github.io/simple-url-cache
 
 ## Installation
 

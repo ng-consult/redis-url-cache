@@ -94,6 +94,10 @@ class CacheEngine {
 
     private getInstance(domain):RedisStorageInstance | FileStorageInstance {
 
+        if (typeof CacheEngine.pool[this.type][this.instanceName] === 'undefined') {
+            CacheEngine.pool[this.type][this.instanceName] = {};
+        }
+
         if (typeof CacheEngine.pool[this.type][this.instanceName][domain] === 'undefined') {
 
             if(this.isFS(this.storageConfig)) {
@@ -118,13 +122,15 @@ class CacheEngine {
 
         return new Promise((resolve, reject) => {
             instance.getAllCachedDomains().then(domains=> {
-                const nbDomains = domains.length;
+                if(domains.length === 0) {
+                    resolve(true);
+                }
                 let nb = 0;
                 domains.forEach(domain => {
                     tmpInstance = this.getInstance(domain);
                     tmpInstance.clearAllCache().then(()=> {
                         nb++;
-                        if (nb === nbDomains) {
+                        if (nb === domains.length) {
                             resolve(true);
                         }
                     }, err => {
@@ -179,24 +185,32 @@ class CacheEngine {
      * }
      * @returns {Promise|Promise<T>}
      */
-    getAllCachedURLs():Promise<string[][]> {
+    getAllCachedURLs():Promise<any> {
         return new Promise((resolve, reject) => {
             var urls = {};
             this.getCachedDomains().then(domains => {
                 let nb = 0;
+                if(domains.length ===0) {
+                    resolve({});
+                }
                 domains.forEach(domain => {
+                    urls[domain] = [];
+
                     this.getCachedURLs(domain).then(result => {
                         urls[domain] = result;
-                        if (++nb === domains.length) {
+                        nb++;
+                        debug(nb, domains.length);
+                        if (nb === domains.length) {
+                            console.log('resolving ', nb);
                             resolve(urls);
                         }
                     }, err => {
                         reject(err);
-                    })
-                })
+                    });
+                });
             }, err => {
                 reject(err);
-            })
+            });
         });
     }
 

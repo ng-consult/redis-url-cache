@@ -9,6 +9,7 @@ var expect = chai.expect;
 var DELETE_DOMAIN = require('./common').DELETE_DOMAIN;
 var HAS_DOMAIN = require('./common').HAS_DOMAIN;
 var SET_URL = require('./common').SET_URL;
+var SET_URLS = require('./common').SET_URLS;
 var SET_URL_FALSE = require('./common').SET_URL_FALSE;
 var HAS_NOT_URL = require('./common').HAS_NOT_URL;
 var HAS_URL = require('./common').HAS_URL;
@@ -21,6 +22,8 @@ var WAIT_HAS_NOT_URL = require('./common').WAIT_HAS_NOT_URL;
 var URL_NAME_IS = require('./common').URL_NAME_IS;
 var URL_CATEGORY_IS = require('./common').URL_CATEGORY_IS;
 var SET_FORCE = require('./common').SET_FORCE;
+var GET_ALL_URLS = require('./common').GET_ALL_URLS;
+var GET_URLS = require('./common').GET_URLS;
 
 module.exports = function(cacheEngine) {
 
@@ -40,7 +43,11 @@ module.exports = function(cacheEngine) {
 
         HAS_NOT_URL(urlCache1);
         SET_URL(urlCache1, html);
+        
         URL_HAS_CONTENT(urlCache1, html);
+        URL_HAS_CONTENT(urlCache1, html);
+        URL_HAS_CONTENT(urlCache1, html);
+
         WAIT_HAS_NOT_URL(urlCache1, 1100);
 
         SET_URL(urlCache1, html);
@@ -143,7 +150,8 @@ module.exports = function(cacheEngine) {
         HAS_DOMAIN('http://b.com', cacheEngine);
 
         DELETE_DOMAIN('http://whatever_should_silently_succeed', cacheEngine);
-        DELETE_DOMAIN('http://b.com', cacheEngine)
+        DELETE_DOMAIN('http://b.com', cacheEngine);
+        DELETE_DOMAIN('http://b.com', cacheEngine);
         DELETE_DOMAIN('COMMON_DOMAIN', cacheEngine);
 
         HAS_NOT_URL(urlCaches[0]);
@@ -179,7 +187,96 @@ module.exports = function(cacheEngine) {
         HAS_NOT_URL(urlCaches[1]);
         HAS_NOT_URL(urlCaches[2]);
 
-
+        DELETE_ALL(cacheEngine);
+        DELETE_ALL(cacheEngine);
     });
+    
+    describe('getCachedURLs()', function() {
+
+        describe('default domain', function() {
+
+            var urlCaches = [];
+            urlCaches.push(cacheEngine.url('/0always.html'));
+            urlCaches.push(cacheEngine.url('/1always.html'));
+
+
+            GET_URLS(cacheEngine, null, []);
+            GET_URLS(cacheEngine, null, []);
+
+
+            SET_URLS(urlCaches, html);
+
+            GET_URLS(cacheEngine, null, ['/0always.html', '/1always.html']);
+            GET_URLS(cacheEngine, null, ['/0always.html', '/1always.html']);
+
+            DELETE_ALL(cacheEngine);
+            DELETE_ALL(cacheEngine);
+
+            GET_URLS(cacheEngine, null, []);
+            GET_URLS(cacheEngine, null, []);
+
+            SET_URLS(urlCaches, html);
+
+            GET_URLS(cacheEngine, null, ['/0always.html', '/1always.html']);
+            GET_URLS(cacheEngine, null, ['/0always.html', '/1always.html']);
+
+            DELETE_ALL(cacheEngine);
+
+        });
+
+        describe('set domain', function() {
+
+            var urlCaches = [];
+            urlCaches.push(cacheEngine.url('http://a.com/0always.html'));
+            urlCaches.push(cacheEngine.url('http://a.com/1always.html'));
+
+            GET_URLS(cacheEngine, 'http://a.com', []);
+            GET_URLS(cacheEngine, 'http://a.com', []);
+
+            SET_URLS(urlCaches, html);
+
+            GET_URLS(cacheEngine, 'http://a.com', ['/0always.html', '/1always.html']);
+            GET_URLS(cacheEngine, 'http://a.com', ['/0always.html', '/1always.html']);
+
+            DELETE_ALL(cacheEngine);
+
+            GET_URLS(cacheEngine, 'http://a.com', []);
+            GET_URLS(cacheEngine, 'http://a.com', []);
+
+            SET_URLS(urlCaches, html);
+
+            GET_URLS(cacheEngine, 'http://a.com', ['/0always.html', '/1always.html']);
+            GET_URLS(cacheEngine, 'http://a.com', ['/0always.html', '/1always.html']);
+
+        });
+    });
+
+
+    describe('getAllCachedURLs()', function() {
+
+        var i,
+            j,
+            urls = {},
+            urlCaches = [];
+
+        for(i=0; i<3; i++) {
+            urls['http://a' + i + '.com'] = [];
+            for(j=0; j< 3; j++) {
+                urlCaches.push(cacheEngine.url('http://a' + i + '.com/' + j + 'always.html'));
+                urls['http://a' + i + '.com'].push('/' + j + 'always.html');
+            }
+        }
+
+        DELETE_ALL(cacheEngine);
+
+        GET_ALL_URLS(cacheEngine, {});
+
+        SET_URLS(urlCaches, html);
+
+        GET_ALL_URLS(cacheEngine, urls);
+
+        DELETE_ALL(cacheEngine);
+    })
+
 
 };

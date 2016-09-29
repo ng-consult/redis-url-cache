@@ -41,7 +41,6 @@ class RedisStorage extends Cache implements CacheStorage{
     };
 
     set = (html: string, force?: boolean): Promise<boolean> => {
-        debug('Caching url ', this._url);
         return new Promise((resolve, reject) => {
             if (force === true) {
                 let ttl = 0;
@@ -55,7 +54,6 @@ class RedisStorage extends Cache implements CacheStorage{
                 });
                 return;
             }
-            debug('REDIS FORCE 2');
             if(this._currentCategory === 'never') {
                 debug('this url should never been stored');
                 resolve(false);

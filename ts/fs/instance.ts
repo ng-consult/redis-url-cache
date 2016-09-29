@@ -44,6 +44,9 @@ export default class FileStorageInstance implements StorageInstance {
     clearAllCache():Promise<boolean> {
         return new Promise((resolve, reject) => {
             try{
+                if(!fs.existsSync(this.baseDir)) {
+                    resolve(true);
+                }
                 fs.removeSync( this.baseDir);
                 resolve(true);
             } catch(e) {
@@ -81,14 +84,17 @@ export default class FileStorageInstance implements StorageInstance {
     getAllCachedDomains():Promise<string[]> {
         return new Promise((resolve, reject) => {
             try {
-                debug('starting scann');
+                if(!fs.existsSync(this.baseDir)) {
+                    resolve([]);
+                }
                 const list = fs.readdirSync(path.resolve(path.join(this.config.dir, this.escape(this.instanceName))));
+                if (list.length === 0) {;
+                    resolve([]);
+                }
                 debug('list = ', list);
                 const results = [];
                 list.forEach((dir) =>{
-                    if(dir!=='.' && dir!='..') {
-                        results.push(this.unescape(dir));
-                    }
+                    results.push(this.unescape(dir));
                 });
                 resolve(results);
             } catch(e) {
@@ -101,14 +107,14 @@ export default class FileStorageInstance implements StorageInstance {
     getCachedURLs(): Promise<string[]> {
         return new Promise((resolve, reject) => {
             try {
-                const list = fs.readdirSync(this.baseDir);
-                const results = [];
-                list.forEach((file) =>{
-                    if(file!=='.' && file!='..') {
-                        results.push(this.unescape(file));
-                    }
-                });
-                resolve(results);
+                if(!fs.existsSync(this.baseDir)) {
+                    resolve([]);
+                }
+                let list = fs.readdirSync(this.baseDir);
+                for(var i in list){
+                    list[i] = this.unescape(list[i]);
+                }
+                resolve(list);
             } catch(e) {
                 debug('Error while reading dir', this.baseDir);
                 reject(e);
@@ -131,6 +137,9 @@ export default class FileStorageInstance implements StorageInstance {
     has(key):Promise<boolean>  {
         return new Promise((resolve, reject) => {
             try{
+                if(!fs.existsSync(this.baseDir)) {
+                    resolve(false);
+                }
                 const exist = fs.existsSync(key);
                 resolve(exist);
             } catch(e) {
@@ -141,8 +150,10 @@ export default class FileStorageInstance implements StorageInstance {
     }
 
     set(key, value):Promise<boolean> {
+
         return new Promise((resolve, reject) => {
             try{
+                fs.ensureDirSync( this.baseDir );
                 fs.writeFileSync(key, value, 'utf-8');
                 resolve(true);
             } catch(e) {

@@ -49,7 +49,7 @@ export default class Helpers {
     }
 
     static IsSet (name: string, input: any) {
-        if(typeof input === 'undefined') {
+        if(typeof input === 'undefined' && input !== null && input !== '') {
             Helpers.Error(name, 'is not set');
         }
     }

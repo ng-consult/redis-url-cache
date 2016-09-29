@@ -25,7 +25,7 @@ function HAS_URL (url) {
         }).catch(function(res) {
             done('err' +res);
         });
-    })
+    });
 }
 
 function WAIT_HAS_NOT_URL (url, time) {
@@ -99,7 +99,7 @@ function SET_URLS(urlArray, html) {
         count = 0;
 
     urlArray.forEach(function(url) {
-        SET_URL(url);
+        SET_URL(url, html);
     });
 }
 
@@ -285,8 +285,53 @@ function URL_NAME_IS(url, name) {
     })
 }
 
-module.exports.SET_FORCE = SET_FORCE;
+function GET_ALL_URLS(instance, urls) {
+    var allUrls = {};
+    it('Should get all the urls witouth errors', function(done) {
+        instance.getAllCachedURLs().then(function(result) {
+            allUrls = result;
+            done();
+        }, function(err) {
+            done('err = '+ err);
+        })
+    });
 
+    it('Should retrun the correct urls', function () {
+        expect(allUrls).eql(urls);
+    })
+}
+
+function GET_URLS(instance, domain, urls) {
+    var allUrls = {};
+    if(domain === null) {
+        it('Should get the urls witouth errors when no domain is set', function(done) {
+            instance.getCachedURLs().then(function(result) {
+                allUrls = result;
+                done();
+            }, function(err) {
+                done('err = '+ err);
+            });
+        });
+    } else {
+        it('Should get the urls witouth errors for the domain '+ domain, function(done) {
+            instance.getCachedURLs(domain).then(function(result) {
+                allUrls = result;
+                done();
+            }, function(err) {
+                done('err = '+ err);
+            });
+        });
+    }
+
+
+    it('Should retrun the correct urls', function () {
+        expect(allUrls).eql(urls);
+    });
+}
+module.exports.SET_FORCE = SET_FORCE;
+module.exports.GET_URLS = GET_URLS;
+
+module.exports.GET_ALL_URLS = GET_ALL_URLS;
 module.exports.URL_CATEGORY_IS = URL_CATEGORY_IS;
 module.exports.URL_GET_REJECTED = URL_GET_REJECTED;
 module.exports.URL_HAS_CONTENT = URL_HAS_CONTENT;
