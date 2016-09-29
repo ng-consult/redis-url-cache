@@ -1,0 +1,463 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>simple-url-cache</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script src="assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">simple-url-cache</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> simple-url-cache</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="simple-url-cache-build-status-https-travis-ci-org-a-lucas-simple-url-cache-svg-branch-master-https-travis-ci-org-a-lucas-simple-url-cache-codecov-https-codecov-io-gh-a-lucas-simple-url-cache-branch-master-graph-badge-svg-https-codecov-io-gh-a-lucas-simple-url-cache-">simple-url-cache <a href="https://travis-ci.org/a-lucas/simple-url-cache"><img src="https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master" alt="Build Status"></a>  <a href="https://codecov.io/gh/a-lucas/simple-url-cache"><img src="https://codecov.io/gh/a-lucas/simple-url-cache/branch/master/graph/badge.svg" alt="codecov"></a></h1>
+				<p>Conditionally cache your URL&#39;s content on FS or REDIS. It supports cache instance sharing or isolation.</p>
+				<h2 id="api-documentation">API documentation</h2>
+				<p>You can find it under the folder <code>docs/index.html</code>, and it&#39;s been generated with <a href="https://github.com/TypeStrong/typedoc">typedoc</a></p>
+				<h2 id="installation">Installation</h2>
+				<pre><code class="lang-bash">npm install simple-url-cache
+</code></pre>
+				<h2 id="api">Api</h2>
+				<ul>
+					<li>CacheEngine<ul>
+							<li><a href="#constructor">constructor</a></li>
+							<li><a href="#cleardomain">clearDomain()</a></li>
+							<li><a href="#clearalldomains">clearAllDomains()</a></li>
+							<li><a href="#getallcachedurls">getAllCachedURLs()</a></li>
+							<li><a href="#getcachedurls">getCachedURLs()</a></li>
+							<li><a href="#getcacheddomains">getCachedDomains()</a></li>
+							<li><a href="#url">url()</a></li>
+						</ul>
+					</li>
+					<li>CacheStorage<ul>
+							<li><a href="#delete">delete()</a></li>
+							<li><a href="#get">get()</a></li>
+							<li><a href="#has">has()</a></li>
+							<li><a href="#set">set()</a></li>
+						</ul>
+					</li>
+					<li>StorageConfigs<ul>
+							<li><a href="#cache-config">Cache config</a></li>
+							<li><a href="#file-storage-config">File storage config</a></li>
+							<li><a href="#redis-storage-config">Redis storage config</a></li>
+						</ul>
+					</li>
+				</ul>
+				<h2 id="cache-engine">Cache Engine</h2>
+				<h3 id="constructor">constructor</h3>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">constructor</span>( defaultDomain: string, instanceName: string, storageConfig, cacheRules)
+</code></pre>
+				<p><strong>defaultDomain</strong> Every URL that miss a hostname will get classified under this domain</p>
+				<p><strong>instanceName</strong> The isolated instance where this cacheEngine will store urls.
+				If another cacheEngine has the same storage type and the same instance name, they will share the pool.</p>
+				<p>Example: </p>
+				<pre><code class="lang-javascript">
+<span class="hljs-keyword">var</span> engine1 = <span class="hljs-keyword">new</span> CachEngine(<span class="hljs-string">'http://localhost'</span>, <span class="hljs-string">'I1'</span>, {<span class="hljs-attr">type</span>: <span class="hljs-string">'file'</span>, <span class="hljs-attr">dir</span>: <span class="hljs-string">'/var/cache'</span>}, cacheRules); 
+<span class="hljs-keyword">var</span> engine2 = <span class="hljs-keyword">new</span> CachEngine(<span class="hljs-string">'http://localhost'</span>, <span class="hljs-string">'I1'</span>, {<span class="hljs-attr">type</span>: <span class="hljs-string">'file'</span>, <span class="hljs-attr">dir</span>: <span class="hljs-string">'/var/cache'</span>}, cacheRules);
+<span class="hljs-keyword">var</span> engine3 = <span class="hljs-keyword">new</span> CachEngine(<span class="hljs-string">'http://localhost'</span>, <span class="hljs-string">'I2'</span>, {<span class="hljs-attr">type</span>: <span class="hljs-string">'file'</span>, <span class="hljs-attr">dir</span>: <span class="hljs-string">'/var/cache'</span>}, cacheRules);
+
+<span class="hljs-comment">// At this stage, engine1 and engine2 share the same pool.</span>
+
+engine1.url(<span class="hljs-string">'http://a.com/index.html'</span>).set(<span class="hljs-string">'some content'</span>); 
+<span class="hljs-comment">// resolve(true)</span>
+
+engine2.url(<span class="hljs-string">'http://b.com/index.html'</span>).set(<span class="hljs-string">'some content'</span>);
+<span class="hljs-comment">// resolve(true)</span>
+
+engine1.url(<span class="hljs-string">'http://b.com/index.html'</span>).set(<span class="hljs-string">'some content'</span>); 
+<span class="hljs-comment">// resolves(false) - already cached</span>
+
+engine3.url(<span class="hljs-string">'http://a.com/index.html'</span>).set(<span class="hljs-string">'some content'</span>);
+<span class="hljs-comment">// resolve(true)</span>
+
+engine1.url(<span class="hljs-string">'http://b.com/index.html'</span>).get() 
+<span class="hljs-comment">//resolve(true) -&gt; sahred pool with engine1 </span>
+
+engine3.url(<span class="hljs-string">'http://b.com/index.html'</span>).set(<span class="hljs-string">'some content'</span>);
+<span class="hljs-comment">// resolve(false) -&gt; not set</span>
+</code></pre>
+				<p>The resulting folder structure is: </p>
+				<pre><code class="lang-bash"><span class="hljs-comment"># Instance 1</span>
+/var/cache/I1/htt[://a.com/index.html
+/var/cache/I1/htt[://b.com/index.html
+
+<span class="hljs-comment">#instance 2</span>
+/var/cache/I2/htt[://a.com/index.html
+</code></pre>
+				<h3 id="cleardomain">clearDomain</h3>
+				<pre><code class="lang-typescript">clearDomain(domain?: <span class="hljs-built_in">string</span>): Promise&lt;<span class="hljs-built_in">boolean</span>&gt;
+</code></pre>
+				<p>Removes all cached URLs under stored unde a domain</p>
+				<p><strong>domain</strong> the domain to be cleared, if none is provided, the default domain will be cleared</p>
+				<h3 id="clearalldomains">clearAllDomains</h3>
+				<pre><code class="lang-typescript">clearAllDomains(): Promise&lt;<span class="hljs-built_in">boolean</span>&gt;
+</code></pre>
+				<p>Clears all the URLs stored within this instance</p>
+				<h3 id="getallcachedurls">getAllCachedURLs</h3>
+				<pre><code class="lang-typescript">getAllCachedURL(): Promise&lt;<span class="hljs-built_in">string</span>[][]&gt;
+</code></pre>
+				<p>Return a list of all cached urls withiin the instance </p>
+				<p>example: </p>
+				<pre><code class="lang-javascript">
+{
+    <span class="hljs-string">"http://www.domainA.com"</span>: [
+                                <span class="hljs-string">"/index.html"</span>,
+                                <span class="hljs-string">"about.html"</span>
+                            ],
+    <span class="hljs-string">"http://www.domainB.com"</span>: [
+                                <span class="hljs-string">"/index.html"</span>,
+                                <span class="hljs-string">"about.html"</span>
+                            ],
+
+}
+</code></pre>
+				<h3 id="getcachedurls">getCachedURLs</h3>
+				<pre><code class="lang-typescript">getCachedURLs(domain?: <span class="hljs-built_in">string</span>): Promise&lt;<span class="hljs-built_in">string</span>[]&gt;
+</code></pre>
+				<p>Get the array of cached URLs associated with this domain &amp; instance</p>
+				<p><strong>domain</strong> if none provided, then the default domain will be used</p>
+				<h3 id="getcacheddomains">getCachedDomains</h3>
+				<pre><code class="lang-typescript">getCachedDomains(): Promise&lt;<span class="hljs-built_in">string</span>[]&gt;
+</code></pre>
+				<p>Returns a list of all cached domain names (including protocol, port and authentication)</p>
+				<h3 id="url">url</h3>
+				<pre><code class="lang-typescript">url(url: <span class="hljs-built_in">string</span>): CacheStorage
+</code></pre>
+				<p>Create a new <code>CacheStorage</code> instance</p>
+				<h2 id="cachestorage">CacheStorage</h2>
+				<h3 id="delete">delete</h3>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">delete</span>(): Promise&lt;<span class="hljs-built_in">boolean</span>&gt;
+</code></pre>
+				<p>Resolve to true if the url has been suppressed, false if the url wasn&#39;t cached
+				Reject an Error if any</p>
+				<h3 id="get">get</h3>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">get</span>(): Promise&lt;<span class="hljs-built_in">string</span>&gt;
+</code></pre>
+				<p>Resolve to the url&#39;s content
+				Reject if the url wasn&#39;t cached</p>
+				<h3 id="has">has</h3>
+				<pre><code class="lang-typescript">has(): Promise&lt;<span class="hljs-built_in">boolean</span>&gt;
+</code></pre>
+				<p>Resolve to true if the url is cached, false if the file is not cached, rejected on error</p>
+				<h3 id="set">set</h3>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">set</span>(content: <span class="hljs-built_in">string</span> [, force: <span class="hljs-built_in">boolean</span>]) : Promise&lt;<span class="hljs-built_in">boolean</span>&gt;
+</code></pre>
+				<p>Resolve to true if the url has been cached successfully,
+				Rejects false if </p>
+				<pre><code>-<span class="ruby"> the url matches the <span class="hljs-string">`never`</span> rule.
+</span>-<span class="ruby"> The url has already been cached</span>
+</code></pre><p>Rejects on Error</p>
+				<p><strong>html</strong>: the content of the file to be cached, must be UTF8</p>
+				<p><strong>force</strong>: </p>
+				<pre><code>-<span class="ruby"> ~~Actualize the TTL <span class="hljs-keyword">for</span> maxAge already cached urls~~
+</span>-<span class="ruby"> Force the caching <span class="hljs-keyword">for</span> url matching the <span class="hljs-string">`never`</span> rule.</span>
+</code></pre><h2 id="usage">Usage</h2>
+				<p>Example with Fs storage</p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> engine = <span class="hljs-keyword">new</span> CachEngine(<span class="hljs-string">'http://localhost'</span>, <span class="hljs-string">'I1'</span>, {<span class="hljs-attr">type</span>: <span class="hljs-string">'file'</span>, <span class="hljs-attr">dir</span>: <span class="hljs-string">'/var/cache'</span>}, cacheRules);
+
+<span class="hljs-keyword">var</span> content =<span class="hljs-string">'Hello !'</span>;
+
+<span class="hljs-keyword">var</span> urls = [
+    <span class="hljs-string">'http://www.google.com/index.html'</span>,
+    <span class="hljs-string">'/index.html'</span>,
+    <span class="hljs-string">'http://www.google.com/about.html'</span>
+];
+
+urls.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">url</span>) </span>{
+    engine.url(url).set(content, <span class="hljs-literal">true</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'cached'</span>);
+    }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+        <span class="hljs-built_in">console</span>.error(err);
+    });
+});
+</code></pre>
+				<p>The resulting folder structure would be : </p>
+				<pre><code class="lang-bash"><span class="hljs-comment">#2 folders</span>
+/var/cache/I1/http://localhost/
+<span class="hljs-comment">#    -&gt; /index.html</span>
+/var/cache/I2/http://www.google.com/
+<span class="hljs-comment">#    -&gt; /index.html</span>
+<span class="hljs-comment">#    -&gt; /about.html</span>
+</code></pre>
+				<blockquote>
+					<p>For readability, the folder names are unescaped.</p>
+				</blockquote>
+				<h2 id="storage-engines">Storage engines</h2>
+				<p>The usage across both storage engines is the same, only the storage config file differs.</p>
+				<h2 id="config-files">Config Files</h2>
+				<h3 id="cache-config">Cache Config</h3>
+				<p>This is an object describing which URL will be cached, which URLs won&#39;t be cached, and which ones will have a ttl expiration.</p>
+				<p>This is the same object, independently of the storage engine used.</p>
+				<p>An example worth 1000 words : </p>
+				<pre><code class="lang-javascript">
+exports.cacheConfig = {
+    <span class="hljs-comment">// Will cache all URL starting with /posts/ and ending with html for 24 hours</span>
+    cacheMaxAge: [ 
+        {
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^\/posts.*html$/</span>,  
+            <span class="hljs-attr">maxAge</span>: <span class="hljs-number">3600</span>
+        }
+    ],
+    <span class="hljs-comment">// Will cache about-us.html, contact-us.html and /prices.html indefinitively</span>
+    cacheAlways: [  
+        {
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^about-us\.html$/</span>, 
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^contact-us\.html$/</span>,
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^prices\.html$/</span>
+        }
+    ],
+    <span class="hljs-comment">// will never cache the url /sitemaps.html</span>
+    cacheNever: [ 
+        {
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^sitemaps\.html$/</span>
+        }
+    ], 
+    <span class="hljs-comment">// If no URL is matched against these rules, then the default is to never cache it. can be 'never' or 'always'</span>
+    <span class="hljs-keyword">default</span>: <span class="hljs-string">'never'</span> 
+};
+</code></pre>
+				<h3 id="file-storage-config">File storage config</h3>
+				<p>The simplest config file out there.</p>
+				<pre><code class="lang-javascript">
+<span class="hljs-keyword">export</span>.fileStorageCOnfig = {
+    <span class="hljs-attr">dir</span>: <span class="hljs-string">'/var/cache'</span>
+}
+</code></pre>
+				<h3 id="redis-storage-config">Redis storage config</h3>
+				<p>A bit more complex. The library <a href="https://github.com/NodeRedis/node_redis">noderedis</a> is used here, so a valid redis node config file is needed. </p>
+				<p>example : </p>
+				<pre><code class="lang-javascript">
+<span class="hljs-keyword">export</span>.redisStorageConfig = {
+    <span class="hljs-attr">host</span>: <span class="hljs-string">'127.0.0.1'</span>,
+    <span class="hljs-attr">port</span>: <span class="hljs-number">6379</span>,
+    <span class="hljs-attr">socket_keepalive</span>: <span class="hljs-literal">true</span>
+}
+</code></pre>
+				<!--
+## Adding Storages
+
+It is easy with typescript.
+
+###     Define a new storage file, for example `mongoStorage.ts`
+
+```typescript
+
+export default class RedisStorage extends CacheCategory implements CacheStorage{
+    // define all required methods from the CacheStorage interface 
+}
+
+```
+
+And compile it with : `npm run build`
+
+###     Add a test file `mongooStorage.spec.js`
+
+```javascript
+
+var simpleCache = require('./../dist/simple-cache.min').CacheEngine;
+var common = require('./helper/common');
+var cacheRules = require('./helper/cacheRules');
+
+describe('The fileStorage', function() {
+
+    var storageConfig = {
+        type: 'mongo',
+        ... other config values here
+    };
+
+    var mongoCache = new simpleCache(storageConfig, cacheRules);
+
+    common(mongoCache);
+
+});
+```
+
+and make sure the test passes with 
+
+`npm test`
+
+If you need to debug, you can use `debug` extensively with: 
+
+```bash
+DEBUG=simple-url-cache-FS,simple-url-cache-REDIS npm test
+```
+
+###     Do the same with `mongoStorageWeirdUrl.js`
+
+##      Update te index.d.ts to file include your new typing definitions
+
+###     Send me your Pull Request
+
+-->
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_cacheengine_.html">"cache<wbr>Engine"</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_helpers_.html">"<wbr>Helpers"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_cache_.html">"cache"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_fs_instance_.html">"fs/instance"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_fs_storage_.html">"fs/storage"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_interfaces_.html">"interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_redis_instance_.html">"redis/instance"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_redis_pool_.html">"redis/pool"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_redis_storage_.html">"redis/storage"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
