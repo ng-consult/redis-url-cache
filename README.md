@@ -1,11 +1,10 @@
 # simple-url-cache [![Build Status](https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-url-cache)  [![codecov](https://codecov.io/gh/a-lucas/simple-url-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/a-lucas/simple-url-cache)
 
 
-Conditionally cache your URL's content on FS or REDIS. It supports cache instance sharing or isolation.
+Conditionally cache your URL's content on FS or REDIS with RegExp. Also supports cache instance sharing and isolation.
 
 
 ## API documentation
-
 
 https://a-lucas.github.io/simple-url-cache
 
@@ -43,7 +42,7 @@ npm install simple-url-cache
 ### constructor
 
 ```typescript
-constructor( defaultDomain: string, instanceName: string, storageConfig, cacheRules)
+constructor( defaultDomain: string, instanceName: string, storageConfig: Object, cacheConfig: Object)
 ```
 
 **defaultDomain** Every URL that miss a hostname will get classified under this domain
@@ -51,6 +50,12 @@ constructor( defaultDomain: string, instanceName: string, storageConfig, cacheRu
 **instanceName** The isolated instance where this cacheEngine will store urls.
 If another cacheEngine has the same storage type and the same instance name, they will share the pool.
 
+**storageConfig** [File Storage Config](#file-storage-config) or [Redis Storage Config](#redis-storage-config)
+Defines how & where url content is stored
+ 
+**cacheConfig** [Cache config](#cache-config)
+Supports TTL and inclusion/exclusion for any URL rules you need
+ 
 Example: 
 
 ```javascript
@@ -91,6 +96,17 @@ The resulting folder structure is:
 #instance 2
 /var/cache/I2/htt[://a.com/index.html
 ```
+
+### url
+
+```typescript
+url(url: string): CacheStorage
+```
+
+**url**
+Initialize a new [CacheStorage](#cachestorage) instance ready to be *get(), set(), delete() and has()*.
+
+This is the most used method in the library, that's why it is at the top of the list.
 
 ### clearDomain
 
@@ -154,13 +170,6 @@ getCachedDomains(): Promise<string[]>
 
 Returns a list of all cached domain names (including protocol, port and authentication)
 
-### url
-
-```typescript
-url(url: string): CacheStorage
-```
-
-Create a new `CacheStorage` instance
 
 
 ## CacheStorage
