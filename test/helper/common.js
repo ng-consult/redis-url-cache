@@ -2,282 +2,308 @@ var chai = require('chai');
 var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 
+var debug = require('debug')('simple-url-cache-test');
 var expect = chai.expect;
 
-module.exports = function(cacheEngine) {
 
-    var cacheMaxAgeURL = '/maxAge.html';
-    var cacheAlwaysURL = '/always.html';
-    var cacheNeverURL = '/never.html';
-    var notMatchedURL = '/unmatched.html';
-
-    var html = '<b>Some HTML</b>';
-
-    var urlCache1, urlCache2, urlCache3, urlCache4;
-
-
-    describe('cacheMaxAge', function() {
-
-        beforeEach(function() {
-            urlCache1 = cacheEngine.url(cacheMaxAgeURL);
-        });
-
-
-        after(function() {
-            urlCache1.removeUrl();
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache1.isCached()).to.eventually.equal(false);
-        });
-
-        it('We cache the URL', function() {
-            return expect(urlCache1.cache(html)).to.eventually.equal(true);
-        });
-
-        it('We cache the URL a second time', function() {
-            return expect(urlCache1.cache(html)).to.eventually.equal(false);
-        });
-
-        it('The url should be cached', function() {
-            return expect(urlCache1.isCached()).to.eventually.equal(true);
-        });
-
-        it('The html should be set', function() {
-            return expect(urlCache1.getUrl()).to.eventually.equal(html);
-        });
-
-        it('it waits 1.1 seconds - the cache should be deleted', function(done) {
-            setTimeout(function() {
-                urlCache1.isCached().then(function(result) {
-                    expect(result).eql(false);
-                    done();
-                }, function(err) {
-                    done(err);
-                }).catch(function(err) {
-                    done(err);
-                });
-            }, 1100);
-        });
-
-        it('We cache the URL', function() {
-            return expect(urlCache1.cache(html)).to.eventually.equal(true);
-        });
-
-        it('We remove the cache', function() {
-            return expect(urlCache1.removeUrl()).to.eventually.equal(true);
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache1.isCached()).to.eventually.equal(false);
-        });
-
-        it('The html should throw an error', function() {
-            return expect(urlCache1.getUrl()).to.be.rejectedWith('This url is not cached: ' + cacheMaxAgeURL);
-        });
-
+function HAS_URLS(urlArray) {
+    var results = [],
+        count = 0;
+    urlArray.forEach(function(url){
+        HAS_URL(url);
     });
+}
 
-    describe('cacheNever', function() {
 
-        urlCache2 = cacheEngine.url(cacheNeverURL);
-
-        after(function() {
-            urlCache2.removeUrl();
+function HAS_URL (url) {
+    it('Should have the url cached ' + url.getCurrentUrl(), function(done) {
+        url.has().then(function(res) {
+            expect(res).eql(true);
+            done();
+        }, function(res) {
+            done('err' +res);
+        }).catch(function(res) {
+            done('err' +res);
         });
-
-        it('The url shoud be /never.html', function() {
-            expect(urlCache2.getCurrentUrl()).to.eql(cacheNeverURL);
-        });
-
-        it('The url category shoud be never', function() {
-            expect(urlCache2.getCategory()).to.eql('never');
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache2.isCached()).to.eventually.equal(false);
-        });
-
-        it('We cache the URL', function() {
-            return expect(urlCache2.cache(html)).to.eventually.equal(false);
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache2.isCached()).to.eventually.equal(false);
-        });
-
-        it('We force the cache for the URL', function() {
-            return expect(urlCache2.cache(html, true)).to.eventually.equal(true);
-        });
-
-        it('The url should be cached', function() {
-            return expect(urlCache2.isCached()).to.eventually.equal(true);
-        });
-
-        it('The html should be set', function() {
-            return expect(urlCache2.getUrl()).to.eventually.equal(html);
-        });
-
-        it('We remove the cache', function() {
-            return expect(urlCache2.removeUrl()).to.eventually.equal(true);
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache2.isCached()).to.eventually.equal(false);
-        });
-
-        it('The html should trhow an error', function() {
-            return expect( urlCache2.getUrl() ).to.be.rejectedWith('This url is not cached: ' + cacheNeverURL);
-        });
-
-    });
-
-    describe('unMatchedURL', function() {
-        urlCache3 = cacheEngine.url(notMatchedURL);
-
-        after(function() {
-            urlCache3.removeUrl();
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache3.isCached()).to.eventually.equal(false);
-        });
-
-        it('We cache the URL', function() {
-            return expect(urlCache3.cache(html)).to.eventually.equal(false);
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache3.isCached()).to.eventually.equal(false);
-        });
-
-        it('We force the cache for the URL', function() {
-            return expect(urlCache3.cache(html, true)).to.eventually.equal(true);
-        });
-
-        it('The url should be cached', function() {
-            return expect(urlCache3.isCached()).to.eventually.equal(true);
-        });
-
-        it('The html should be set', function() {
-            return expect(urlCache3.getUrl()).to.eventually.equal(html);
-        });
-
-        it('We remove the cache', function() {
-            return expect(urlCache3.removeUrl()).to.eventually.equal(true);
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache3.isCached()).to.eventually.equal(false);
-        });
-
-        it('The html should trhow an error', function() {
-            return expect( urlCache3.getUrl() ).to.be.rejectedWith('This url is not cached: ' + notMatchedURL);
-        });
-    });
-
-    describe('cacheAlways', function() {
-
-        urlCache4 = cacheEngine.url(cacheAlwaysURL);
-
-        it('The category should be always', function() {
-            expect(urlCache4.getCategory()).to.eql('always');
-        });
-
-        it('We cache the URL', function() {
-            return expect(urlCache4.cache(html)).to.eventually.equal(true);
-        });
-
-        it('We cache the URL a second time', function() {
-            return expect(urlCache4.cache(html)).to.eventually.equal(false);
-        });
-
-        it('The url should be cached', function() {
-            return expect(urlCache4.isCached()).to.eventually.equal(true);
-        });
-
-        it('The html should be set', function() {
-            return expect(urlCache4.getUrl()).to.eventually.equal(html);
-        });
-
-        it('We remove the cache', function() {
-            return expect(urlCache4.removeUrl()).to.eventually.equal(true);
-        });
-
-        it('The url shouldn\'t be cached', function() {
-            return expect(urlCache4.isCached()).to.eventually.equal(false);
-        });
-
-        it('The html should trhow an error', function() {
-            return expect( urlCache4.getUrl() ).to.be.rejectedWith('This url is not cached: ' + cacheAlwaysURL);
-        });
-
-    });
-
-    describe('clearAllCache()', function() {
-
-
-        var i,
-            urlCaches = [];
-
-        it('Stores 5 urls', function(done) {
-            var count = 0;
-
-            for(i=0; i<5; i++){
-                urlCaches.push(cacheEngine.url( i + 'always.html'));
-                urlCaches[i].cache('<some content').then(function(res) {
-                    //expect(res).to.eql(true);
-                    count++;
-                    if(count === 5) {
-                        done()
-                    }
-                }, function(res) {
-                    done(res);
-                }).catch(function(res) {
-                    done(res);
-                });
-            }
-
-
-
-        });
-
-        it('These URLs should be cached', function(done) {
-            var count = 0;
-            for(i=0; i<5; i++){
-                urlCaches[i].isCached().then(function(res) {
-                    count++;
-                    if(count === 5) {
-                        done()
-                    }
-                }, function(err) {
-                    done(err);
-                })
-            }
-        });
-
-        it('clears all the caches', function(done) {
-            cacheEngine.clearAllCache().then(function(res){
-                expect(res).eql(true);
-                done();
-            }, function(err){
-                done(err);
-            })
-        });
-
-        it('All caches should be cleared', function(done) {
-            var count = 0;
-            for(i=0; i<5; i++){
-                urlCaches[i].isCached().then(function(res) {
-                    expect(res).equal(false);
-                    count++;
-                    if(count === 5) {
-                        done()
-                    }
-                })
-            }
-        });
-
     })
+}
 
-};
+function WAIT_HAS_NOT_URL (url, time) {
+    it('Waits ' + time +' and shouldn\'t have the url cached ' + url.getCurrentUrl(), function(done) {
+        setTimeout(function() {
+            url.has().then(function(res) {
+                expect(res).eql(false);
+                done();
+            }, function(res) {
+                done('err' +res);
+            }).catch(function(res) {
+                done('err' +res);
+            });
+        }, time);
+    });
+    DELETE_URL_REJECTED(url);
+    URL_GET_REJECTED(url);
+}
+
+function HAS_NOT_URL (url) {
+    it('Shouldn\'t have the url cached ' + url.getCurrentUrl(), function(done) {
+        url.has().then(function(res) {
+            expect(res).eql(false);
+            done();
+        }, function(res) {
+            done('err' +res);
+        }).catch(function(res) {
+            done('err' +res);
+        });
+    });
+    DELETE_URL_REJECTED(url);
+
+}
+
+
+function HAS_NOT_URLS(urlArray) {
+    urlArray.forEach(function(url) {
+        HAS_NOT_URL(url);
+    });
+}
+
+function SET_URL(url, html) {
+    it('cache the url '+ url.getCurrentUrl() + ' resolve(true)', function(done){
+        url.set(html).then(function(res) {
+            expect(res).eql(true);
+            done();
+        }, function(res) {
+            done('err' +res);
+        }).catch(function(res) {
+            done('err' +res);
+        });
+    });
+}
+
+function SET_URL_FALSE(url, html) {
+    it('cache the url '+ url.getCurrentUrl() + ' resolve(false)', function(done){
+        url.set(html).then(function(res) {
+            expect(res).eql(false);
+            done();
+        }, function(res) {
+            done('err' +res);
+        }).catch(function(res) {
+            done('err' +res);
+        });
+    });
+
+}
+
+function SET_URLS(urlArray, html) {
+    var results = [],
+        count = 0;
+
+    urlArray.forEach(function(url) {
+        SET_URL(url);
+    });
+}
+
+
+function HAS_DOMAIN(domain, instance) {
+    it('domain should be set ' + domain, function(done) {
+        instance.getCachedDomains().then(function(domains) {
+            expect(domains).to.include(domain);
+            done();
+        }, function(err) {
+            debug(done);
+            done(err);
+        });
+
+    });
+    /*
+    return;
+
+
+    it('Should contain the domain ', domain, function(done) {
+
+        instance.getCachedDomains().then(function(domains) {
+            expect(domains).to.include(domain);
+            done();
+        }, function(res) {
+            done('err' +res);
+        }).catch(function(res) {
+            done('err' +res);
+        });
+    });*/
+}
+
+function HAS_NOT_DOMAIN(domain, instance) {
+    it('Should\'t have the domain ' + domain, function(done) {
+        instance.getCachedDomains().then(function(domains) {
+            expect(domains).to.not.include(domain);
+            done();
+        }, function(res) {
+            done('err' +res);
+        }).catch(function(res) {
+            done('err' +res);
+        });
+    });
+}
+
+function DELETE_DOMAIN(domain, instance) {
+
+    it('Should delete the domain without error ' + domain, function () {
+        instance.clearDomain(domain).then(function (result) {
+            expect(result).eql(true);
+            done();
+        }, function (res) {
+            done('err' +res);
+        }).catch(function (res) {
+            done('err' +res);
+        });
+    });
+
+    HAS_NOT_DOMAIN(domain, instance);
+
+}
+
+
+
+function DELETE_ALL(instance) {
+
+    it('should run clearAllDomains without errors', function(done) {
+
+        instance.clearAllDomains().then(function(res){
+            expect(res).eql(true);
+            done();
+        }, function(err){
+            done('err' +err);
+        }).catch(function(res) {
+            done('err' +res);
+        });
+
+    });
+
+    it('shouldn\'t have any domain', function(done) {
+        instance.getCachedDomains().then(function(domains) {
+            expect(domains.length).eql(0);
+            done();
+        }, function(res) {
+            done('err' +res);
+        }).catch(function(res) {
+            done('err' +res);
+        });
+    })
+}
+
+function DELETE_DOMAIN_NOT_SET(defaultDomain, instance) {
+    HAS_DOMAIN(defaultDomain, instance);
+    it('Should delete the domain not set without error', function () {
+        instance.clearDomain().then(function (result) {
+            expect(result).eql(true);
+            done();
+        }, function (res) {
+            done('err' +res);
+        }).catch(function (res) {
+            done('err' +res);
+        });
+    });
+    HAS_NOT_DOMAIN(defaultDomain, instance);
+}
+
+function DELETE_URL(url) {
+    it('Should delete the url' + url.getCurrentUrl(), function(done) {
+
+        url.delete().then(function(res) {
+            expect(res).eql(true);
+            done();
+        }, function(err) {
+            done('err' + err);
+        })
+    });
+    HAS_NOT_URL(url);
+}
+
+function URL_HAS_CONTENT(url, html) {
+    it('The URL should have the correct content ' + url.getCurrentUrl(), function(done) {
+
+        url.get().then(function(res) {
+            expect(res).eql(html);
+            done();
+        }, function(err) {
+            done('error' + err);
+        })
+    })
+}
+
+function URL_GET_REJECTED(url) {
+    it('The url.get() should reject() ' + url.getCurrentUrl(), function(done) {
+
+        url.get().then(function(res) {
+            done('err');
+        }, function(err) {
+            expect(err).to.be.defined;
+            done();
+        })
+    })
+}
+
+function DELETE_URLS_REJECTED(urls) {
+    urls.forEach(function(url) {
+        DELETE_URL_REJECTED(url);
+    });
+}
+
+function DELETE_URL_REJECTED(url) {
+    it('Should reject the deletion of '+ url.getCurrentUrl(), function(done) {
+        url.delete().then(function() {
+            done('err')
+        }, function(err) {
+            expect(err).to.be.defined;
+            done();
+        });
+    })
+}
+
+function URL_CATEGORY_IS(url, name) {
+    it('The url category should be ' + name, function() {
+        expect(url.getCategory()).eql(name);
+    })
+}
+
+function SET_FORCE(url, html) {
+    it('The url is forcefully cached' + url.getCurrentUrl(), function(done) {
+        url.set(html, true).then(function(res) {
+            expect(res).eql(true);
+            done();
+        }, function(err) {
+            done('err = ' + err);
+        });
+    });
+    HAS_URL(url);
+    URL_HAS_CONTENT(url, html);
+}
+
+function URL_NAME_IS(url, name) {
+    it('The url name should be ' + name, function() {
+        expect(url.getCurrentUrl()).eql(name);
+    })
+}
+
+module.exports.SET_FORCE = SET_FORCE;
+
+module.exports.URL_CATEGORY_IS = URL_CATEGORY_IS;
+module.exports.URL_GET_REJECTED = URL_GET_REJECTED;
+module.exports.URL_HAS_CONTENT = URL_HAS_CONTENT;
+module.exports.DELETE_URL = DELETE_URL;
+module.exports.DELETE_URL_REJECTED = DELETE_URL_REJECTED;
+module.exports.DELETE_URLS_REJECTED = DELETE_URL_REJECTED;
+module.exports.DELETE_DOMAIN = DELETE_DOMAIN;
+module.exports.HAS_NOT_DOMAIN = HAS_NOT_DOMAIN;
+module.exports.HAS_DOMAIN = HAS_DOMAIN;
+module.exports.SET_URLS = SET_URLS;
+module.exports.SET_URL = SET_URL;
+module.exports.SET_URL_FALSE = SET_URL_FALSE;
+module.exports.HAS_NOT_URLS = HAS_NOT_URLS;
+module.exports.HAS_NOT_URL = HAS_NOT_URL;
+module.exports.WAIT_HAS_NOT_URL = WAIT_HAS_NOT_URL;
+module.exports.URL_NAME_IS = URL_NAME_IS;
+module.exports.DELETE_DOMAIN_NOT_SET = DELETE_DOMAIN_NOT_SET;
+module.exports.HAS_URL = HAS_URL;
+module.exports.HAS_URLS = HAS_URLS;
+module.exports.DELETE_ALL = DELETE_ALL;

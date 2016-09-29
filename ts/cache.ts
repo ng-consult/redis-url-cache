@@ -1,11 +1,13 @@
-import {CacheRules, RegexRule} from './interfaces';
+import { RegexRule,StorageInstance} from './interfaces';
 
-export abstract class CacheCategory {
+export default class Cache {
 
     protected _currentCategory:string;
     protected _currentMaxAge:number;
+    protected _config;
 
-    constructor(protected currentUrl: string, protected _config: CacheRules) {
+    constructor(protected _storageInstance: StorageInstance, protected currentUrl: string) {
+        this._config = this._storageInstance.getCacheRules();
         this.getCacheCategory();
     }
 
@@ -50,5 +52,8 @@ export abstract class CacheCategory {
         return this.currentUrl;
     }
 
-}
+    protected getStorageInstance(): StorageInstance {
+        return this._storageInstance;
+    }
 
+}

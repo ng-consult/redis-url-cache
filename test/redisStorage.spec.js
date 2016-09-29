@@ -1,7 +1,7 @@
-
-var simpleCache = require('./../dist/simple-cache.min').CacheEngine;
+var simpleCache = require('./../dist/simple-cache.min');
 var cacheRules = require('./helper/cacheRules');
-var common = require('./helper/common');
+var instance = require('./helper/instance');
+var instances = require('./helper/instances');
 
 var storageConfig = {
     type: 'redis',
@@ -10,11 +10,28 @@ var storageConfig = {
     socket_keepalive: true
 };
 
-var redisCache = new simpleCache(storageConfig, cacheRules);
+
+describe('REDIS storage testing', function() {
+
+    var redis1,
+        redis2,
+        redis3,
+        redis4;
 
 
-describe('The redisStorage', function () {
+    describe('One Instance ', function () {
 
-    common(redisCache);
+        this.timeout(10000);
 
+        redis1 = new simpleCache('COMMON_DOMAIN', 'INSTANCE',  storageConfig, cacheRules);
+        instance(redis1);
+
+    });
+
+    describe('Two common instance, one separate instance', function() {
+        redis2 = new simpleCache('DOMAIN1', 'INSTANCE1',  storageConfig, cacheRules);
+        redis3 = new simpleCache('DOMAIN2', 'INSTANCE1',  storageConfig, cacheRules);
+        redis4 = new simpleCache('DOMAIN3', 'INSTANCE2',  storageConfig, cacheRules);
+        instances(redis2, redis3, redis4);
+    });
 });

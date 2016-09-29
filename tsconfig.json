@@ -1,11 +1,17 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es5",
+        "allowUnreachableCode": false,
         "module": "commonjs",
         "noImplicitAny": false,
         "declaration": false,
         "diagnostics": true,
-        "moduleResolution": "node"
+        "listFiles": true,
+        "pretty": true,
+        //"traceResolution": true,
+        "moduleResolution": "node",
+        "removeComments": true,
+        "watch": true
     },
     "files": [
         "./typings/index.d.ts",

@@ -2,52 +2,15 @@
 // Project: https://github.com/a-lucas/simple-url-cache
 // Definitions by: Antoine LUCAS <https://github.com/a-lucas>
 
-export class CacheEngine {
-    constructor(storageConfig:FileStorageConfig, cacheRules:CacheRules);
-    constructor(storageConfig:RedisStorageConfig, cacheRules:CacheRules);
+//declare module "simple-url-cache" {
 
-    clearAllCache(): Promise<boolean>
-    url(url:string):FileStorage;
-    url(url:string):RedisStorage;
+
+export interface RegexRule {
+    regex:RegExp
 }
 
-
-export class FileStorage implements CacheStorage {
-    constructor(_url:string, _storageConfig:FileStorageConfig, _regexRules:CacheRules);
-
-    isCached():Promise<boolean>;
-
-    removeUrl():Promise<boolean>;
-
-    getUrl():Promise<string>;
-
-    cache(html:string):Promise<boolean>
-    cache(html:string, force:boolean):Promise<boolean>;
-
-    destroy():void;
-
-    getCategory():string;
-
-    getCurrentUrl():string;
-}
-
-export class RedisStorage implements CacheStorage {
-    constructor(_url:string, _storageConfig:RedisStorageConfig, _regexRules:CacheRules);
-
-    isCached():Promise<boolean>;
-
-    removeUrl():Promise<boolean>;
-
-    getUrl():Promise<string>;
-
-    cache(html:string):Promise<boolean>;
-    cache(html:string, force:boolean):Promise<boolean>;
-
-    destroy():void;
-
-    getCategory():string;
-
-    getCurrentUrl():string;
+export interface MaxAgeRegexRule extends RegexRule {
+    maxAge:number
 }
 
 export interface CacheRules {
@@ -57,11 +20,11 @@ export interface CacheRules {
     default:string
 }
 
-export interface FileStorageConfig extends StorageConfig {
+export interface FileStorageConfig {
     dir:string;
 }
 
-export interface RedisStorageConfig extends StorageConfig {
+export interface RedisStorageConfig {
     host:string;
     port:number;
     path?:string;
@@ -71,23 +34,69 @@ export interface RedisStorageConfig extends StorageConfig {
     db?:string;
 }
 
-interface StorageConfig {
-    type:string
+export interface CacheStorage {
+    /**
+     * Resolve to true if exists, false if not, and rejects an Error if any
+     */
+    has():Promise<boolean>;
+    /**
+     * Resolve to true if deleted, false if not there, and rejects an Error if any
+     */
+    delete():Promise<boolean>;
+    /**
+     * Resolves to the html, Rejects undefined if not cached
+     */
+    get():Promise<string>;
+    /**
+     * Resolve to true if cached, false if lready cached, and rejects an Error if any
+     * @param html
+     * @param force
+     */
+    set(html:string, force:boolean):Promise<boolean>;
 }
 
-interface CacheStorage {
-    isCached():Promise<boolean>;
-    removeUrl():Promise<boolean>;
-    getUrl():Promise<string>;
-    cache(html:string):Promise<boolean>;
-    cache(html:string, force:boolean):Promise<boolean>;
-    destroy():void;
+
+declare class FileStorage extends Cache implements CacheStorage {
+    delete():Promise<boolean>;
+
+    get():Promise<string>;
+
+    has():Promise<boolean>;
+
+    set(html:string):Promise<boolean>;
+    set(html:string, force:boolean):Promise<boolean>;
 }
 
-interface RegexRule {
-    regex:RegExp
+
+declare class Cache {
+    getCategory():string;
+
+    getCurrentUrl():string;
 }
 
-interface MaxAgeRegexRule extends RegexRule {
-    maxAge:number
+
+declare class CacheEngine {
+    /**
+     *
+     * @param defaultDomain This is the default domain when the url doesn't contain any host information.
+     * It can be of any form, usually http:   // user:pass @ host.com : 8080
+     * @param storageConfig: Either a FileStorageConfig or a RedisStorageConfig
+     * @param cacheRules
+     */
+    constructor(defaultDomain:string, instance:string, storageConfig:RedisStorageConfig | FileStorageConfig, cacheRules:CacheRules);
+
+    /**
+     *
+     * @param domain If no domain is provided, then the default domain will be cleared
+     */
+    clearAllCache(domain?:string):Promise<boolean>;
+
+    /**
+     *
+     * @param url Takes the URL, and split it in two, left side is http:   // user:pass @ host.com : 8080, right side is the relative path. Prepend forward slash is missing to the relatve path
+     * The left side is used to create a subdirectory for File storage, or a collection for Redis. The Redis collection naming convention is [db_]domain if any db parameter is provided. If no db is provided, then the default domain is used to store url without hostnames.
+     * @returns {CacheStorage}
+     */
+    url(url:string):CacheStorage;
 }
+//}

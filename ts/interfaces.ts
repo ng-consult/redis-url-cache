@@ -1,3 +1,4 @@
+import {Promise} from 'es6-promise';
 
 export interface RegexRule {
     regex: RegExp
@@ -14,15 +15,11 @@ export interface CacheRules{
     default: string
 }
 
-export interface StorageConfig {
-    type: string
-}
-
-export interface FileStorageConfig extends StorageConfig{
+export interface FileStorageConfig{
     dir: string;
 }
 
-export interface RedisStorageConfig  extends StorageConfig{
+export interface RedisStorageConfig{
     host: string;
     port: number;
     path?: string;
@@ -33,9 +30,20 @@ export interface RedisStorageConfig  extends StorageConfig{
 }
 
 export interface CacheStorage {
-    isCached(): Promise<boolean>;
-    removeUrl(): Promise<boolean>;
-    getUrl(): Promise<string>;
-    cache(html:string, force: boolean): Promise<boolean>;
+    has(): Promise<boolean>;
+    delete(): Promise<boolean>;
+    get(): Promise<string>;
+    set(html:string, force: boolean): Promise<boolean>;
+}
+
+export interface StorageInstance {
+    get(key: string): Promise<string>;
+    has(key: string): Promise<boolean>;
+    set(key: string, value: string, ttl?: number): Promise<boolean>;
+    delete(key: string): Promise<boolean>;
+    clearAllCache(): Promise<boolean>;
     destroy(): void;
+    getCacheRules(): CacheRules;
+    getCachedURLs(): Promise <string[]>;
+    getAllCachedDomains(): Promise <string[]>;
 }

@@ -70,90 +70,72 @@
 				<ul>
 					<li>File system storage</li>
 					<li>Redis storage</li>
-					<li>Written in typescript (1.8), compiled with webpack</li>
 					<li>Cache rules definitions (regexes)</li>
 					<li>TTL per URLs (regexes)</li>
+					<li>multiple hostname support</li>
 				</ul>
-				<h1 id="api-documentation">API documentation</h1>
+				<h2 id="api-documentation">API documentation</h2>
 				<p>You can find it under the folder <code>docs/index.html</code>, and it&#39;s been generated with <code>typedoc</code> <a href="https://github.com/TypeStrong/typedoc">https://github.com/TypeStrong/typedoc</a>.</p>
-				<h1 id="installation">Installation</h1>
+				<h2 id="installation">Installation</h2>
 				<pre><code class="lang-bash">npm install --save simple-url-cache
 </code></pre>
-				<!--
-# Api
+				<h2 id="api">Api</h2>
+				<h3 id="cache-engine">Cache Engine</h3>
+				<p><strong>constructor( defaultDomain: string, storageConfig, cacheRules)</strong></p>
+				<p>defaultDomain: Every URL that miss a hostname will get classified under this domain</p>
+				<p>Example: </p>
+				<pre><code>
+<span class="hljs-keyword">var</span> engine = <span class="hljs-built_in">new</span> CachEngine(<span class="hljs-string">'http://localhost'</span>, {<span class="hljs-keyword">type</span>: <span class="hljs-string">'file'</span>, dir: <span class="hljs-string">'/var/cache'</span>}, cacheRules);
+</code></pre><p><strong>url(url: string): CacheStorage</strong></p>
+				<p>Create a new <code>CacheStorage</code> instance</p>
+				<h2 id="cachestorage">CacheStorage</h2>
+				<p><strong>has(): Promise<boolean | Error></strong></p>
+				<p>Resolve to true if the url is cached, false if the file is not cached, rejected on error</p>
+				<p><strong>delete(): Promise&lt;boolean | Error</strong></p>
+				<p>Resolve to true if the url has been suppressed, false if the url wasnt cached
+				Reject an Error</p>
+				<p><strong>get(): Promise<string | null ></strong></p>
+				<p>Resolve to the url&#39;s content
+				Reject if the url wasn&#39;t cached</p>
+				<p><strong>set(content: string [, force: boolean]) : Promise<boolean | Error></strong></p>
+				<p>Resolve to true if the url has been cached successfully, false if the url matches the <code>never</code> rule.
+				Rejects on Error</p>
+				<p>force: </p>
+				<pre><code>-<span class="ruby"> Actualize the TTL <span class="hljs-keyword">for</span> maxAge already cached urls
+</span>-<span class="ruby"> Force the caching <span class="hljs-keyword">for</span> url matching the <span class="hljs-string">`never`</span> rule.</span>
+</code></pre><h2 id="usage">Usage</h2>
+				<p>Example with Fs storage</p>
+				<pre><code><span class="hljs-built_in">var</span> engine = <span class="hljs-keyword">new</span> CachEngine(<span class="hljs-string">'http://localhost'</span>, {<span class="hljs-attribute">type</span>: <span class="hljs-string">'file'</span>, <span class="hljs-attribute">dir</span>: <span class="hljs-string">'/var/cache'</span>}, cacheRules);
 
+<span class="hljs-built_in">var</span> content =<span class="hljs-string">'Hello !'</span>;
 
-##EngineCache
+<span class="hljs-built_in">var</span> urls = [
+    <span class="hljs-string">'http://www.google.com/index.html'</span>,
+    <span class="hljs-string">'/index.html'</span>,
+    <span class="hljs-string">'http://www.google.com/about.html'</span>
+];
 
-constructor
-clearAllCache
-url
-
-
-##url
-
-isCached
-cache
-getUrl
-removeUrl
--->
-				<h1 id="usage">Usage</h1>
-				<p>So far, we support two storage engines : file system, and redis.</p>
+urls.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">url</span>) </span>{
+    engine.url(<span class="hljs-built_in">url</span>).set(content, <span class="hljs-literal">true</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'cached'</span>);
+    }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+        <span class="hljs-built_in">console</span>.error(err);
+    });
+});
+</code></pre><p>The resulting folder structure would be : </p>
+				<pre><code><span class="hljs-number">2</span> folders
+<span class="hljs-regexp">/var/cache/http:/</span><span class="hljs-regexp">/localhost/</span><span class="hljs-function">
+    -&gt;</span> /index.html
+<span class="hljs-regexp">/var/cache/http:/</span><span class="hljs-regexp">/www.google.com/</span><span class="hljs-function">
+    -&gt;</span> /index.html<span class="hljs-function">
+    -&gt;</span> /about.html
+</code></pre><blockquote>
+					<p>For readability, the folder names are unescaped.</p>
+				</blockquote>
+				<h2 id="storage-engines">Storage engines</h2>
 				<p>The usage across both storage engines is the same, only the storage config file differs.</p>
-				<pre><code class="lang-javascript">
-<span class="hljs-keyword">var</span> simpleCache = <span class="hljs-built_in">require</span>(<span class="hljs-string">'simple-cache'</span>).cacheEngine;
-<span class="hljs-keyword">var</span> storageConfig = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./config'</span>); <span class="hljs-comment">// get your config file</span>
-<span class="hljs-keyword">var</span> cacheRules = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./cacheRules'</span>); <span class="hljs-comment">//get your cache rule definition file</span>
-
-<span class="hljs-keyword">var</span> cacheEngine = <span class="hljs-keyword">new</span> simpleCache(storageConfig, cacheRules);
-
-cacheEngine.clearAllCache().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ok</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Ccahe cleared!'</span>);
-}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(err);
-};
-
-<span class="hljs-keyword">var</span> url = <span class="hljs-string">'/someURL.html'</span>;
-<span class="hljs-keyword">var</span> html = <span class="hljs-string">'&lt;b&gt;I ama content&lt;/b&gt;'</span>;
-
-<span class="hljs-keyword">var</span> cacheUrl = cacheEngine.url(url);
-
-<span class="hljs-comment">// is Cached?</span>
-
-cacheUrl.isCached().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// -&gt; false</span>
-});
-
-<span class="hljs-comment">// cache it</span>
-
-cacheUrl.cache(html).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// -&gt; true</span>
-});
-
-<span class="hljs-comment">// is Cached?</span>
-
-cacheUrl.isCached().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// -&gt; true</span>
-});
-
-<span class="hljs-comment">// Get content</span>
-
-cacheUrl.getUrl().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// -&gt; &lt;b&gt;I ama content&lt;/b&gt;</span>
-});
-
-<span class="hljs-comment">// remove it</span>
-
-cacheUrl.removeUrl().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// -&gt; true</span>
-});
-
-<span class="hljs-comment">// Close the session: </span>
-
-cacheUrl.destroy();
-</code></pre>
-				<h1 id="config-files">Config Files</h1>
-				<h2 id="regex-rules">Regex Rules</h2>
+				<h2 id="config-files">Config Files</h2>
+				<h3 id="regex-rules">Regex Rules</h3>
 				<p>This is an object describing which URL will be cached, which URLs won&#39;t be cached, and which ones will have a ttl expiration.</p>
 				<p>This is the same object, independently of the storage engine used.</p>
 				<p>An example worth 1000 words : </p>
@@ -162,83 +144,103 @@ exports.cacheConfig = {
     <span class="hljs-comment">// Will cache all URL starting with /posts/ and ending with html for 24 hours</span>
     cacheMaxAge: [ 
         {
-            regex: <span class="hljs-regexp">/posts\/.*html$/</span>,  
-            maxAge: <span class="hljs-number">3600</span>
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^\/posts.*html$/</span>,  
+            <span class="hljs-attr">maxAge</span>: <span class="hljs-number">3600</span>
         }
     ],
     <span class="hljs-comment">// Will cache about-us.html, contact-us.html and /prices.html indefinitively</span>
     cacheAlways: [  
         {
-            regex: <span class="hljs-regexp">/about-us.html$/</span>, 
-            regex: <span class="hljs-regexp">/contact-us.html$/</span>,
-            regex: <span class="hljs-regexp">/prices.html$/</span>
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^about-us\.html$/</span>, 
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^contact-us\.html$/</span>,
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^prices\.html$/</span>
         }
     ],
     <span class="hljs-comment">// will never cache the url /sitemaps.html</span>
     cacheNever: [ 
         {
-            regex: <span class="hljs-regexp">/sitemaps.html$/</span>
+            <span class="hljs-attr">regex</span>: <span class="hljs-regexp">/^sitemaps\.html$/</span>
         }
     ], 
     <span class="hljs-comment">// If no URL is matched against these rules, then the default is to never cache it. can be 'never' or 'always'</span>
     <span class="hljs-keyword">default</span>: <span class="hljs-string">'never'</span> 
 };
 </code></pre>
-				<h2 id="filestorage-config">FileStorage config</h2>
+				<h3 id="filestorage-config">FileStorage config</h3>
 				<p>The simplest config file out there.</p>
 				<pre><code class="lang-javascript">
 <span class="hljs-keyword">export</span>.fileStorageCOnfig = {
-    type: <span class="hljs-string">'file'</span>, 
-    dir: <span class="hljs-string">'/var/cache'</span>
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'file'</span>, 
+    <span class="hljs-attr">dir</span>: <span class="hljs-string">'/var/cache'</span>
 }
 </code></pre>
-				<h2 id="redis-stoarge-config">Redis Stoarge config</h2>
+				<h3 id="redis-stoarge-config">Redis Stoarge config</h3>
 				<p>A bit more complex. The library node_redis is used here, so a valid redis node config file is needed. You can see more about it here : <a href="https://github.com/NodeRedis/node_redis">https://github.com/NodeRedis/node_redis</a> </p>
 				<p>As an example : </p>
 				<pre><code class="lang-javascript">
 <span class="hljs-keyword">export</span>.redisStorageConfig = {
-    type: <span class="hljs-string">'redis'</span>,
-    host: <span class="hljs-string">'127.0.0.1'</span>,
-    port: <span class="hljs-number">6379</span>,
-    socket_keepalive: <span class="hljs-literal">true</span>
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'redis'</span>,
+    <span class="hljs-attr">host</span>: <span class="hljs-string">'127.0.0.1'</span>,
+    <span class="hljs-attr">port</span>: <span class="hljs-number">6379</span>,
+    <span class="hljs-attr">socket_keepalive</span>: <span class="hljs-literal">true</span>
 }
 </code></pre>
-				<h2 id="adding-storages">Adding Storages</h2>
-				<p>It is easy with typescript.</p>
-				<h3 id="define-a-new-storage-file-for-example-mongostorage-ts-">Define a new storage file, for example <code>mongoStorage.ts</code></h3>
-				<pre><code class="lang-typescript">
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> RedisStorage extends CacheCategory <span class="hljs-keyword">implements</span> CacheStorage{
-    <span class="hljs-comment">// define all required methods from the CacheStorage interface </span>
+				<!--
+## Adding Storages
+
+It is easy with typescript.
+
+###     Define a new storage file, for example `mongoStorage.ts`
+
+```typescript
+
+export default class RedisStorage extends CacheCategory implements CacheStorage{
+    // define all required methods from the CacheStorage interface 
 }
-</code></pre>
-				<p>And compile it with : <code>npm run build</code></p>
-				<h3 id="add-a-test-file-mongoostorage-spec-js-">Add a test file <code>mongooStorage.spec.js</code></h3>
-				<pre><code class="lang-javascript">
-<span class="hljs-keyword">var</span> simpleCache = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./../dist/simple-cache.min'</span>).CacheEngine;
-<span class="hljs-keyword">var</span> common = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./helper/common'</span>);
-<span class="hljs-keyword">var</span> cacheRules = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./helper/cacheRules'</span>);
 
-describe(<span class="hljs-string">'The fileStorage'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+```
 
-    <span class="hljs-keyword">var</span> storageConfig = {
-        type: <span class="hljs-string">'mongo'</span>,
+And compile it with : `npm run build`
+
+###     Add a test file `mongooStorage.spec.js`
+
+```javascript
+
+var simpleCache = require('./../dist/simple-cache.min').CacheEngine;
+var common = require('./helper/common');
+var cacheRules = require('./helper/cacheRules');
+
+describe('The fileStorage', function() {
+
+    var storageConfig = {
+        type: 'mongo',
         ... other config values here
     };
 
-    <span class="hljs-keyword">var</span> mongoCache = <span class="hljs-keyword">new</span> simpleCache(storageConfig, cacheRules);
+    var mongoCache = new simpleCache(storageConfig, cacheRules);
 
     common(mongoCache);
 
 });
-</code></pre>
-				<p>and make sure the test passes with </p>
-				<p><code>npm test</code></p>
-				<p>If you need to debug, you can use <code>debug</code> extensively with: </p>
-				<pre><code class="lang-bash">DEBUG=simple-url-cache-FS,simple-url-cache-REDIS npm <span class="hljs-built_in">test</span>
-</code></pre>
-				<h3 id="do-the-same-with-mongostorageweirdurl-js-">Do the same with <code>mongoStorageWeirdUrl.js</code></h3>
-				<h2 id="update-te-index-d-ts-to-file-include-your-new-typing-definitions">Update te index.d.ts to file include your new typing definitions</h2>
-				<h3 id="send-me-your-pull-request">Send me your Pull Request</h3>
+```
+
+and make sure the test passes with 
+
+`npm test`
+
+If you need to debug, you can use `debug` extensively with: 
+
+```bash
+DEBUG=simple-url-cache-FS,simple-url-cache-REDIS npm test
+```
+
+###     Do the same with `mongoStorageWeirdUrl.js`
+
+##      Update te index.d.ts to file include your new typing definitions
+
+###     Send me your Pull Request
+
+-->
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -257,19 +259,28 @@ describe(<span class="hljs-string">'The fileStorage'</span>, <span class="hljs-f
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_abstract_.html">"abstract"</a>
+						<a href="modules/_helpers_.html">"<wbr>Helpers"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_filestorage_.html">"file<wbr>Storage"</a>
+						<a href="modules/_cache_.html">"cache"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_fs_instance_.html">"fs/instance"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_fs_storage_.html">"fs/storage"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
 						<a href="modules/_interfaces_.html">"interfaces"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_redispool_.html">"redis<wbr>Pool"</a>
+						<a href="modules/_redis_instance_.html">"redis/instance"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_redisstorage_.html">"redis<wbr>Storage"</a>
+						<a href="modules/_redis_pool_.html">"redis/pool"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_redis_storage_.html">"redis/storage"</a>
 					</li>
 				</ul>
 			</nav>

@@ -10,6 +10,9 @@ fs.readdirSync('node_modules')
     .forEach(function(mod) {
         nodeModules[mod] = 'commonjs ' + mod;
     });
+nodeModules['url'] = 'commonjs url';
+nodeModules['path'] = 'commonjs path';
+
 
 module.exports = {
     entry: './ts/cacheEngine.ts',

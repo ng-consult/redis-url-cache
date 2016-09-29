@@ -8,7 +8,6 @@ module.exports.valid =
     ";leading-semi.js",
     "slash\\.js",
     "slash/.js",
-    "col:on.js",
     "star*.js",
     "question?.js",
     "quote\".js",
@@ -43,6 +42,8 @@ module.exports.valid =
 
 
 module.exports.invalid = [
-    //"./",
-    "",
+
+   // "",
+    /*"./",
+    "col:on.js",*/
 ];
