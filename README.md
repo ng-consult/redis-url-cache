@@ -207,7 +207,7 @@ Rejects on Error
 **html**: the content of the file to be cached, must be UTF8
 
 **force**: 
-    <!--- Actualize the TTL for maxAge already cached urls-->
+    - ~~Actualize the TTL for maxAge already cached urls~~
     - Force the caching for url matching the `never` rule.
      
  
@@ -215,7 +215,7 @@ Rejects on Error
 
 Example with Fs storage
 
-```
+```javascript
 var engine = new CachEngine('http://localhost', 'I1', {type: 'file', dir: '/var/cache'}, cacheRules); 
 
 var content ='Hello !';
