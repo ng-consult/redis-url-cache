@@ -21,7 +21,7 @@ npm install simple-url-cache
     - [constructor](#constructor)
     - [clearDomain()](#cleardomain)
     - [clearAllDomains()](#clearalldomains)
-    - [getAllCachedURLs()](#getallcachedurl)
+    - [getAllCachedURLs()](#getallcachedurls)
     - [getCachedURLs()](#getcachedurls)
     - [getCachedDomains()](#getcacheddomains)
     - [url()](#url)
@@ -33,21 +33,21 @@ npm install simple-url-cache
 - StorageConfigs
     - [Cache config](#cache-config)
     - [File storage config](#file-storage-config)
-    - [Redis storage config](#redis-storage-confg)
+    - [Redis storage config](#redis-storage-config)
     
 
-### Cache Engine
+## Cache Engine
 
 
-#### constructor
+### constructor
 
 ```javascript
 constructor( defaultDomain: string, instanceName: string, storageConfig, cacheRules)
 ```
 
-defaultDomain: Every URL that miss a hostname will get classified under this domain
+**defaultDomain** Every URL that miss a hostname will get classified under this domain
 
-instanceName: The isolated instance where this cacheEngine will store urls.
+**instanceName** The isolated instance where this cacheEngine will store urls.
 If another cacheEngine has the same storage type and the same instance name, they will share the pool.
 
 Example: 
@@ -91,34 +91,70 @@ The resulting folder structure is:
 /var/cache/I2/htt[://a.com/index.html
 ```
 
-#### clearDomain
+### clearDomain
 
 ```javascript
 clearDomain(domain?: string): Promise<boolean>
 ```
 
-#### clearAllDomains
+Removes all cached URLs under stored unde a domain
+
+**domain** the domain to be cleared, if none is provided, the default domain will be cleared
+
+
+### clearAllDomains
+
 ```javascript
 clearAllDomains(): Promise<boolean>
 ```
 
-#### getAllCachedURLs
+Clears all the URLs stored within this instance
+
+### getAllCachedURLs
+
 ```javascript
 getAllCachedURL(): Promise<string[][]>
 ```
 
-#### getCachedURLs
+Return a list of all cached urls withiin the instance 
+
+example: 
+
+```javascript
+
+{
+    "http://www.domainA.com": [
+                                "/index.html",
+                                "about.html"
+                            ],
+    "http://www.domainB.com": [
+                                "/index.html",
+                                "about.html"
+                            ],
+        
+}
+
+```
+### getCachedURLs
+
 ```javascript
 getCachedURLs(domain?: string): Promise<string[]>
 ```
 
-#### getCachedDomains
+Get the array of cached URLs associated with this domain & instance
+
+**domain** if none provided, then the default domain will be used
+
+### getCachedDomains
+
 ```javascript
 getCachedDomains(): Promise<string[]>
 ```
 
+Returns a list of all cached domain names (including protocol, port and authentication)
 
-#### url
+### url
+
 ```javascript
 url(url: string): CacheStorage
 ```
@@ -126,10 +162,11 @@ url(url: string): CacheStorage
 Create a new `CacheStorage` instance
 
 
-
 ## CacheStorage
 
-#### delete
+
+### delete
+
 ```javascript
 delete(): Promise<boolean>
 ```
@@ -137,7 +174,7 @@ delete(): Promise<boolean>
 Resolve to true if the url has been suppressed, false if the url wasn't cached
 Reject an Error if any
 
-#### get
+### get
 
 ```javascript
 get(): Promise<string>
@@ -147,15 +184,16 @@ Resolve to the url's content
 Reject if the url wasn't cached
 
 
-#### has
+### has
+
 ```javascript
 has(): Promise<boolean>
 ```
 
 Resolve to true if the url is cached, false if the file is not cached, rejected on error
 
+### set
 
-#### set
 ```javascript
 set(content: string [, force: boolean]) : Promise<boolean>
 ```
@@ -166,8 +204,9 @@ Rejects false if
     - The url has already been cached
 Rejects on Error
 
+**html**: the content of the file to be cached, must be UTF8
 
-force: 
+**force**: 
     <!--- Actualize the TTL for maxAge already cached urls-->
     - Force the caching for url matching the `never` rule.
      
