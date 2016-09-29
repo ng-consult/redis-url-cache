@@ -6,7 +6,7 @@
   "scripts": {
     "typings": "./node_modules/.bin/typings install ",
     "build": "./node_modules/.bin/webpack",
-    "doc": "node_modules/.bin/typedoc -out docs ts --ignoreCompilerErrors --mode modules --module commonjs --target ES5 --readme ./README.md ",
+    "doc": "node_modules/.bin/typedoc -out docs ts --entryPoint https://a-lucas.github.io/simple-url-cache/ --ignoreCompilerErrors --mode modules --module commonjs --target ES5 --readme ./README.md ",
     "test": "rm -Rf coverage ; ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test/index.js",
     "codecov": "./node_modules/.bin/codecov"
   },
