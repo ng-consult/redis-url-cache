@@ -801,4 +801,4 @@ module.exports =
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=simple-cache.min.js.map
+//# sourceMappingURL=redis-cache.js.map

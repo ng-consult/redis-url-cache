@@ -1,4 +1,4 @@
-var simpleCache = require('./../dist/simple-cache.min');
+var simpleCache = require('./../dist/redis-cache');
 var cacheRules = require('./helper/cacheRules');
 var instance = require('./helper/instance');
 var instances = require('./helper/instances');

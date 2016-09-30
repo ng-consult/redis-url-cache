@@ -1,4 +1,4 @@
-var simpleCache = require('./../dist/simple-cache.min');
+var simpleCache = require('./../dist/redis-cache');
 
 describe('It should fail on wrong parameters', function() {
 

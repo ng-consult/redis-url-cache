@@ -20,7 +20,7 @@ module.exports = {
     target: 'node',
     output: {
         library: 'redis-url-cache',
-        filename: 'dist/redis-cache.min.js',
+        filename: 'dist/redis-cache.js',
         libraryTarget: 'commonjs2'
     },
     resolve: {

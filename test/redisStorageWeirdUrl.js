@@ -1,5 +1,5 @@
 
-var simpleCache = require('./../dist/simple-cache.min');
+var simpleCache = require('./../dist/redis-cache');
 var weirdUrls = require('./helper/weirdUrls');
 
 var chai = require('chai');

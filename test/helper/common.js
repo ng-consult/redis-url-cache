@@ -1,4 +1,3 @@
-var simpleUrlCache = require('./../../dist/simple-cache.min');
 
 var chai = require('chai');
 var chaiAsPromised = require("chai-as-promised");
