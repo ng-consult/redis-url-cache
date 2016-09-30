@@ -2,7 +2,7 @@
     "rules": {
         "class-name": true,
         "comment-format": [
-            true,
+            false,
             "check-space"
         ],
         "indent": [
@@ -22,7 +22,7 @@
         ],
         "quotemark": [
             true,
-            "double"
+            "simple"
         ],
         "semicolon": [
             true,
@@ -47,7 +47,7 @@
             "ban-keywords"
         ],
         "whitespace": [
-            true,
+            false,
             "check-branch",
             "check-decl",
             "check-operator",

@@ -2,14 +2,12 @@ var simpleCache = require('./../dist/simple-cache.min');
 var instances = require('./helper/instances');
 var instance = require('./helper/instance');
 
-
 var cacheRules = require('./helper/cacheRules');
 var path = require('path');
 
 describe('The fileStorage', function() {
 
     var storageConfig = {
-        type: 'file',
         dir: path.resolve(__dirname + '/../cache')
     };
 
@@ -18,7 +16,7 @@ describe('The fileStorage', function() {
         fs3,
         fs4;
     
-    describe('One instance', function() {
+    describe.only('One instance', function() {
         fs1 = new simpleCache('COMMON_DOMAIN', 'INSTANCE',  storageConfig, cacheRules);
         instance(fs1);
     });

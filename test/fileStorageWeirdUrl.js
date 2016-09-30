@@ -40,7 +40,7 @@ describe('The fileStorage - weirdURLs', function() {
         weirdUrls.valid.forEach(function(weirdUrl) {
             var url = fileCache.url(weirdUrl);
 
-            describe('URL ' + weirdUrl + 'resolved to ' + url.getCurrentUrl(), function() {
+            describe('URL ' + weirdUrl + 'resolved to ' + url.getUrl(), function() {
 
                 HAS_NOT_URL(url);
 

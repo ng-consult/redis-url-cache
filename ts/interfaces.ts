@@ -1,4 +1,5 @@
 import {Promise} from 'es6-promise';
+import Helpers from './helpers';
 
 export interface RegexRule {
     regex: RegExp
@@ -9,9 +10,9 @@ export interface MaxAgeRegexRule extends RegexRule{
 }
 
 export interface CacheRules{
-    cacheMaxAge: MaxAgeRegexRule[],
-    cacheAlways: RegexRule[],
-    cacheNever: RegexRule[],
+    maxAge: MaxAgeRegexRule[],
+    always: RegexRule[],
+    never: RegexRule[],
     default: string
 }
 
@@ -29,21 +30,36 @@ export interface RedisStorageConfig{
     db?: string;
 }
 
-export interface CacheStorage {
-    has(): Promise<boolean>;
-    delete(): Promise<boolean>;
-    get(): Promise<string>;
-    set(html:string, force: boolean): Promise<boolean>;
-}
+export type StorageType = 'file' | 'redis';
 
-export interface StorageInstance {
-    get(key: string): Promise<string>;
-    has(key: string): Promise<boolean>;
-    set(key: string, value: string, ttl?: number): Promise<boolean>;
-    delete(key: string): Promise<boolean>;
-    clearAllCache(): Promise<boolean>;
-    destroy(): void;
-    getCacheRules(): CacheRules;
-    getCachedURLs(): Promise <string[]>;
-    getAllCachedDomains(): Promise <string[]>;
+export abstract class StorageInstance {
+
+    private storageType: StorageType;
+
+    constructor(protected instanceName, config: any) {
+        if (Helpers.isFS(config)) {
+           this.storageType = 'file';
+        } else {
+            this.storageType = 'redis';
+        }
+    }
+    getStorageType(): StorageType {
+        return this.storageType;
+    }
+
+    getInstanceName(): string {
+        return this.instanceName;
+    }
+
+    abstract destroy(): void;
+    abstract delete(domain: string, url: string): Promise<boolean>;
+    abstract get(domain: string, url: string, category: string, ttl: number): Promise<string>;
+    abstract has(domain: string, url: string, category: string, ttl: number): Promise<boolean>;
+    abstract set(domain: string, url: string, value: string, category: string,  ttl: number, force: boolean): Promise<boolean>;
+
+    abstract clearCache(): Promise<boolean>;
+    abstract clearDomain(domain: string): Promise<boolean>;
+    abstract getCachedDomains(): Promise <string[]>;
+    abstract getCacheRules(): CacheRules;
+    abstract getCachedURLs(domain: string): Promise <string[]>;
 }

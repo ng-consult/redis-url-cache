@@ -42,7 +42,7 @@ describe('The redisStorage - weirdURLs', function() {
         weirdUrls.valid.forEach(function(weirdUrl) {
             var url = redisCache.url(weirdUrl);
 
-            describe('URL ' + weirdUrl + 'resolved to ' + url.getCurrentUrl(), function() {
+            describe('URL ' + weirdUrl + 'resolved to ' + url.getUrl(), function() {
 
                 HAS_NOT_URL(url);
 
@@ -57,7 +57,7 @@ describe('The redisStorage - weirdURLs', function() {
         weirdUrls.invalid.forEach(function(weirdUrl) {
             var url = redisCache.url(weirdUrl);
 
-            describe('URL ' + weirdUrl + 'resolved to ' + url.getCurrentUrl(), function() {
+            describe('URL ' + weirdUrl + 'resolved to ' + url.getUrl(), function() {
 
                 HAS_NOT_URL(url);
 

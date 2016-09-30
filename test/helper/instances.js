@@ -9,17 +9,13 @@ var expect = chai.expect;
 var DELETE_DOMAIN = require('./common').DELETE_DOMAIN;
 var HAS_NOT_DOMAIN = require('./common').HAS_NOT_DOMAIN;
 var HAS_DOMAIN = require('./common').HAS_DOMAIN;
-var SET_URLS = require('./common').SET_URLS;
-var HAS_NOT_URLS = require('./common').HAS_NOT_URLS;
 var HAS_NOT_URL = require('./common').HAS_NOT_URL;
 var HAS_URL = require('./common').HAS_URL;
-var HAS_URLS = require('./common').HAS_URLS;
 var DELETE_ALL = require('./common').DELETE_ALL;
 
 module.exports = function(instance1, instance2, instance3) {
 
-    
-
+    /*
     var cacheMaxAgeURL = 'maxAge.html';
     var cacheAlwaysURL = 'always.html';
     var cacheNeverURL = 'never.html';
@@ -95,4 +91,5 @@ module.exports = function(instance1, instance2, instance3) {
     describe('Removing Instance3', function() {
         DELETE_ALL(instance3);
     });
+    */
 };
