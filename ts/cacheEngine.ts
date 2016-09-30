@@ -1,6 +1,5 @@
 import {Promise} from 'es6-promise';
-import {CacheRules, StorageInstance, FileStorageConfig, RedisStorageConfig, StorageType} from './interfaces';
-import FileStorageInstance from "./fs/instance";
+import {CacheRules, StorageInstance, RedisStorageConfig, StorageType} from './interfaces';
 import RedisStorageInstance from "./redis/instance";
 import Helpers from './helpers';
 import * as nodeurl from 'url';
@@ -16,7 +15,6 @@ class CacheEngine {
     static locks:any = {};
 
     static helpers = {
-        validateFileStorageConfig: Helpers.validateFileStorageConfig,
         validateRedisStorageConfig: Helpers.validateRedisStorageConfig,
         validateCacheConfig: Helpers.validateCacheConfig
     };
@@ -53,16 +51,16 @@ class CacheEngine {
      * @param storageConfig: Either a FileStorageConfig or a RedisStorageConfig
      * @param cacheRules
      */
-    constructor(private defaultDomain:string, private instanceName:string, private storageConfig:RedisStorageConfig | FileStorageConfig, private cacheRules:CacheRules) {
+    constructor(private defaultDomain:string, private instanceName:string, private storageConfig:RedisStorageConfig, private cacheRules:CacheRules) {
 
         Helpers.isStringDefined(defaultDomain);
         Helpers.isStringDefined(instanceName);
         Helpers.validateCacheConfig(cacheRules);
 
-        if (Helpers.isFS(storageConfig)) {
+        if (Helpers.isRedis(storageConfig)) {
             this.type = 'file';
         } else {
-            this.type = 'redis';
+            throw new Error('Only Redis is supported');
         }
 
         if (typeof CacheEngine.pool[this.type] === 'undefined') {
@@ -76,18 +74,13 @@ class CacheEngine {
 
     }
 
-    static clearDomain(instanceName:string, storageType: StorageType, domain:string):Promise<boolean> {
-        Helpers.isStringDefined(instanceName);
-        Helpers.isStringDefined(storageType);
+    clearDomain(domain:string):Promise<boolean> {
+        if (typeof domain === 'undefined') {
+            domain = this.defaultDomain;
+        }
         Helpers.isStringDefined(domain);
         return new Promise((resolve, reject) => {
-            if (typeof CacheEngine.pool[storageType] === 'undefined') {
-                resolve(true);
-            }
-            if (typeof CacheEngine.pool[storageType][instanceName] === 'undefined') {
-                resolve(true);
-            }
-            const instance = CacheEngine.pool[storageType][instanceName];
+            const instance = this.getInstance();
             instance.clearDomain(domain).then(() => {
                 resolve(true);
             }, err => {
@@ -96,40 +89,21 @@ class CacheEngine {
         });
     }
 
-    static clearInstance(instanceName:string, storageType: StorageType):Promise<boolean> {
-        debug('celarInstance called with ', instanceName, storageType);
-        Helpers.isStringDefined(instanceName);
-        Helpers.isStringDefined(storageType);
+    clearInstance():Promise<boolean> {
         return new Promise((resolve, reject) => {
-            if (typeof CacheEngine.pool[storageType] === 'undefined') {
+            const instance = this.getInstance();
+            instance.clearCache().then( () => {
+                //delete CacheEngine.pool[storageType][instanceName];
                 resolve(true);
-            }
-            else if (typeof CacheEngine.pool[storageType][instanceName] === 'undefined') {
-                resolve(true);
-            } else {
-                const instance = CacheEngine.pool[storageType][instanceName];
-                instance.clearCache().then( () => {
-                    //delete CacheEngine.pool[storageType][instanceName];
-                    resolve(true);
-                }, err => {
-                    reject(err);
-                });
-            }
-
+            }, err => {
+                reject(err);
+            });
         });
     }
 
-    static getStoredHostnames(instanceName:string, storageType: StorageType):Promise<string[]> {
-        Helpers.isStringDefined(instanceName);
-        Helpers.isStringDefined(storageType);
+    getStoredHostnames():Promise<string[]> {
         return new Promise((resolve, reject) => {
-            if (typeof CacheEngine.pool[storageType] === 'undefined') {
-                resolve([]);
-            }
-            if (typeof CacheEngine.pool[storageType][instanceName] === 'undefined') {
-                resolve([]);
-            }
-            const instance = CacheEngine.pool[storageType][instanceName];
+            const instance = this.getInstance();
             instance.getCachedDomains().then(domains => {
                 resolve(domains);
             }, err => {
@@ -138,22 +112,14 @@ class CacheEngine {
         });
     }
 
-    static getStoredURLs(instanceName:string, storageType: StorageType, domain:string):Promise<string[]> {
-        Helpers.isStringDefined(instanceName);
-        Helpers.isStringDefined(storageType);
+    getStoredURLs(domain:string):Promise<string[]> {
+        if (typeof domain === 'undefined') {
+            domain = this.defaultDomain;
+        }
         Helpers.isStringDefined(domain);
-        debug('calling getStoredURLs with', instanceName, storageType, domain);
-        
+
         return new Promise((resolve, reject) => {
-            if (typeof CacheEngine.pool[storageType] === 'undefined') {
-                resolve([]);
-            }
-            if (typeof CacheEngine.pool[storageType][instanceName] === 'undefined') {
-                resolve([]);
-            }
-
-            const instance = CacheEngine.pool[storageType][instanceName];
-
+            const instance = this.getInstance();
             instance.getCachedURLs(domain).then(urls => {
                 resolve(urls)
             }, err => {
@@ -203,19 +169,16 @@ class CacheEngine {
         return new Cache(domain, instance, relativeURL);
     }
 
-    private getInstance(): RedisStorageInstance | FileStorageInstance {
+    private getInstance(): RedisStorageInstance{
 
         if (typeof CacheEngine.pool[this.type][this.instanceName] === 'undefined') {
             CacheEngine.pool[this.type][this.instanceName] = {};
             CacheEngine.locks[this.type][this.instanceName] = {};
         }
 
-        if (Helpers.isFS(this.storageConfig)) {
-            CacheEngine.pool[this.type][this.instanceName] = new FileStorageInstance(this.instanceName, this.storageConfig, this.cacheRules);
-        } else {
+        if (Helpers.isRedis(this.storageConfig)) {
             CacheEngine.pool[this.type][this.instanceName] = new RedisStorageInstance(this.instanceName, this.storageConfig, this.cacheRules);
         }
-
 
         return CacheEngine.pool[this.type][this.instanceName];
     }

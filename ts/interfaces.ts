@@ -16,10 +16,6 @@ export interface CacheRules{
     default: string
 }
 
-export interface FileStorageConfig{
-    dir: string;
-}
-
 export interface RedisStorageConfig{
     host: string;
     port: number;
@@ -37,10 +33,10 @@ export abstract class StorageInstance {
     private storageType: StorageType;
 
     constructor(protected instanceName, config: any) {
-        if (Helpers.isFS(config)) {
-           this.storageType = 'file';
+        if (Helpers.isRedis(config)) {
+           this.storageType = 'redis';
         } else {
-            this.storageType = 'redis';
+            throw new Error('only redis is supported');
         }
     }
     getStorageType(): StorageType {

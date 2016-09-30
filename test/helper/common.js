@@ -22,6 +22,19 @@ function WAIT_HAS_NOT_URL (url, time) {
     });
 }
 
+function WAIT_GET_URLS (url, time, domain, urlExpected) {
+    describe('Waits ' + time , function() {
+
+        it('waiting...', function(done) {
+            setTimeout(function() {
+                done();
+            }, time);
+        });
+
+    });
+    GET_URLS(domain, url, urlExpected);
+}
+
 
 function SET_URL(url, html) {
 
@@ -104,11 +117,11 @@ function URL_DETAILS(url, expectedUrl, expectedClassification, expectedDomain) {
 }
 
 
-function HAS_DOMAIN(domain, url) {
-    describe(domain +' should exist for instance ' + url.getInstanceName(), function() {
+function HAS_DOMAIN(domain, cacheEngine) {
+    describe(domain +' should exist', function() {
         var domains;
         it('should run simpleUrlCache.getStoredHostnames() without error', function(done) {
-            simpleUrlCache.getStoredHostnames(url.getInstanceName(), url.getStorageType()).then(function(results) {
+            cacheEngine.getStoredHostnames().then(function(results) {
                 domains = results;
                 done();
             }, function(err) {
@@ -122,11 +135,11 @@ function HAS_DOMAIN(domain, url) {
     });
 }
 
-function HAS_NOT_DOMAIN(domain, url) {
-    describe(domain +' should NOT exist for instance ' + url.getInstanceName(), function() {
+function HAS_NOT_DOMAIN(domain, cacheEngine) {
+    describe(domain +' should NOT exist', function() {
         var domains;
         it('should run simpleUrlCache.getStoredHostnames() without error', function(done) {
-            simpleUrlCache.getStoredHostnames(url.getInstanceName(), url.getStorageType()).then(function(results) {
+            cacheEngine.getStoredHostnames().then(function(results) {
                 domains = results;
                 done();
             }, function(err) {
@@ -140,11 +153,11 @@ function HAS_NOT_DOMAIN(domain, url) {
     });
 }
 
-function DELETE_DOMAIN(domain, url) {
+function DELETE_DOMAIN(domain, cacheEngine) {
 
-    describe('Deleting domain ' + domain + ' from instance '+ url.getInstanceName(), function() {
+    describe('Deleting domain ' + domain , function() {
         it('Should delete the domain without error ', function () {
-            simpleUrlCache.clearDomain(url.getInstanceName(), url.getStorageType(), domain)
+            cacheEngine.clearDomain(domain)
                 .then(function (result) {
                 done();
             }, function (res) {
@@ -155,14 +168,14 @@ function DELETE_DOMAIN(domain, url) {
         });
     });
 
-    HAS_NOT_DOMAIN(domain, url);
+    HAS_NOT_DOMAIN(domain, cacheEngine);
 }
 
-function GET_URLS(domain, url, expectedUrls) {
+function GET_URLS(domain, cacheEngine, expectedUrls) {
     var allUrls;
-    describe('Getting URLs for the domain ' + domain + ' in the instance ' + url.getInstanceName(), function() {
+    describe('Getting URLs for the domain ' + domain , function() {
         it('Should get the urls witouth errors ', function(done) {
-            simpleUrlCache.getStoredURLs(url.getInstanceName(), url.getStorageType(), domain).then(function(result) {
+            cacheEngine.getStoredURLs(domain).then(function(result) {
                 allUrls = result;
                 done();
             }, function(err) {
@@ -170,30 +183,32 @@ function GET_URLS(domain, url, expectedUrls) {
             });
         });
 
-        it('Should retrun the correct urls', function () {
+        it('Should return the correct urls', function () {
             expect(allUrls).eql(expectedUrls);
         });
     })
 }
 
-function DELETE_ALL(url) {
+function DELETE_ALL(cacheEngine) {
 
-    describe('Clearing all domains from instance ' + url.getInstanceName(), function() {
+    describe('Clearing all domains ', function() {
         var domains ;
         it('should run clearInstance() without errors', function(done) {
 
-            simpleUrlCache.clearInstance(url.getInstanceName(), url.getStorageType()).then(function(res){
+            cacheEngine.clearInstance().then(function(res){
                 done();
             }, function(err){
+                debug(err);
                 done('err' + err);
-            }).catch(function(res) {
-                done('err' + res);
+            }).catch(function(err) {
+                debug(err);
+                done('err' + err);
             });
 
         });
 
         it('runs getStoredHostNames()', function(done) {
-            simpleUrlCache.getStoredHostnames(url.getInstanceName(), url.getStorageType()).then(function(results) {
+            cacheEngine.getStoredHostnames().then(function(results) {
                 domains = results;
                 done();
             }, function(res) {
@@ -212,7 +227,7 @@ function DELETE_ALL(url) {
 }
 
 
-
+module.exports.WAIT_GET_URLS = WAIT_GET_URLS;
 module.exports.DELETE_ALL = DELETE_ALL;
 module.exports.GET_URLS = GET_URLS;
 module.exports.DELETE_DOMAIN = DELETE_DOMAIN;

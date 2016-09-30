@@ -16,9 +16,38 @@ export default class RedisStorageInstance extends StorageInstance {
     }
 
     clearCache():Promise<boolean> {
-        throw 'TODO';
         return new Promise((resolve, reject) => {
-            reject('PB');
+            const client = this._conn.getConnection();
+            const batch = client.batch();
+
+            client.hkeys(this.hashKey, (err, domains) => {
+                debug(err);
+                if(err) reject(err);
+                debug('Domains found = ', domains);
+                if(domains.length === 0) {
+                    resolve(true);
+                }
+                var nb = 0;
+
+                domains.forEach( domain => {
+                    batch.del(this.getDomainHashKey(domain));
+                    batch.hdel(this.hashKey, domain);
+                    client.hkeys(this.getDomainHashKey(domain), (err, keys) => {
+                        debug('keys = ', keys);
+                        keys.forEach(key => {
+                            batch.del(this.getUrlKey(domain, key));
+                        });
+                        nb++;
+                        if(nb === domains.length) {
+                            batch.exec(err => {
+                                debug(err);
+                                if(err) reject(err);
+                                resolve(true);
+                            });
+                        }
+                    });
+                });
+            });
         });
     }
 
@@ -51,6 +80,7 @@ export default class RedisStorageInstance extends StorageInstance {
             });
         });
     }
+
     getCachedDomains(): Promise<string[]> {
         return new Promise((resolve, reject)=> {
             debug('getAllCachedDomains called');
@@ -77,10 +107,12 @@ export default class RedisStorageInstance extends StorageInstance {
                     resolve(cachedUrls);
                 }
 
+                debug('found these urls in ', this.getDomainHashKey(domain));
                 urls.forEach( url => {
 
                     promises.push(client.get(this.getUrlKey(domain, url), (err, data) => {
                         if(err) reject(err);
+                        debug('for url, got content ', url, data);
                         if(data !== null) {
                             cachedUrls.push(url);
                         } else {

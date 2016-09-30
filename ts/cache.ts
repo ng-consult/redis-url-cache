@@ -71,9 +71,6 @@ export default class Cache {
 
         for (i in this._config.always) {
             if (this.getRegexTest (this._config.always[i]) === true) {
-                if(this._category.length > 0) {
-                    console.warn('This url has already matched against a regex', this._url);
-                }
                 if(this._category !== 'always') {
                     console.error('And overriding maxAge with always');
                 }
@@ -83,9 +80,6 @@ export default class Cache {
 
         for (i in this._config.never) {
             if (this.getRegexTest (this._config.never[i]) === true) {
-                if(this._category.length > 0) {
-                    console.warn('This url has already matched against a regex', this._url);
-                }
                 if(this._category !== 'always') {
                     console.error('And overriding maxAge/Always with mever');
                 }

@@ -1,33 +1,10 @@
-import {FileStorageConfig, RedisStorageConfig} from './interfaces';
+import {RedisStorageConfig} from './interfaces';
 
 export default class Helpers {
 
-    static isFS(storageConfig:RedisStorageConfig | FileStorageConfig): storageConfig is FileStorageConfig {
-        return typeof (<FileStorageConfig>storageConfig).dir !== 'undefined';
+    static isRedis(storageConfig:RedisStorageConfig): storageConfig is RedisStorageConfig {
+        return typeof (<RedisStorageConfig>storageConfig).host !== 'undefined';
     }
-
-    static escapeURL(key: string): string {
-        let escaped = key.replace(':', '%3A');
-        escaped = escaped.replace('.', '%2E'); //http://stackoverflow.com/questions/3856693/a-url-resource-that-is-a-dot-2e
-        escaped = escaped.replace('~', '%7E'); //http://www.w3schools.com/tags/ref_urlencode.asp
-        escaped = encodeURIComponent(escaped);
-        return escaped;
-    };
-
-    static unescapeURL(key: string): string {
-        let unescaped = decodeURIComponent(key);
-        unescaped = unescaped.replace('%3A', ':');
-        unescaped = unescaped.replace('%2E', '.');
-        unescaped = unescaped.replace('%7E', '~');
-        return unescaped;
-    }
-
-    static validateURL(key: string): boolean {
-        if (key.length === 0) { return false;}
-        if (key.length > 255) { return false;}
-        if (typeof key === 'undefined') { return false; }
-        return true;
-    };
 
     static isStringDefined(input: string) {
         if(typeof input !== 'string' || input.length === 0) {
@@ -88,9 +65,6 @@ export default class Helpers {
         });
     }
 
-    static validateFileStorageConfig(data: any) {
-        Helpers.isStringDefined(data.dir);
-    }
 
     static validateRedisStorageConfig(data: any) {
         //todo
