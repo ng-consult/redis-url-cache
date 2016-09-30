@@ -1,6 +1,6 @@
 {
   "name": "simple-url-cache",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A simple cache engine used to store html document with URL keys",
   "main": "dist/simple-cache.min.js",
   "scripts": {
