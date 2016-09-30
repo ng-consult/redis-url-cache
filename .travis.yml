@@ -7,7 +7,7 @@ services:
   - redis-server
 cache:
   directories:
-  #- node_modules # NPM packages
+  - node_modules # NPM packages
 before_install:
   - sudo apt-get -qq update
   - npm install

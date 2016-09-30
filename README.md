@@ -1,4 +1,4 @@
-# simple-url-cache [![Build Status](https://travis-ci.org/a-lucas/simple-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/simple-url-cache)  [![codecov](https://codecov.io/gh/a-lucas/simple-url-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/a-lucas/simple-url-cache)
+# Redis Url Cache [![Build Status](https://travis-ci.org/a-lucas/redis-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/redis-url-cache)  [![codecov](https://codecov.io/gh/a-lucas/redis-url-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/a-lucas/redis-url-cache)
 
 
 Conditionally cache your URL's content on REDIS with RegExp. Also supports cache instance sharing and isolation.
@@ -6,14 +6,14 @@ Conditionally cache your URL's content on REDIS with RegExp. Also supports cache
 
 <!--## API documentation
 
-https://a-lucas.github.io/simple-url-cache
+https://a-lucas.github.io/redis-url-cache
 -->
 
 ## Installation
 
 
 ```bash
-npm install simple-url-cache
+npm install redis-url-cache
 ```
 
 ## API
@@ -72,7 +72,7 @@ Example:
 
 ```javascript
 
-var CacheEngine = require('simple-url-cache');
+var CacheEngine = require('redis-url-cache');
 
 var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules); 
 var engine2 = new CachEngine('http://localhost:4444', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules);
@@ -141,7 +141,7 @@ Retrieves an array of all the domains cached.
 example: 
 
 ```javascript
-var CacheEngine = require('simple-url-cache');
+var CacheEngine = require('redis-url-cache');
 
 var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules); 
 
@@ -171,7 +171,7 @@ example:
 
 
 ```javascript
-var CacheEngine = require('simple-url-cache');
+var CacheEngine = require('redis-url-cache');
 
 var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules); 
 
@@ -284,7 +284,7 @@ url.getDomain() // http://a.com
 The instanceName set when this url has been stored
 
 ```javascript
-var CacheEngine = require('simple-url-cache');
+var CacheEngine = require('redis-url-cache');
 
 var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules); 
 var engine2 = new CachEngine('http://localhost:3333', 'I2', {host: '127.0.0.1',port: 6379}, cacheRules); 
@@ -421,7 +421,7 @@ and make sure the test passes with
 If you need to debug, you can use `debug` extensively with: 
 
 ```bash
-DEBUG=simple-url-cache-FS,simple-url-cache-REDIS npm test
+DEBUG=redis-url-cache-FS,redis-url-cache-REDIS npm test
 ```
 
 ###     Do the same with `mongoStorageWeirdUrl.js`

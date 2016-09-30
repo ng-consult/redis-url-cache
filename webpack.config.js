@@ -19,8 +19,8 @@ module.exports = {
     externals: nodeModules,
     target: 'node',
     output: {
-        library: 'simple-url-cache',
-        filename: 'dist/simple-cache.min.js',
+        library: 'redis-url-cache',
+        filename: 'dist/redis-cache.min.js',
         libraryTarget: 'commonjs2'
     },
     resolve: {
