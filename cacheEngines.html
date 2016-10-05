@@ -9,33 +9,10 @@ layout: default
         </div>
 
         <div class="column column-25">
-            <h2>Cache Engines</h2>
-            <ul>
-                <li>Promises and callbacks support</li>
-                <li>Methods
-                    <ul>
-                        <li>constructr</li>
-                        <li>url()</li>
-                        <li>clearDomain()</li>
-                        <li>clearInstance()</li>
-                        <li>getStoredHostnames()</li>
-                        <li>getStoredURLs()</li>
-                    </ul>
-                </li>
-            </ul>
 
-            <h2>Instance</h2>
-            <ul>
-                <li>Usage</li>
-                <li>Methods <ul>
-                    <li>Constructor</li>
-                    <li>getInstanceName</li>
-                    <li>getConfig</li>
-                    <li>getManager</li>
-                    <li>publish</li>
-                </ul></li>
-
-            </ul>
+            <nav class="right-bar">
+                {% include nav.html nav=site.data.menuCacheEngine root=true %}
+            </nav>
         </div>
 
     </div>

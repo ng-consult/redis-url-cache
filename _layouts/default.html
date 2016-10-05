@@ -6,10 +6,82 @@
     <title>Title</title>
     <script src="highlight/highlight.pack.js"></script>
     <link rel="stylesheet" href="highlight/styles/github.css">
-    <script src="http://localhost:35729/livereload.js"></script>
+    <!--<script src="http://localhost:35729/livereload.js"></script>-->
     <link rel="stylesheet" href="milligram.css">
-
+    <script src="jquery.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function () {
+
+            var activeNav = null;
+
+            function closeExpanded(index) {
+                console.log('closing index ', index);
+
+                $('.right-bar ul > ul > ul').eq(index).css('height', '0px');
+                $('.right-bar ul > ul > ul').eq(index).prev().find('a span').eq(0).toggleClass('active');
+
+            }
+
+            $('.right-bar ul > ul > ul').each(function(index) {
+
+                $(this).prev().find('a').append('<span>&#x21B4;</span>');
+
+                $(this).prev().on('click', (function(e) {
+                    if(activeNav === null) {
+                        this.style.height  = this.scrollHeight + "px";
+                        console.log($(this).prev().find('a span').eq(0));
+                        $(this).prev().find('a span').eq(0).toggleClass('active');
+                        activeNav = index;
+                    } else if(activeNav === index) {
+                        this.style.height  = "0px";
+                        $(this).prev().find('a span').eq(0).toggleClass('active');
+                        activeNav = null
+                    } else {
+                        closeExpanded(activeNav);
+                        this.style.height  = this.scrollHeight + "px";
+                        $(this).prev().find('a span').eq(0).toggleClass('active');
+                        activeNav = index;
+                    }
+                    console.log(index);
+                }).bind(this));
+
+            })
+
+        });
+
+/*
+        [].forEach.call(document.getElementsByClassName('top'), function (el, index) {
+            el.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(index);
+                alert('c');
+                if (activeNav === null) {
+
+                }
+                return false;
+            });
+        });
+
+
+        /*    function growDiv() {
+         var growDiv = document.getElementById('grow');
+         if (growDiv.clientHeight) {
+         growDiv.style.height = 0;
+         } else {
+
+         growDiv.style.height = growDiv.scrollHeight + "px";
+         }
+         document.getElementById("more-button").value=document.getElementById("more-button").value=='Read more'?'Read less':'Read more';
+         }*/
+    </script>
+
 
 </head>
 <body>

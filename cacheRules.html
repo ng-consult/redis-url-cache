@@ -5,59 +5,12 @@ layout: default
 <div class="container">
     <div class="row">
         <div class="column column-75">
-            <h2>Cache Rule Creator</h2>
 
-            <h3>Introduction</h3>
-
-            <p>Lorem ipsum</p>
-            <h3>Methods</h3>
-            <p>Lorem ipsum</p>
-            <h4>constructor()</h4>
-            <p>Lorem ipsum</p>
-            <h4>importRules()</h4>
-            <p>Lorem ipsum</p>
-
-            <h2>Cache Rule Manager</h2>
-
-            <h3>Usage</h3>
         </div>
-
         <div class="column column-25">
-            <h2>Cache Rule Creator</h2>
-            <ul>
-                <li>Introduction</li>
-                <li>Methods
-                    <ul>
-                        <li>constructr</li>
-                        <li>importRules()</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h2>CacheRuleManager</h2>
-            <ul>
-                <li>Usage</li>
-                <li>Methods <ul>
-                    <li>add <ul>
-                        <li>addMaxAgeRule</li>
-                        <li>addAlwaysRule</li>
-                        <li>addNeverRule</li>
-                    </ul>
-                    </li>
-                    <li>removeAll <ul>
-                        <li>removeAllMaxAgeRules</li>
-                        <li>removeAllNeverRules</li>
-                        <li>removeAllAlwaysRules</li>
-                    </ul>
-                    </li>
-
-                    <li>removeRule</li>
-                    <li>setDefault</li>
-                    <li>getRules</li>
-
-                </ul></li>
-
-            </ul>
+            <nav class="right-bar">
+                {% include nav.html nav=site.data.menuCacheRules  count=1 %}
+            </nav>
         </div>
 
     </div>

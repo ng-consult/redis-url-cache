@@ -1,0 +1,62 @@
+- text: Cache Engines
+  subitems:
+    - text: Promises and callbacks support
+    - text: methods
+      subitems:
+        - text: constrcutor
+        - text: url
+        - text: clearDomain
+        - text: clearInstance
+        - text: getStoredHostnames
+        - text: getStoredURLs
+
+- text: Cache Rule Creator
+  subitems:
+    - text: Introduction
+    - text: Methods
+      subitems:
+      - text: constructr
+      - text: importRules()
+- text: CacheRuleManager
+  subitems:
+    - text: Usage
+    - text: Methods
+      subitems:
+      - text: addMaxAgeRule
+      - text: addAlwaysRule
+      - text: addNeverRule
+      - text: removeAll
+      - text: removeAllMaxAgeRules
+      - text: removeAllNeverRules
+      - text: removeAllAlwaysRules
+      - text: removeRule
+      - text: setDefault
+      - text: getRules
+- text: Instance
+  subitems:
+    - text: Usage
+    - text: methods
+      subitems:
+      - text: constructor
+      - text: getInstanceName
+      - text: getConfig
+      - text: getManager
+      - text: publish
+
+- text: Url
+  subitems:
+    - text: Promises and callbacks support
+    - text: setters and getters
+      subitems:
+        - text: delete
+        - text: has
+        - text: get
+        - text: set
+    - text: other methods
+      subitems:
+        - text: getDomain
+        - text: getUrl
+        - text: getCategory
+        - text: getTTL
+        - text: getInstanceName
+
