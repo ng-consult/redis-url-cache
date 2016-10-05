@@ -1,62 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="highlight/highlight.pack.js"></script>
-    <link rel="stylesheet" href="highlight/styles/github.css">
-    <script src="http://localhost:35729/livereload.js"></script>
-    <link rel="stylesheet" href="milligram.css">
-
-    <script>hljs.initHighlightingOnLoad();</script>
-
-</head>
-<body>
-
-<header>
-
-    <nav>
-        <div class="float-left">
-            <a href="/">
-                Redis URL cache
-            </a>
-        </div>
-
-        <div class="float-right">
-            <a href="documentation.html">
-                Documentation
-            </a>
-            <a href="https://github.com/a-lucas/redis-url-cache" target="_blank">
-                Github
-            </a>
-
-        </div>
-        <div style="clear: both"></div>
-
-
-    </nav>
-    <section style="text-align: center">
-    <h1>Redis url cache</h1>
-
-    <p>An extensible node.js URL caching library</p>
-
-        <a href="https://github.com/a-lucas/redis-url-cache"  class="button" target="_blank">
-            View on Github
-        </a>
-
-        <a href="documentation.html"  class="button">
-            Documentation
-        </a>
-
-        <a href="https://github.com/a-lucas/redis-url-cache/archive/master.zip"  class="button" target="_blank">
-            Download .tar.gz
-        </a>
-    </section>
-
-</header>
-
-<div class="container">
+---
+layout: home
+---
 
     <p>redis-url-cache helps you store and retrieve url content on a Redis datastore.</p>
 
@@ -70,60 +14,66 @@
 
 <h3>Configuration</h3>
 
-<p>Create a cache-config.js file with the following content</p>
+<p>Create your config files with the following content</p>
 
 <pre><code lang="javascript">
-    module.exports = {
+    module.exports.rules = {
         always: [],
         maxAge: [],
         never: []
         default: 'always'
+    };
+
+    module.exports.redis = {
+        host: 127.0.0.1,
+        port: 6379
     }
+
 </code></pre>
 
 <p>This will store indefinitively all urls by default</p>
 
-<h3>Start using it</h3>
+<h3>Create your caching instance</h3>
 
-<p>Get your Redis connections details ready</p>
+    <p>This will store this instance definition inside Redis. This should be executed only once.</p>
 
 <pre><code lang="javascript">
-    var RedisCache = require('redis-ur;-cache');
-    var cacheConfig = require('cache-config');
+    const CacheRulesCreator = require('redis-url-cache').CacheRulesCreator;
+    const {redis, rules} = require('cache-config');
 
-    const cacheEngine = new cacheEngine('http://www.yoursite.com', 'I1', {  }, cacheConfig);
-
-    var url = cacheEngine.url('/someRelative.html');
-
-    url.set('content').then(function() {});
-
-    url.get().then(function(content) {
-
-    });
+    const configCreator = new CacheRulesCreator('INSTANCE_1', redis, err => { });
+    configCreator.importRules(rules, err => {  });
 </code></pre>
 
 
-<p>Check out the full usage guide to learn more.</p>
+<h3>Start using it</h3>
+
+<pre><code lang="javascript">
+    const {Instance, CacheEngineCB, CacheEnginePromise} = require('redis-url-cache');
+    const {redis} = require('cache-config');
+
+    const instance = new RedisUrlCache.Instance('INSTANCE_1', redis, {}, (err) => {} );
+
+    const cacheEngineCB = new CacheEngineCB('http://www.yoursite.com', instance);
+    //or use the promise support instead
+    const cacheEnginePromise = new CacheEnginePromise('http://www.yoursite.com', instance);
+
+    const url1 = cacheEngineCB.url('/someRelative.html');
+    const url2 = cacheEngineCB.url('/someRelative.html');
 
 
-</div>
-<footer>
-    <div class="container">
-        <div class="float-left">
-            @2016 Antoine LUCAS<br />
-            Styles based on the <a href="https://milligram.github.io/" target="_blank">milligram css</a> framework<br />
-            Issues? <a href="https://github.com/a-lucas/redis-url-cache/issues">Let us know on github</a>
-        </div>
+    url1.set('<b>Hello</b>', (err, status) => {
+        if(err) throw err;
+    } );
 
-        <div class="float-right">
-            <a href=""><img src="" >a-lucas</a>
-        </div>
-        <div style="clear: both"></div>
-    </div>
+    url1.get( (err, content) => {
+        //content = '<b>Hello</b>;
+    } );
 
+    url2.has().then( exists => {
+        //exists = true because these two cacheEngines share the same instance and same default domain.
+    }, err => {});
 
+</code></pre>
 
-</footer>
-
-</body>
-</html>
+<p>Check out <a href="">the full usage guide</a> to learn more.</p>
