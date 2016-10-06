@@ -1,9 +1,9 @@
-- text: Cache Engines
+- text: Cache Engine
   subitems:
-    - text: Promises and callbacks support
+    - text: Promise and callback support
     - text: methods
       subitems:
-        - text: constrcutor
+        - text: constructor
         - text: url
         - text: clearDomain
         - text: clearInstance
@@ -16,8 +16,8 @@
     - text: Methods
       subitems:
       - text: constructr
-      - text: importRules()
-- text: CacheRuleManager
+      - text: importRules
+- text: Cache Rule Manager
   subitems:
     - text: Usage
     - text: Methods

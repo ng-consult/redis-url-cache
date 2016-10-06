@@ -1,0 +1,39 @@
+<h2>Files</h2>
+
+
+{% for static_file in site.static_files %}
+  <!--<li>{{static_file.path}}</li>-->
+{% endfor %}
+</ul>
+
+{% for item in include.nav %}
+  <h2>{{item.text}}</h2>
+  {% capture path %}api/{{ item.text | downcase | replace: " ", "-" }}.html{% endcapture %}
+  <p>{{path}}</p>
+  {% include {{path}} %}
+  {% if item.subitems %}
+
+    {% for item2 in item.subitems %}
+      <h3>{{item2.text}}</h3>
+      {% capture path %}api/{{ item.text | downcase | replace: " ", "-"}}.{{ item2.text | downcase | replace: " ", "-"}}.html{% endcapture %}
+      <p>{{path}}</p>
+{% include {{path}} %}
+
+
+
+      {% if item2.subitems %}
+
+        {% for item3 in item2.subitems %}
+          <h4>{{item3.text}}</h4>
+
+{% capture path %}api/{{ item.text | downcase | replace: " ", "-"}}.{{ item2.text | downcase | replace: " ", "-"}}.{{ item3.text | downcase | replace: " ", "-"}}.html{% endcapture %}
+<p>{{path}}</p>
+{% include {{path}} %}
+        {% endfor %}
+
+      {% endif %}
+
+    {% endfor %}
+  {% endif %}
+
+{% endfor %}

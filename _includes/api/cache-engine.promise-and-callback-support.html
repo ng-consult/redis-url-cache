@@ -1,0 +1,20 @@
+<p>
+    Redis-url-cache supports either a promise API or a node.js callback API ( with err as a first callback parameter ).
+
+    To use the promise, you need to require the CacheEnginePromise class, or the CacheEngineCB for the callback
+</p>
+
+<pre><code lang="javascript">
+    var CacheEngine = require('redis-url-cache').CacheEnginePromise;
+
+    //or
+
+    var CacheEngine = require('redis-url-cache').CacheEngineCB;
+</code></pre>
+
+
+<p>
+    All subsequent usage will then use promise or callbacks depending on which class you used to initiate your cacheEngine object.
+</p>
+
+<p>    Please not that Instance and ConfigCreator don't use promise.</p>
