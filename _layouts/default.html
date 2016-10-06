@@ -8,86 +8,174 @@
     <link rel="stylesheet" href="highlight/styles/github.css">
     <!--<script src="http://localhost:35729/livereload.js"></script>-->
     <link rel="stylesheet" href="milligram.css">
+    <link rel="stylesheet" href="bootstrap-grid.css">
     <script src="jquery.min.js"></script>
+
     <script>hljs.initHighlightingOnLoad();</script>
+    <meta name="viewport" content="width=device-width"/>
 
 
     <script type="text/javascript">
 
-
-
+        /**
+         * COPYRIGHT ANTOINE LUCAS 2016
+         */
         $(document).ready(function () {
 
-            var activeNav = null;
+            // swipe detection
+            var touchsurface = document.body,
+                    mq = window.matchMedia("(max-width: 960px)"),
+                    startX,
+                    startY,
+                    dist,
+                    tmpDist,
+                    active = false,
+                    cancelled = false,
+                    ignore = false,
+                    startTime,
+                    fontSize,
+                    viewportWidth,
+                    cssRightProp,
+            //side menu
+                    activeNav = null;
 
+
+            //closes the side bar on click
+            $('.right-bar ul a').on('click', function () {
+                if ($(this).find('span').length === 0 && active && mq.matches) {
+                    $('.right-bar').addClass('transition');
+                    $('.right-bar').css('right', '-100vw');
+                    active = false;
+                }
+            });
+
+
+            //un-expand the selected item
             function closeExpanded(index) {
-                console.log('closing index ', index);
-
                 $('.right-bar ul > ul > ul').eq(index).css('height', '0px');
                 $('.right-bar ul > ul > ul').eq(index).prev().find('a span').eq(0).toggleClass('active');
-
             }
 
-            $('.right-bar ul > ul > ul').each(function(index) {
+            //adds the litte arrow, and also handles click on them to expand/reduce subitems
+            $('.right-bar ul > ul > ul').each(function (index) {
 
                 $(this).prev().find('a').append('<span>&#x21B4;</span>');
 
-                $(this).prev().on('click', (function(e) {
-                    if(activeNav === null) {
-                        this.style.height  = this.scrollHeight + "px";
-                        console.log($(this).prev().find('a span').eq(0));
+                $(this).prev().on('click', (function (e) {
+                    if (activeNav === null) {
+                        this.style.height = this.scrollHeight + "px";
                         $(this).prev().find('a span').eq(0).toggleClass('active');
                         activeNav = index;
-                    } else if(activeNav === index) {
-                        this.style.height  = "0px";
+                    } else if (activeNav === index) {
+                        this.style.height = "0px";
                         $(this).prev().find('a span').eq(0).toggleClass('active');
                         activeNav = null
                     } else {
                         closeExpanded(activeNav);
-                        this.style.height  = this.scrollHeight + "px";
+                        this.style.height = this.scrollHeight + "px";
                         $(this).prev().find('a span').eq(0).toggleClass('active');
                         activeNav = index;
                     }
-                    console.log(index);
                 }).bind(this));
-
-            })
-
-        });
-
-/*
-        [].forEach.call(document.getElementsByClassName('top'), function (el, index) {
-            el.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log(index);
-                alert('c');
-                if (activeNav === null) {
-
-                }
-                return false;
             });
+
+
+            // makes sure resize doesnt break the swip feature
+            mq.addListener(function (mq) {
+                active = false;
+                if (!mq.matched) {
+                    $('.right-bar').css('right', 'initial');
+                } else {
+                    $('.right-bar').css('right', '-100vw');
+                }
+            });
+
+            //ignores the touchend event
+            function cancelSwipe() {
+                var event;
+                if (window.CustomEvent) {
+                    event = new CustomEvent('touchcancel');
+                } else {
+                    event = document.createEvent('touchcancel');
+                    event.initCustomEvent('touchcancel', true, true);
+                }
+                touchsurface.dispatchEvent(event);
+            }
+
+            touchsurface.addEventListener('touchcancel', function (e) {
+                cancelled = true;
+            });
+            
+            //starts the swip detection
+            touchsurface.addEventListener('touchstart', function (e) {
+                ignore = $(e.path[0]).hasClass('hljs'); //makes sure we can still scroll on code
+                if (!mq.matches || ignore) return;
+                cancelled = false;
+                var touchobj = e.changedTouches[0];
+                dist = 0;
+                tmpDist = 0;
+                viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+                startX = touchobj.pageX;
+                startY = touchobj.pageY;
+                startTime = new Date().getTime();
+                var style = window.getComputedStyle(document.documentElement, null).getPropertyValue('font-size');
+                fontSize = parseFloat(style);
+                $('.right-bar').removeClass('transition');
+            }, false);
+
+            //shows the side list while swipping
+            touchsurface.addEventListener('touchmove', function (e) {
+                if (!mq.matches || ignore) return;
+                var touchobj = e.changedTouches[0];
+                tmpDist = startX - touchobj.pageX;
+                if (tmpDist > 0 && active) {
+                    return;
+                }
+                if (!active) {
+                    if (tmpDist >= viewportWidth / 2) {
+                        active = true;
+                        cssRightProp = '0px';
+                        $('.right-bar').addClass('transition');
+                        cancelSwipe();
+                    } else {
+                        cssRightProp = 'calc(-100vw + ' + tmpDist + 'px)';
+                    }
+                } else {
+                    if ((tmpDist + viewportWidth / 2 ) < 0) {
+                        active = false;
+                        cssRightProp = '-100vw';
+                        $('.right-bar').addClass('transition');
+                        cancelSwipe();
+                    } else {
+                        cssRightProp = 'calc(0px - ' + (-tmpDist) + 'px)';
+                    }
+                }
+                $('.right-bar').css('right', cssRightProp);
+            }, false);
+
+            touchsurface.addEventListener('touchend', function (e) {
+                if (!mq.matches || ignore || cancelled) return;
+
+                var touchobj = e.changedTouches[0];
+                dist = touchobj.pageX - startX; // get total dist traveled by finger while in contact with surface
+                if (!active) {
+                    cssRightProp = '-100vw';
+                } else {
+                    cssRightProp = '0px';
+                }
+                $('.right-bar').addClass('transition');
+                $('.right-bar').css('right', cssRightProp);
+            }, false);
         });
-
-
-        /*    function growDiv() {
-         var growDiv = document.getElementById('grow');
-         if (growDiv.clientHeight) {
-         growDiv.style.height = 0;
-         } else {
-
-         growDiv.style.height = growDiv.scrollHeight + "px";
-         }
-         document.getElementById("more-button").value=document.getElementById("more-button").value=='Read more'?'Read less':'Read more';
-         }*/
+        /**
+         * END COPYRIGHT
+         */
     </script>
-
-
 </head>
 <body>
 
 {% include header.html %}
-<div class="container">
+<div class="container" id="container">
     {{ content }}
 </div>
 {% include footer.html %}

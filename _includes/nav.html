@@ -3,7 +3,7 @@
 <ul>
     {% for item in include.nav %}
     <li>
-        <a href="#">
+        <a href='#{{ item.text | downcase | replace: " ", "-" }}'>
             {% if item.url == navurl %}
             <b>{{ item.text }}</b>
             {% else %}
@@ -12,7 +12,35 @@
         </a>
     </li>
     {% if item.subitems %}
-    {% include nav.html nav=item.subitems %}
+    <ul>
+        {% for item2 in item.subitems %}
+        <li>
+            <a href='#{{ item.text | downcase | replace: " ", "-"}}.{{ item2.text | downcase | replace: " ", "-"}}'>
+                {% if item2.url == navurl %}
+                <b>{{ item2.text }}</b>
+                {% else %}
+                {{ item2.text }}
+                {% endif %}
+            </a>
+        </li>
+
+        {% if item2.subitems %}
+        <ul>
+            {% for item3 in item2.subitems %}
+            <li>
+                <a href='#{{ item.text | downcase | replace: " ", "-"}}.{{ item2.text | downcase | replace: " ", "-"}}.{{ item3.text | downcase | replace: " ", "-"}}'>
+                    {% if item3.url == navurl %}
+                    <b>{{ item3.text }}</b>
+                    {% else %}
+                    {{ item3.text }}
+                    {% endif %}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endfor %}
+    </ul>
     {% endif %}
     {% endfor %}
 </ul>

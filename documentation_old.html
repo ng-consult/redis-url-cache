@@ -1,0 +1,286 @@
+---
+layout: default
+---
+<div class="container">
+    <div class="row">
+        <div class="column column-75">
+
+            <h2 id="installation">Installation</h2>
+            <pre><code lang="bash">npm install redis-url-cache</code></pre>
+            <h2 id="api">API</h2>
+
+
+            <h2 id="cacheengine">Cache Engine</h2>
+            <h3 id="settersgetters">setters /getters</h3>
+            <h4 id="constructor-NaN">constructor</h4>
+            <pre><code lang="typescript">constructor( defaultDomain: string, instanceName: string, storageConfig: Object, cacheConfig: Object)</code></pre>
+            <p><strong>defaultDomain</strong> Every URL that miss a hostname will get classified under this domain</p>
+            <p><strong>instanceName</strong> The isolated instance where this cacheEngine will store urls.
+                If another cacheEngine has the same storage type and the same instance name, they will share the pool.
+            </p>
+            <p><strong>storageConfig</strong> <a href="#redis-storage-config">Redis Storage Config</a>
+                Defines how &amp; where url content is stored</p>
+            <p><strong>cacheConfig</strong> <a href="#cache-config">Cache config</a>
+                Supports TTL and inclusion/exclusion for any URL rules you need</p>
+            <p>Example: </p>
+    <pre><code lang="javascript">
+    var CacheEngine = require('redis-url-cache');
+    var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules);
+    var engine2 = new CachEngine('http://localhost:4444', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules);
+    var engine3 = new CachEngine('http://localhost:5555', 'I2', {host: '127.0.0.1',port: 6379}, cacheRules);
+
+    // At this stage, engine1 and engine2 share the same pool.
+
+    engine1.url('http://a.com/index.html').set('some content');
+    // resolve(true)
+
+    engine2.url('http://b.com/index.html').set('some content');
+    // resolve(true)
+
+    engine1.url('http://b.com/index.html').set('some content');
+    // resolves(false) - already cached
+
+    engine3.url('http://a.com/index.html').set('some content');
+    // resolve(true)
+
+    engine1.url('http://b.com/index.html').get()
+    //resolve(true) -&gt; shared pool with engine1
+
+    engine3.url('http://b.com/index.html').get()
+    // reject(false) -&gt; not set
+    </code></pre>
+            <h3 id="url">url</h3>
+    <pre><code lang="typescript">
+        url(url: string): CacheStorage
+    </code></pre>
+            <p>
+                <strong>url</strong>
+                Initialize a new <a href="#cachestorage">CacheStorage</a> instance ready to be <a href="#get">get()</a>,
+                <a href="#set">set()</a>, <a href="#delete">delete()</a> and <a href="#has">has()</a>.
+            </p>
+            <h3 id="cleardomain">clearDomain</h3>
+            <pre><code lang="typescript language-typescript">clearDomain(domain: string): Promise&lt;boolean&gt;</code></pre>
+            <p>Delete all the cached urls stored within this instance under the specified domain.</p>
+            <h3 id="clearinstance">clearInstance</h3>
+            <pre><code lang="typescript language-typescript">clearInstance(): Promise&lt;boolean&gt;</code></pre>
+            <p>Removes all the cached URLs for all domains for this instance.</p>
+            <h3 id="getstoredhostnames">getStoredHostnames</h3>
+            <pre><code lang="typescript language-typescript">getAllCachedURL(): Promise&lt;string[]&gt;</code></pre>
+            <p>Retrieves an array of all the domains cached.</p>
+            <p>example: </p>
+    <pre><code lang="javascript language-javascript">
+    var CacheEngine = require('redis-url-cache');
+
+    var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules);
+
+    engine1.url('http://a.com/index.html').set('content').then( ... )
+    engine1.url('http://b.com/index.html').set('content').then( ... )
+
+    CacheEngine.getStoredHostnames().then(function(results) {
+        console.log(results);
+        // ['http://a.com', 'http://b.com']
+    });
+    </code></pre>
+            <p><strong>domain</strong> if none provided, then the default domain will be used</p>
+            <h3 id="getstoredurls">getStoredURLs</h3>
+    <pre><code
+            class="typescript language-typescript">getCachedDomains(idomain:string): Promise&lt;string[]&gt;</code></pre>
+            <p>Get the array of cached URLs associated with this domain &amp; instance</p>
+            <p><strong>domain</strong> All the stored URLs retrived had this domain prepended </p>
+            <p>example:</p>
+<pre><code lang="javascript language-javascript">
+    var CacheEngine = require('redis-url-cache');
+
+    var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules);
+
+    engine1.url('http://a.com/index.html').set('content').then( ... )
+    engine1.url('http://a.com/about.html').set('content').then( ... )
+
+    CacheEngine.getStoredURLs().then(function(results) {
+        console.log(results);
+        // ['/index.html', '/about.html']
+    });
+</code></pre>
+            <h2 id="statichelper">Static helper</h2>
+            <p>The methods used to validate the CacheConfig and the RedisStorageConfig objects are exposed
+                statically.</p>
+            <p>They all throw a<code>TypeError</code> when invalid</p>
+            <h3 id="validatecacheconfig">validateCacheConfig()</h3>
+            <pre><code lang="typescript language-typescript">validateCacheConfig(config: CacheRules)</code></pre>
+            <h6 id="validateredisstorageconfig">validateRedisStorageConfig()</h6>
+    <pre><code
+            lang="typescript language-typescript">validateRedisStorageConfig(config: RedisStorageConfig)</code></pre>
+            <h2 id="cachestorage">CacheStorage</h2>
+            <h3 id="geterssetters">geters &amp; setters</h3>
+            <h4 id="delete">delete</h4>
+            <pre><code lang="typescript language-typescript">delete(): Promise&lt;boolean&gt;</code></pre>
+            <p>Resolve to true if the url has been suppressed, false if the url wasn't cached
+                Reject an Error if any</p>
+            <h4 id="get">get</h4>
+            <pre><code lang="typescript language-typescript">get(): Promise&lt;string&gt;</code></pre>
+            <p>Resolve to the url's content
+                Reject if the url wasn't cached</p>
+            <h4 id="has">has</h4>
+            <pre><code lang="typescript language-typescript">has(): Promise&lt;boolean&gt;</code></pre>
+            <p>Resolve to true if the url is cached, false if the url is not cached, rejected on error</p>
+            <h4 id="set">set</h4>
+<pre><code
+        lang="typescript language-typescript">set(content: string [, force: boolean]) : Promise&lt;boolean&gt;</code></pre>
+            <p>Resolve to true if the url has been cached successfully,
+                Rejects false if
+                - the url matches the <code>never</code> rule.
+                - The url has already been cached
+                Rejects on Error</p>
+            <p><strong>html</strong>: the content of the url to be cached, must be UTF8</p>
+            <p><strong>force</strong>:
+                - Actualize the TTL for maxAge already cached urls
+                - Force the caching for url matching the <code>never</code> rule.</p>
+            <h3 id="methods">methods</h3>
+            <h4 id="getcategory">getCategory()</h4>
+            <p>Returns the url's internal category name. <code>always</code>, <code>maxAge</code> or <code>never</code>
+            </p>
+            <h4 id="getdomain">getDomain()</h4>
+            <p>Returns the domain which the URL has been stored with.</p>
+<pre><code lang="javascript language-javascript">var url = CacheEngine.url('http://a.com/index.html');
+url.set('content').then()
+
+url.getDomain() // http://a.com</code></pre>
+            <h4 id="getinstancename">getInstanceName()</h4>
+            <p>The instanceName set when this url has been stored</p>
+<pre><code lang="javascript language-javascript">var CacheEngine = require('redis-url-cache');
+
+var engine1 = new CachEngine('http://localhost:3333', 'I1', {host: '127.0.0.1',port: 6379}, cacheRules);
+var engine2 = new CachEngine('http://localhost:3333', 'I2', {host: '127.0.0.1',port: 6379}, cacheRules);
+
+var url1 = engine1.url('http://a.com/index.html')
+var url2 = engine1.url('http://a.com/about.html')
+
+url1.getInstanceName() // I1
+url2.getInstanceName() // I2</code></pre>
+            <h4 id="getstoragetype">getStorageType()</h4>
+            <p>Same as <code>getInstanceName()</code>, will return <code>redis</code></p>
+            <h3 id="storageengines">Storage engines</h3>
+            <p>So far, only redis is supported, but it is not hard to add more, PR are welcome.</p>
+            <p>Initially, FileSystem storage was supported, but it has been removed for several reasons : </p>
+            <ul>
+                <li>Performances issues.</li>
+                <li>Huge complexity issues when dealing with large sets of data, specially when
+                    <code>getStoredURLs()</code> is
+                    called or if a power outage happens.
+                </li>
+            </ul>
+            <blockquote>
+                <p>it had to replay the whole Regex test against each stored URL, and then make a stat on the file in
+                    case it
+                    matches a maxAge rule to check the creation time.</p>
+            </blockquote>
+            <p>But if you need to add another storage engine, like mongo for example, the code is designed in a way were
+                the
+                <code>CacheStorage</code>
+                and <code>CacheEngine</code> APIs are completly storage independent.</p>
+            <h3 id="configfiles">Config Files</h3>
+            <h4 id="cacheconfig">Cache Config</h4>
+            <p>This is an object describing which URL will be cached, which URLs won't be cached, and which ones will
+                have a ttl
+                expiration.</p>
+            <p>This is the same object, independently of the storage engine used.</p>
+            <p>An example worth 1000 words : </p>
+<pre><code lang="javascript language-javascript">exports.cacheConfig = {
+    // Will cache all URL starting with /posts/ and ending with html for 24 hours
+    cacheMaxAge: [
+        {
+            regex: /^\/posts.*html$/,
+            maxAge: 3600
+        }
+    ],
+    // Will cache about-us.html, contact-us.html and /prices.html indefinitively
+    cacheAlways: [
+        {
+            regex: /^about-us\.html$/,
+            regex: /^contact-us\.html$/,
+            regex: /^prices\.html$/
+        }
+    ],
+    // will never cache the url /sitemaps.html
+    cacheNever: [
+        {
+            regex: /^sitemaps\.html$/
+        }
+    ],
+    // If no URL is matched against these rules, then the default is to never cache it. can be 'never' or 'always'
+    default: 'never'
+};</code></pre>
+            <h4 id="redisstorageconfig">Redis storage config</h4>
+            <p>A bit more complex. The library <a href="https://github.com/NodeRedis/node_redis">noderedis</a> is used
+                here, so
+                a
+                valid redis node config file is needed. </p>
+            <p>example : </p>
+<pre><code lang="javascript language-javascript">export.redisStorageConfig = {
+    host: '127.0.0.1',
+    port: 6379,
+    socket_keepalive: true
+}</code></pre>
+        </div>
+        <div class="column column-25">
+
+            <nav class="right-bar">
+                <h3 id="api">API</h3>
+                <ul>
+                    <li><strong>CacheEngine</strong>
+                        <ul>
+                            <li>methods
+
+                                <ul>
+                                    <li><a href="#constructor">constructor</a></li>
+                                    <li><a href="#url">url()</a></li>
+                                    <li><a href="#cleardomain">clearDomain()</a></li>
+                                    <li><a href="#clearinstance">clearInstance()</a></li>
+                                    <li><a href="#getstoredhostnames">getStoredHostnames()</a></li>
+                                    <li><a href="#getstoredurls">getStoredURLs()</a></li>
+                                </ul>
+                            </li>
+                            <li>static properties
+
+                                <ul>
+                                    <li><a href="#helpers">helpers</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>CacheStorage</strong>
+
+                        <ul>
+                            <li>setters/getters
+
+                                <ul>
+                                    <li><a href="#delete">delete()</a></li>
+                                    <li><a href="#get">get()</a></li>
+                                    <li><a href="#has">has()</a></li>
+                                    <li><a href="#set">set()</a></li>
+                                </ul>
+                            </li>
+                            <li>methods
+                                <ul>
+                                    <li><a href="#getcategory">getCategory()</a></li>
+                                    <li><a href="#getdomain">getDomain()</a></li>
+                                    <li><a href="#getinstancename">getInstanceName()</a></li>
+                                    <li><a href="#getstoragetype">getStorageType()</a></li>
+                                    <li><a href="#geturl">getUrl()</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li><strong>Configuration</strong>
+                        <ul>
+                            <li><a href="#cache-config">Cache config</a></li>
+                            <li><a href="#redis-storage-config">Redis storage config</a></li>
+                        </ul>
+                        <p></p>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
