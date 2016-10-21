@@ -1,12 +1,8 @@
 "use strict";
 var redis = require('redis');
-var CacheRulesCreator = require('./../../dist/redis-cache').RedisUrlCache.CacheRulesCreator;
-
-var leche = require('leche');
+var CacheCreator = require('./../../dist/redis-cache').RedisUrlCache.CacheCreator;
 
 var chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 
 var debug = require('debug')('simple-url-cache-test');
 var expect = chai.expect;
@@ -251,7 +247,7 @@ function RECREATE_CONFIG(instanceName, storageConfig, cacheRules) {
         });
 
         it('should create the new cache rule ok', function (done) {
-            CacheRulesCreator.createCache(instanceName, false, storageConfig, cacheRules, function (err) {
+            CacheCreator.createCache(instanceName, false, storageConfig, cacheRules, function (err) {
                 if (err) return done(err);
                 done();
             });
@@ -259,7 +255,7 @@ function RECREATE_CONFIG(instanceName, storageConfig, cacheRules) {
 
         it('should complain about the fact that a Cache Config already exists', function (done) {
 
-            CacheRulesCreator.createCache(instanceName, false, storageConfig, cacheRules, function (err) {
+            CacheCreator.createCache(instanceName, false, storageConfig, cacheRules, function (err) {
                 if (err) return done();
                 if (!err) done('Should be refused');
             });

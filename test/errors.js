@@ -2,7 +2,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var CacheRulesCreator = require('./../dist/redis-cache').RedisUrlCache.CacheRulesCreator;
+var CacheCreator = require('./../dist/redis-cache').RedisUrlCache.CacheCreator;
 var CacheEnginePromise = require('./../dist/redis-cache').RedisUrlCache.CacheEnginePromise;
 var CacheEngineCB = require('./../dist/redis-cache').RedisUrlCache.CacheEngineCB;
 var Instance = require('./../dist/redis-cache').RedisUrlCache.Instance;
@@ -21,16 +21,16 @@ describe('It should fail on wrong parameters', function() {
     describe('Config creator', function() {
 
         it('should fail with no arguments', function() {
-           expect(function(){CacheRulesCreator.createCache();}).to.throw;
+           expect(function(){CacheCreator.createCache();}).to.throw;
         });
 
         it('should fail with 3 null arguments', function() {
-            expect(function(){CacheRulesCreator.createCache(null, null, null, null, null);}).to.throw;
+            expect(function(){CacheCreator.createCache(null, null, null, null, null);}).to.throw;
         });
 
-
+//TODO replace with correct definition
         it('should fail with first wrong argument null arguments', function() {
-            expect(function(){new CacheRulesCreator('', false, storageConfig, cacheRules, function(err){});}).to.throw;
+            expect(function(){new CacheCreator('', false, storageConfig, cacheRules, function(err){});}).to.throw;
         });
 
 
@@ -44,14 +44,14 @@ describe('It should fail on wrong parameters', function() {
         });
 
         it('Should create a new cacheRule ok', function(done) {
-            CacheRulesCreator.createCache('INSTANCE', true, storageConfig, cacheRules, function(err) {
+            CacheCreator.createCache('INSTANCE', true, storageConfig, cacheRules, function(err) {
                 if(err) return done(err);
                 done();
             });
         });
 
         it('Should complain that an instance with the same name already exists', function(done) {
-            CacheRulesCreator.createCache('INSTANCE', false, storageConfig, cacheRules, function(err) {
+            CacheCreator.createCache('INSTANCE', false, storageConfig, cacheRules, function(err) {
                 if(err) return done();
                 done('should complain');
             });

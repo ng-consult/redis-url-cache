@@ -1,6 +1,4 @@
 var chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 
 var debug = require('debug')('simple-url-cache-test');
 var expect = chai.expect;
@@ -101,5 +99,5 @@ module.exports = function(type, data) {
     describe('Removing Instance3', function() {
         DELETE_ALL(cacheEngine3);
     });
-    
+
 };

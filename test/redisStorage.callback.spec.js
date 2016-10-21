@@ -3,7 +3,7 @@
 var CacheEngine = require('./../dist/redis-cache').RedisUrlCache.CacheEngineCB;
 
 var Instance = require('./../dist/redis-cache').RedisUrlCache.Instance;
-var CacheRulesCreator = require('./../dist/redis-cache').RedisUrlCache.CacheRulesCreator;
+var CacheCreator = require('./../dist/redis-cache').RedisUrlCache.CacheCreator;
 
 var cacheRules = require('./helper/cacheRules');
 var oneInstance = require('./helper/oneInstance');
@@ -16,7 +16,6 @@ var expect = chai.expect;
 var common = require('./helper/commonCB');
 
 var storageConfig = {
-    type: 'redis',
     host: '127.0.0.1',
     port: 6379,
     socket_keepalive: true
