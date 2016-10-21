@@ -1,18 +1,24 @@
-import {Promise} from 'es6-promise';
-import Helpers from './helpers';
+
+
 
 export interface RegexRule {
-    regex: RegExp
+    regex: RegExp,
+    ignoreQuery?: boolean
 }
 
 export interface MaxAgeRegexRule extends RegexRule{
     maxAge: number
 }
 
+export interface DomainRule<T> {
+    domain: string | RegExp,
+    rules: T[]
+}
+
 export interface CacheRules{
-    maxAge: MaxAgeRegexRule[],
-    always: RegexRule[],
-    never: RegexRule[],
+    maxAge: DomainRule<MaxAgeRegexRule>[],
+    always: DomainRule<RegexRule>[],
+    never: DomainRule<RegexRule>[],
     default: string
 }
 
@@ -26,36 +32,40 @@ export interface RedisStorageConfig{
     db?: string;
 }
 
-export type StorageType = 'file' | 'redis';
 
-export abstract class StorageInstance {
-
-    private storageType: StorageType;
-
-    constructor(protected instanceName, config: any) {
-        if (Helpers.isRedis(config)) {
-           this.storageType = 'redis';
-        } else {
-            throw new Error('only redis is supported');
-        }
-    }
-    getStorageType(): StorageType {
-        return this.storageType;
-    }
-
-    getInstanceName(): string {
-        return this.instanceName;
-    }
-
-    abstract destroy(): void;
-    abstract delete(domain: string, url: string): Promise<boolean>;
-    abstract get(domain: string, url: string, category: string, ttl: number): Promise<string>;
-    abstract has(domain: string, url: string, category: string, ttl: number): Promise<boolean>;
-    abstract set(domain: string, url: string, value: string, category: string,  ttl: number, force: boolean): Promise<boolean>;
-
-    abstract clearCache(): Promise<boolean>;
-    abstract clearDomain(domain: string): Promise<boolean>;
-    abstract getCachedDomains(): Promise <string[]>;
-    abstract getCacheRules(): CacheRules;
-    abstract getCachedURLs(domain: string): Promise <string[]>;
+export interface IGetResults {
+    content: string,
+    createdOn: number,
+    extra: any
 }
+
+export interface parsedURL {
+    domain: string,
+    relativeURL: string
+}
+
+export interface CallBackGetResultsParam {
+    (err: string | Error, res?: IGetResults): any
+}
+
+export interface CallBackBooleanParam {
+    (err: string | Error, res?: boolean): any
+}
+
+export interface CallBackStringParam {
+    (err: string | Error, res?: string): any
+}
+
+export interface CallBackStringArrayParam {
+    (err: string | Error, res?: string[]): any
+}
+
+export interface InstanceConfig {
+    on_existing_regex?: option_on_existing_regex //when adding a regex , and a similar is found, either replace it, ignore it, or throw an error
+    on_publish_update?: boolean // when the cacheEngine.publish( is called, will scann all existing created url objects, and re-calculate the url's category
+}
+
+
+export type option_on_existing_regex = 'replace' | 'ignore' | 'error';
+
+export type method = 'promise' | 'callback';

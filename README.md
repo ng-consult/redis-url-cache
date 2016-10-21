@@ -5,7 +5,6 @@ Conditionally cache your URL's content on REDIS with RegExp. Also supports cache
 
 
 <!--## API documentation
-
 https://a-lucas.github.io/redis-url-cache
 -->
 
@@ -48,7 +47,7 @@ npm install redis-url-cache
 
 ## Cache Engine
 
-### setters /getters
+### methods
 
 #### constructor
 
@@ -80,16 +79,16 @@ var engine3 = new CachEngine('http://localhost:5555', 'I2', {host: '127.0.0.1',p
 
 // At this stage, engine1 and engine2 share the same pool.
 
-engine1.url('http://a.com/index.html').set('some content'); 
+engine1.url('http://a.com/index.html').set('some content', {}); 
 // resolve(true)
 
-engine2.url('http://b.com/index.html').set('some content');
+engine2.url('http://b.com/index.html').set('some content', {});
 // resolve(true)
 
-engine1.url('http://b.com/index.html').set('some content'); 
+engine1.url('http://b.com/index.html').set('some content', {}); 
 // resolves(false) - already cached
 
-engine3.url('http://a.com/index.html').set('some content');
+engine3.url('http://a.com/index.html').set('some content', {});
 // resolve(true)
 
 engine1.url('http://b.com/index.html').get() 
@@ -207,7 +206,7 @@ validateRedisStorageConfig(config: RedisStorageConfig)
 
 ## CacheStorage
 
-### geters & setters
+### getters & setters
 
 #### delete
 
@@ -223,11 +222,22 @@ Reject an Error if any
 
 
 ```typescript
-get(): Promise<string>
+get(): Promise<IGetObjects>
 ```
 
-Resolve to the url's content 
+Resolve to the stored url's informations. 
 Reject if the url wasn't cached
+
+The format of the response is :
+ 
+```typescript
+interface IGetResults {
+    content: string,
+    createdOn: number,
+    extra: Object
+}
+```
+
 
 #### has
 
@@ -242,7 +252,7 @@ Resolve to true if the url is cached, false if the url is not cached, rejected o
 
 
 ```typescript
-set(content: string [, force: boolean]) : Promise<boolean>
+set(content: string , extra: Object [, force: boolean]) : Promise<boolean>
 ```
 
 Resolve to true if the url has been cached successfully, 
@@ -251,7 +261,9 @@ Rejects false if
     - The url has already been cached
 Rejects on Error
 
-**html**: the content of the url to be cached, must be UTF8
+**html**: the content of the url to be cached, must be UTF-8
+
+**extra**: A JSON object taht contans information that you want to associate with this URL.
 
 **force**: 
     - Actualize the TTL for maxAge already cached urls
@@ -330,25 +342,43 @@ An example worth 1000 words :
 ```javascript
 
 exports.cacheConfig = {
-    // Will cache all URL starting with /posts/ and ending with html for 24 hours
-    cacheMaxAge: [ 
+    // Will cache all URL starting with /posts/ and ending with html for 24 hours for mydomain.com
+    cacheMaxAge: [
+        
         {
-            regex: /^\/posts.*html$/,  
-            maxAge: 3600
+            domain: 'mydomain.com',
+            rules; [
+                {
+                    regex: /^\/posts.*html$/,  
+                    maxAge: 3600    
+                }
+            ]
+            
         }
     ],
-    // Will cache about-us.html, contact-us.html and /prices.html indefinitively
-    cacheAlways: [  
+    // Will cache about-us.html, contact-us.html and /prices.html indefinitively for mydomain.com, and same for any hostname containing `cdn`.
+    cacheAlways: [
         {
-            regex: /^about-us\.html$/, 
-            regex: /^contact-us\.html$/,
-            regex: /^prices\.html$/
+            domain: /mydomain\.com/,
+            rules: [
+                {regex: /^about-us\.html$/},
+                {regex: /^contact-us\.html$/},
+                {regex: /^prices\.html$/}    
+            ]
+            
+        },
+        {
+            domain: /cnd/,
+            rules: [ { regex: /.*/ } ]
         }
     ],
-    // will never cache the url /sitemaps.html
+    // will never cache sockets
     cacheNever: [ 
-        {
-            regex: /^sitemaps\.html$/
+        {   
+            domain: /.*/,
+            rules: [
+                {regex: /socket/}
+            ]           
         }
     ], 
     // If no URL is matched against these rules, then the default is to never cache it. can be 'never' or 'always'
