@@ -8,6 +8,8 @@ Conditionally cache your URL's content on REDIS with RegExp. Also supports cache
 https://a-lucas.github.io/redis-url-cache
 -->
 
+## Documentation in progress
+
 ## Installation
 
 
@@ -17,6 +19,23 @@ npm install redis-url-cache
 
 ## API
 
+- **Manage the cache config**
+    - **CacheCreator**
+        - [createCache](#createCache)
+    - **CacheRuleManager**
+        - Accessing the cache rule manager
+        - Adding new Rules
+            - addMaxAgeRule
+            - addNeverRule
+            - addAlwaysRule
+        - Removing rules
+            - removeRule
+            - removeAllMaxAgeRules
+            - removeAllNeverRules
+            - removeAllAlwaysRules
+        - getRules
+        - setDefault
+        
 - **CacheEngine**
     - methods
         - [constructor](#constructor)
@@ -44,6 +63,23 @@ npm install redis-url-cache
     - [Cache config](#cache-config)
     - [Redis storage config](#redis-storage-config)
     
+
+## Cache Creator
+
+#### createCache
+
+
+```typescript
+CacheRulesCreator.createCache(instanceName: string, force: boolean, storageConfig: Object, cacheRules: Object, callback)
+```
+
+It initialize a cache rule config that get stored inside Redis.
+
+- **instanceName**: The unique instance name
+- **force**: If an instance with the same name exists, override the cacheRule definition with the one provided.
+- **storageConfig**: The [Redis config object](#redis-storage-config)
+- **cacheRules**: The [cache rules config object](#cache-config)
+- **callback** : a callback function that takes `err` as argument if any error occurs.
 
 ## Cache Engine
 
