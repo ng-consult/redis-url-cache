@@ -1,0 +1,10 @@
+<p>
+    You need to store the CacheRules at least once into the REDIS store to use the instance.
+    This class will return a callback error if a CacheRule configuration already exists for this instance
+</p>
+<p><strong>A typical workflow: </strong></p>
+<ol>
+    <li>Create and store a new set of CacheRules and stores them into Redis with CacheRuleCreator</li>
+    <li>Initialize an instance which loads the CacheRules definition from redis and pools the Redis connections</li>
+    <li>Create a new CacheEngine linked to this instance</li>
+</ol>

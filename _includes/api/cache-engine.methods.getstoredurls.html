@@ -1,1 +1,12 @@
 
+<pre><code lang="typescript">
+    //With callbacks
+    getStoredURLs(domain: string, callback: CallBackStringArrayParam): void
+
+    //with promises
+    getStoredURLs(domain: string): Promise<string[]>
+</code></pre>
+
+<p>Retrieves all urls stored within the domain specified. If no domain is provided, it will return the urls stored for the default domain<p>
+
+

@@ -1,0 +1,15 @@
+<pre><code lang="typescript">
+url.get( callback: Function(err: string, content: IGetResults) )
+</code></pre>
+
+<p>Retrieves the cached url. If the url is not cached, will return an 'err'</p>
+
+<p> The structure of the content: IGetResults is: </p>
+
+<pre><code lang="typescript">
+interface IGetResults {
+    content: string, //the URL file content
+    createdOn: number, // Cacheing timestamp
+    extra: any //Any SONmobject stored alongside the URL content
+}
+</code></pre>

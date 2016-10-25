@@ -1,0 +1,13 @@
+<p>This JSON object defines how you connect to the REDIS data store. INternally, redis-url-cache uses node-redis. This config bject ise exactly the same as defined here :
+<a href="http://redis.js.org/#api-rediscreateclient" target="_blank">Redis.createClient() config </a>
+</p>
+
+<p> A very basic redis config object example: </p>
+
+<pre><code lang="javascript">
+var redisConfig = {
+    host: 127.0.0.1,
+    port: 6379s,
+    socket_keepalive: true
+}
+</code></pre>

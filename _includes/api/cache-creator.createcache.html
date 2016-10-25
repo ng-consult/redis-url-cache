@@ -1,0 +1,15 @@
+<pre><code lang="typescript">
+static createCache(instanceName: string, force: boolean, redisConfig: RedisStorageConfig, rules: CacheRules, callback: Function(error: string)): void
+</code></pre>
+<ul>
+    <li><b>instanceName</b> Is the name of the instance. It must be unique. If an instance alredy exists, the callback will return an error.</li>
+    <li><b>force</b> If true and an instance already exists with the same name, it will delete the previous instance and replace the config.</li>
+    <li><b>redisConfig</b> A <a href="#config.redis-config">Redis Config</a> object.
+    </li>
+    <li><b>rules</b> A <a href="#config.cache-rules">Cache Rules</a> definition object.
+    </li>
+    <li><b>callback</b> A function the will return a null string if successfull, or an error string escribing the issue.
+    </li>
+</ul>
+
+</p>

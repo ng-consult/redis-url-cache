@@ -1,0 +1,17 @@
+<pre><code lang="typescript">
+url.set(htmlContent: string, extra: Object, force: boolean, callback: Function(err, result: boolean))
+</code></pre>
+
+<p>Conditionally stores a URL depending on matching rules</p>
+
+
+<strong>htmlContent</strong><br /> A non empty string describing the URL content. So far, only UTF-8 has been tested.<br /><br />
+<strong>extra</strong><br /> A JSON object representing extra informations. Can be anything, headers, dependecies....<br /><br />
+<strong>force</strong><br /> A boolean. If set to true, URL that are already cached are rewritten, URL with the never category are stored anyway, and URL with a TTL will get their ttl updated in addition of the content updated.<br /><br />
+<strong>callback(error: string, result: boolean)</strong><br /> A function that returns an error string on error, and a boolean value.
+        <b>True</b> when stored successfully and  <b>False</b> in the following scenario:
+        <ul>
+            <li>The url category is 'never' and force = false</li>
+            <li>The url is already cached and force = false.</li>
+        </ul>
+

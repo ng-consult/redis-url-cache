@@ -1,0 +1,16 @@
+<pre><code lang="typescript">
+    //With callbacks
+    clearDomain(domain?: string, callback: CallBackBooleanParam): void
+
+    //with promises
+    clearDomain(domain?: string): Promise<boolean>
+</code></pre>
+
+<p>
+The domain is the full hostname (ex: http://www.domain.com:8080) you want all the cached url deleted from.
+</p>
+
+<p>
+If no domain is specified, then the default domain will be cleared.
+</p>
+

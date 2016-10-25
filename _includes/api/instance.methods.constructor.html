@@ -1,0 +1,46 @@
+<pre><code lang="typescript">
+ constructor(instanceName: string, redisConfig: RedisStorageConfig, config: InstanceConfig, function(err) {})
+</code></pre>
+
+<p>Loads a CacheRules from Redis with the redisConfig provided.</p>
+
+<p><Strong>InstanceConfig</Strong> Defines some mandatory behavior</p>
+
+<pre><code lang="typescript">
+interface InstanceConfig {
+
+    on_existing_regex?: 'error' | 'ignore' | 'replace'
+    on_publish_update?: boolean // when the cacheEngine.publish( is called, will scann all existing created url objects, and re-calculate the url's category
+}
+</code></pre>
+
+<p>
+    <strong>on_existing_regex</strong>:
+    when adding a regex with <a href="#cache-rule-manager.methods">CacheRuleManager</a>'s methods, and an existing Regex is found, either replace it, ignore it, or throws an error
+</p>
+
+
+<p>
+    <strong>on_publish_update</strong>:
+    when the <a href="#instance.methods.publish">instance.publish()</a> is called, it will scan all existing created url objects, and re-calculate the url's category
+    <br > This can have some performances issues in the scenario when your script creates plenty of url in the same runtime,
+    because it forces the CacheEngine to keep an array listing all urls created in memory.
+    <br >Example:
+</p>
+
+<pre><code lang="typescript">
+  const instance = new Instance('HTML', redisConfig, {on_publish_update: true, (err) => {})
+  const cacheEngine = new CacheEngine('localhost', instance);
+  const url = cacheEngine.url('/someUrl.html');
+
+//Let's assume the that CacheRule Config mark this url's category as never
+  const cacheRuleManager = instance.getManager();
+
+//Let's change this url's category dynamically
+  cacheRuleManager.removeAll()
+  cacheRuleManager.setDefault('always');
+  instance.publish();
+  // at this stage, url's category is now 'always'
+  // withouth on_publish_update, we would have to manually run to update it.
+  url.setCacheCategory();
+</code></pre>

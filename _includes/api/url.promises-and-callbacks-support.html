@@ -1,0 +1,38 @@
+<p>
+    <b>UrlCB</b> is the class name for callback support while <b>UrlPromise</b> is the one associated for promises
+</p>
+
+<p>Internally, UrlPromise ses UrlCB's code. For this reason, we will document only UrlCB's API.</p>
+
+<p>To transpose UrlCb API to UrlPromise API, it is easy to remember that we follow the node.js classic callback parameter order (err, value), with err first.</p>
+
+<p>The promise will return the value on success, and the error on rejection. Example: </p>
+
+<pre><code lang="typescript">
+
+var urlCB = cacheEngineCB.url('http://someURL');
+var urlPromise = cacheEnginePromise.url('http://someURL');
+
+
+urlCB.has( (err: string | Error, has: boolean) => {
+    //do something
+});
+
+urlPromise.has().then ( (has: boolean) => {
+    //do something on success
+}, (err: string | Error) => {
+    //do something on error
+});
+
+
+urlCB.get( (err: string | Error, content: IGetResults) => {
+//do something
+});
+
+urlPromise.get().then ( (content: IGetResults) => {
+    //do something on success
+}, (err: string | Error) => {
+    //do something on error
+});
+
+</code></pre>

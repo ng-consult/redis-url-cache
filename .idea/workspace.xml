@@ -2,33 +2,64 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d716df28-9200-4b84-928c-a79444771267" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addalwaysrule.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addmaxagerule.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addneverrule.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.getrules.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeall.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallalwaysrules.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallmaxagerules.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallneverrules.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removerule.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.setdefault.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.usage.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/instance.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/instance.usage.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap-grid.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/documentation_old.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cacheEngines.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_data/menuCacheEngine.yml" afterPath="$PROJECT_DIR$/_data/documentation.yml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_data/menuCacheRules.yml" afterPath="$PROJECT_DIR$/_data/api.yml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/cacheRules.html" afterPath="$PROJECT_DIR$/api.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redis-url-cache-logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-creator.introduction.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/config.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.setcachecategory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/head.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/nav2.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.introduction.html" afterPath="$PROJECT_DIR$/_includes/api/config.redis-config.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.constructr.html" afterPath="$PROJECT_DIR$/_includes/api/config.cache-rules.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.html" afterPath="$PROJECT_DIR$/_includes/api/cache-creator.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.importrules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-creator.createcache.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_data/api.yml" afterPath="$PROJECT_DIR$/_data/api.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.cleardomain.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.cleardomain.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.clearinstance.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.clearinstance.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.constructor.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.constructor.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredhostnames.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredhostnames.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredurls.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredurls.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.url.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.url.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.promise-and-callback-support.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.promise-and-callback-support.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addalwaysrule.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addalwaysrule.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addmaxagerule.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addmaxagerule.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addneverrule.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addneverrule.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.getrules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.getrules.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeall.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallalwaysrules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallalwaysrules.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallmaxagerules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallmaxagerules.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallneverrules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallneverrules.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removerule.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removerule.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.setdefault.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.setdefault.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.usage.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.usage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.constructor.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.constructor.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.getconfig.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.getconfig.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.getinstancename.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.getinstancename.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.getmanager.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.getmanager.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.publish.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.publish.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.usage.html" afterPath="$PROJECT_DIR$/_includes/api/instance.usage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.getcategory.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.getcategory.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.getdomain.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.getdomain.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.getinstancename.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.getinstancename.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.getttl.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.getttl.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.geturl.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.geturl.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.promises-and-callbacks-support.html" afterPath="$PROJECT_DIR$/_includes/api/url.promises-and-callbacks-support.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.delete.html" afterPath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.delete.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.get.html" afterPath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.get.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.has.html" afterPath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.has.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.set.html" afterPath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.set.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/content.html" afterPath="$PROJECT_DIR$/_includes/content.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/nav.html" afterPath="$PROJECT_DIR$/_includes/nav.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/footer.html" afterPath="$PROJECT_DIR$/_includes/footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/header.html" afterPath="$PROJECT_DIR$/_includes/header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/header_home.html" afterPath="$PROJECT_DIR$/_includes/header_home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/default.html" afterPath="$PROJECT_DIR$/_layouts/default.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/home.html" afterPath="$PROJECT_DIR$/_layouts/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation.html" afterPath="$PROJECT_DIR$/documentation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api.html" afterPath="$PROJECT_DIR$/api.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/milligram.css" afterPath="$PROJECT_DIR$/milligram.css" />
     </list>
     <ignored path="simple-url-cache.iws" />
@@ -50,21 +81,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="api.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_data/api.yml">
+      <file leaf-file-name="nav2.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/nav2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="527">
+              <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
+              <folding>
+                <element signature="n#li#0;n#ul#0;n#ul#0;n#nav#0;n#!!top" expanded="false" />
+                <element signature="n#ul#0;n#li#0;n#ul#0;n#ul#0;n#nav#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="api.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api.html">
+      <file leaf-file-name="default.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_layouts/default.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="13" selection-end-column="6" />
+            <state relative-caret-position="-2472">
+              <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -73,22 +107,49 @@
       <file leaf-file-name="bootstrap-grid.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bootstrap-grid.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="964">
-              <caret line="1227" column="0" selection-start-line="1227" selection-start-column="0" selection-end-line="1227" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="documentation.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_data/documentation.yml">
+      <file leaf-file-name="nav.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/nav.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-              <folding>
-                <marker date="1475758261443" expanded="true" signature="8:23" ph="..." />
-                <marker date="1475758261443" expanded="true" signature="32:43" ph="..." />
-              </folding>
+            <state relative-caret-position="204">
+              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="api.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="82" selection-start-line="10" selection-start-column="82" selection-end-line="10" selection-end-column="82" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="content.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/content.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,49 +157,11 @@
       <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_includes/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_layouts/default.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="107" column="12" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_layouts/home.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="documentation.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/documentation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="34">
+              <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+              <folding>
+                <element signature="n#style#0;n#div#2;n#nav#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -148,8 +171,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -159,40 +182,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/globals.html" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/index.md" />
-        <option value="$PROJECT_DIR$/Gemfiles" />
-        <option value="$PROJECT_DIR$/_config.yml" />
-        <option value="$PROJECT_DIR$/Guardfile" />
-        <option value="$PROJECT_DIR$/Gemfile" />
-        <option value="$PROJECT_DIR$/_includes/footer.html" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/_includes/header_home.html" />
-        <option value="$PROJECT_DIR$/_includes/header.html" />
-        <option value="$PROJECT_DIR$/_data/menu.yml" />
-        <option value="$PROJECT_DIR$/cacheEngines.html" />
-        <option value="$PROJECT_DIR$/_data/menuCacheEngine.yml" />
-        <option value="$PROJECT_DIR$/_includes/api/cacheengine.constructor.html" />
-        <option value="$PROJECT_DIR$/_includes/api/cacheengine.url.html" />
-        <option value="$PROJECT_DIR$/_includes/api/cacheengine.clearDomain.html" />
-        <option value="$PROJECT_DIR$/_includes/api/cacheengine.promisecallback.html" />
-        <option value="$PROJECT_DIR$/_site/cacheRules.html" />
-        <option value="$PROJECT_DIR$/cacheRules.html" />
-        <option value="$PROJECT_DIR$/_includes/api/cache-engine.methods.html" />
-        <option value="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredurls.html" />
-        <option value="$PROJECT_DIR$/_data/menuCacheRules.yml" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-creator.introduction.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.constructr.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.importrules.html" />
         <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.html" />
-        <option value="$PROJECT_DIR$/_includes/nav.html" />
-        <option value="$PROJECT_DIR$/_includes/content.html" />
-        <option value="$PROJECT_DIR$/_data/documentation.yml" />
-        <option value="$PROJECT_DIR$/bootstrap-grid.css" />
-        <option value="$PROJECT_DIR$/documentation.html" />
-        <option value="$PROJECT_DIR$/hammer.js" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addmaxagerule.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addalwaysrule.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addneverrule.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeall.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallalwaysrules.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallmaxagerules.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallneverrules.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.setdefault.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.getrules.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removerule.html" />
+        <option value="$PROJECT_DIR$/_includes/api/instance.usage.html" />
+        <option value="$PROJECT_DIR$/_includes/api/instance.methods.getinstancename.html" />
+        <option value="$PROJECT_DIR$/_includes/api/instance.methods.getconfig.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.promises-and-callbacks-support.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.setters-and-getters.set.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.setters-and-getters.delete.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.setters-and-getters.has.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.setters-and-getters.get.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.other-methods.getdomain.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.other-methods.getcategory.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.other-methods.geturl.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.other-methods.getttl.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.other-methods.getinstancename.html" />
+        <option value="$PROJECT_DIR$/_includes/api/url.other-methods.setcachecategory.html" />
+        <option value="$PROJECT_DIR$/_includes/api/config.html" />
+        <option value="$PROJECT_DIR$/_data/config.redis-config.html" />
+        <option value="$PROJECT_DIR$/_data/api.yml" />
+        <option value="$PROJECT_DIR$/_includes/api/config.cache-rules.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-engine.promise-and-callback-support.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-rule-manager.usage.html" />
+        <option value="$PROJECT_DIR$/_includes/api/cache-creator.createcache.html" />
+        <option value="$PROJECT_DIR$/_includes/api/config.redis-config.html" />
+        <option value="$PROJECT_DIR$/_includes/api/instance.methods.constructor.html" />
+        <option value="$PROJECT_DIR$/_includes/api/instance.methods.getmanager.html" />
+        <option value="$PROJECT_DIR$/_includes/api/instance.methods.publish.html" />
+        <option value="$PROJECT_DIR$/_includes/footer.html" />
+        <option value="$PROJECT_DIR$/_includes/header_home.html" />
+        <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/_config.yml" />
+        <option value="$PROJECT_DIR$/_layouts/head.html" />
         <option value="$PROJECT_DIR$/_layouts/home.html" />
-        <option value="$PROJECT_DIR$/zingtouch.min.js" />
-        <option value="$PROJECT_DIR$/api.html" />
+        <option value="$PROJECT_DIR$/_includes/nav2.html" />
+        <option value="$PROJECT_DIR$/_includes/content.html" />
+        <option value="$PROJECT_DIR$/_includes/header.html" />
         <option value="$PROJECT_DIR$/_layouts/default.html" />
+        <option value="$PROJECT_DIR$/api.html" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -204,7 +244,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="width" value="1920" />
-    <option name="height" value="1172" />
+    <option name="height" value="1164" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -231,8 +271,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -265,8 +303,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simple-url-cache-doc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simple-url-cache-doc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_includes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,11 +338,26 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_includes" />
+      <recent name="$PROJECT_DIR$/_includes/api" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
       <config-file value="" />
       <node-interpreter value="project" />
@@ -349,18 +418,21 @@
       <workItem from="1475656925864" duration="7285000" />
       <workItem from="1475685178655" duration="5423000" />
       <workItem from="1475719341397" duration="5162000" />
-      <workItem from="1475756133366" duration="13066000" />
+      <workItem from="1475756133366" duration="19626000" />
+      <workItem from="1476681835377" duration="568000" />
+      <workItem from="1477286798171" duration="10963000" />
+      <workItem from="1477368353402" duration="5872000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47234000" />
+    <option name="totallyTimeSpent" value="71197000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1172" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1164" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3733544" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29594523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -374,7 +446,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24544583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -412,79 +484,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/about.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/footer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Guardfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
+    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removerule.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/header_home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.methods.cleardomain.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.promise-and-callback-support.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/share/applications/jetbrains-webstorm.desktop">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_site/cacheRules.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="633" column="5" selection-start-line="633" selection-start-column="5" selection-end-line="633" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.methods.constructor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <caret line="1" column="49" selection-start-line="1" selection-start-column="49" selection-end-line="1" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -495,324 +498,351 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.methods.clearinstance.html">
+    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.constructor.html" />
+    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.importrules.html" />
+    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.methods.cleardomain.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredhostnames.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredurls.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-creator.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-creator.introduction.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.constructr.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.importrules.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.methods.url.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.methods.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.usage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addmaxagerule.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addalwaysrule.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addneverrule.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeall.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallmaxagerules.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallneverrules.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallalwaysrules.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removerule.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.setdefault.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.getrules.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/api/instance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_includes/api/instance.usage.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="112" selection-start-line="23" selection-start-column="112" selection-end-line="23" selection-end-column="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/instance.methods.getinstancename.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/instance.methods.getconfig.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="74" selection-start-line="4" selection-start-column="74" selection-end-line="4" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.html">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation_old.html">
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.promises-and-callbacks-support.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="38" selection-start-line="4" selection-start-column="4" selection-end-line="5" selection-end-column="38" />
-          <folding />
+        <state relative-caret-position="170">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cacheEngines.html">
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.setters-and-getters.set.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.setters-and-getters.delete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="103" selection-start-line="4" selection-start-column="103" selection-end-line="4" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.setters-and-getters.has.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.setters-and-getters.get.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="13" column="65" selection-start-line="13" selection-start-column="65" selection-end-line="13" selection-end-column="76" />
-          <folding />
+          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/content.html">
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.other-methods.getdomain.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="68">
+          <caret line="4" column="51" selection-start-line="4" selection-start-column="51" selection-end-line="4" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/nav.html">
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.other-methods.getcategory.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="165" selection-start-line="30" selection-start-column="165" selection-end-line="30" selection-end-column="165" />
-          <folding />
+        <state relative-caret-position="68">
+          <caret line="4" column="110" selection-start-line="4" selection-start-column="110" selection-end-line="4" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.other-methods.geturl.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.other-methods.getttl.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="98" selection-start-line="4" selection-start-column="98" selection-end-line="4" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.other-methods.getinstancename.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="67" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/url.other-methods.setcachecategory.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/config.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_data/api.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="578">
+          <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_data/documentation.yml">
+    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.setdefault.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-          <folding>
-            <marker date="1475758261443" expanded="true" signature="8:23" ph="..." />
-            <marker date="1475758261443" expanded="true" signature="32:43" ph="..." />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="150" selection-start-line="5" selection-start-column="150" selection-end-line="5" selection-end-column="150" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap-grid.css">
+    <entry file="file://$PROJECT_DIR$/_includes/api/cache-engine.promise-and-callback-support.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="964">
-          <caret line="1227" column="0" selection-start-line="1227" selection-start-column="0" selection-end-line="1227" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="391">
+          <caret line="23" column="91" selection-start-line="23" selection-start-column="91" selection-end-line="23" selection-end-column="91" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/header.html">
+    <entry file="file://$PROJECT_DIR$/_includes/api/config.cache-rules.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
+        <state relative-caret-position="952">
+          <caret line="56" column="192" selection-start-line="56" selection-start-column="192" selection-end-line="56" selection-end-column="192" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/_includes/api/cache-rule-manager.usage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/cache-creator.createcache.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/config.redis-config.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="67" selection-start-line="1" selection-start-column="67" selection-end-line="1" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/instance.methods.constructor.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/instance.methods.getmanager.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/api/instance.methods.publish.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/documentation/cache-rules.examples.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/documentation/cache-rules.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/documentation/cache-rules.structure.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/documentation/example--caching-your-express-app.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/documentation/getting-started.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/documentation/instance-options.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="85" selection-start-line="5" selection-start-column="85" selection-end-line="5" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/header_home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hammer.js">
+    <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+        <state relative-caret-position="68">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/zingtouch.min.js">
+    <entry file="file://$PROJECT_DIR$/_includes/head.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="26274" selection-start-line="5" selection-start-column="26274" selection-end-line="5" selection-end-column="26274" />
+        <state relative-caret-position="170">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation.html">
+    <entry file="file://$PROJECT_DIR$/_includes/nav2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="527">
+          <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
+          <folding>
+            <element signature="n#li#0;n#ul#0;n#ul#0;n#nav#0;n#!!top" expanded="false" />
+            <element signature="n#ul#0;n#li#0;n#ul#0;n#ul#0;n#nav#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api.html">
+    <entry file="file://$PROJECT_DIR$/_includes/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="13" selection-end-column="6" />
+        <state relative-caret-position="34">
+          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#nav#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/nav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/default.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="107" column="12" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="12" />
+        <state relative-caret-position="-2472">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap-grid.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="82" selection-start-line="10" selection-start-column="82" selection-end-line="10" selection-end-column="82" />
           <folding />
         </state>
       </provider>

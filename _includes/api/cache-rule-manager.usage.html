@@ -1,0 +1,30 @@
+<p>The CacheRuleManager class alows you to add/delete the CacheRule config stored into Redis</p>
+
+<p>All 3 of <a href="#cache-rule-manager.methods.addmaxagerule">addMaxAgeRule()</a>,
+    <a href="#cache-rule-manager.methods.addalwaysrule">addAlwaysRule()</a>
+    and <a href="#cache-rule-manager.methods.addneverrule">addNeverRule()</a> share the same sets of parameters [domain, path and ignoreQuery].
+    </p>
+<p>
+    When parsed by <a href="">CacheEngine.url()</a>, the url format is separated in two parts.
+    <br><strong> scheme:[//[user:password@]host[:port]]</strong> is matched against the domain
+    <br><strong>[/]path[?query]</strong> is matched against the path RegExp. The query will be ignored if the <code>ignoreQuery</code> parameter is set to true
+
+</p>
+
+<p>A typical CacheRuleManager usage would be: </p>
+
+<pre><code lang="typescript">
+    // This assumes a config has already been created with CacheRuleCreator
+    const instance = new Instance('INSTANCE1', redisConfig, err => {
+        if(err) throw err;
+        // retrives the cacheRuleManager
+        const cacheRuleManager = instance.getManager();
+        //adds an always rule
+        cacheRuleManager.addAlwaysRule(/localhost/, /.*/, (err) => {
+            if (err) throw err;
+            //notifies all existing CacheEngine running in other process for the change
+            instance.publish();
+        }
+    });
+
+</code></pre>

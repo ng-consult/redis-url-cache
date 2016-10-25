@@ -1,0 +1,46 @@
+<pre><code lang="typescript">
+pubish():void
+</code></pre>
+
+<p>When the <a href="#cache-rule-manager">Cache Rule Manager</a> associated with this instance has been modified, calling this method will save the changes in the storage and propagate the changes to all open instances</p>
+
+<p>Example</p>
+
+<pre><code lang="javascript">
+
+    //File A.js on server 1
+    var instance = new Instance('STORAGE', redisConfig, instanceConfig, function(err) {
+        if(err) throw err;
+
+        var ruleManager = instance.getManager();
+        ruleManager.setDefault('always'); // We assume it was previously set to `never`
+
+        instance.publish();
+
+        // Will propagate config changes to all instanciated instances STORAGE.
+
+    }
+
+    //File B.js on server 2
+    var instance = new Instance('STORAGE', redisConfig, instanceConfig, function(err) {
+       if(err) throw err;
+
+        var cacheEngine = new CacheEngineCB('domain', instance);
+
+        var url1 = new url('http://domain.com/some-un-matched-url.html');
+        console.log(url1.getCategory());
+        // `never`
+
+        setTimeout( function(){
+            var url2 = new url('http://domain.com/some-un-matched-url.html');
+            console.log(url2.getCategory());
+            // `always`
+        }, 10000);
+
+        setTimeout( function(){
+            console.log(url1.getCategory());
+            // `always` or `never` depending on the instanceConfig.on_publish_update value
+        });
+    }
+
+</code></pre>

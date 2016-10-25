@@ -1,8 +1,14 @@
 ---
+title: "Redis URL Cache"
+description: "Redis URL Caching s a URL caching library with a REdis backend based on Regex URL matching filtering per domain. Supports live config changes synchornisation accross severall servers, TTL and instance sharing & isolation."
+author: "Antoine A Lucas"
+twitter: AntoinE_LuCAS_
+image: /redis-url-cache-logo.png
 layout: home
 ---
 
-    <p>redis-url-cache helps you store and retrieve url content on a Redis datastore.</p>
+<blockquote>
+    <strong>redis-url-cache</strong> helps you store and retrieve url content from a Redis datastore.</blockquote>
 
 <h2>Getting started</h2>
 
@@ -17,6 +23,7 @@ layout: home
 <p>Create your config files with the following content</p>
 
 <pre><code lang="javascript">
+    //cache.config.js
     module.exports.rules = {
         always: [],
         maxAge: [],
@@ -35,45 +42,49 @@ layout: home
 
 <h3>Create your caching instance</h3>
 
-    <p>This will store this instance definition inside Redis. This should be executed only once.</p>
+<p>This will store this instance definition inside Redis. This should be executed only once.</p>
 
 <pre><code lang="javascript">
-    const CacheRulesCreator = require('redis-url-cache').CacheRulesCreator;
+    const CacheCreator = require('redis-url-cache').RedisUrlCache.CacheCreator;
     const {redis, rules} = require('cache-config');
 
-    const configCreator = new CacheRulesCreator('INSTANCE_1', redis, err => { });
-    configCreator.importRules(rules, err => {  });
+    CacheCreator.createCache('INSTANCE_1', false, redis, rules, err => {  });
 </code></pre>
 
 
 <h3>Start using it</h3>
 
 <pre><code lang="javascript">
-    const {Instance, CacheEngineCB, CacheEnginePromise} = require('redis-url-cache');
+    const {Instance, CacheEngineCB, CacheEnginePromise} = require('redis-url-cache').RedisUrlCache;
     const {redis} = require('cache-config');
 
-    const instance = new RedisUrlCache.Instance('INSTANCE_1', redis, {}, (err) => {} );
+    const instance = new Instance('INSTANCE_1', redis, {}, (err) => {} );
 
     const cacheEngineCB = new CacheEngineCB('http://www.yoursite.com', instance);
+
     //or use the promise support instead
     const cacheEnginePromise = new CacheEnginePromise('http://www.yoursite.com', instance);
 
-    const url1 = cacheEngineCB.url('/someRelative.html');
-    const url2 = cacheEngineCB.url('/someRelative.html');
+    const urlCB = cacheEngineCB.url('/someRelative.html');
+    const urlPromise = cacheEnginePromise.url('/someRelative.html');
 
 
-    url1.set('<b>Hello</b>', (err, status) => {
+    urlCB.set('<b>Hello</b>', { headers: [] },  false, (err, status) => {
         if(err) throw err;
     } );
 
-    url1.get( (err, content) => {
-        //content = '<b>Hello</b>;
+    urlCB.get( (err, result) => {
+        //result = {
+            content: '<b>Hello</b>',
+            extra: { headers: [] },
+            createdOn: 12345677
+        }
     } );
 
-    url2.has().then( exists => {
+    urlPromise.has().then( exists  => {
         //exists = true because these two cacheEngines share the same instance and same default domain.
     }, err => {});
 
 </code></pre>
 
-<p>Check out <a href="">the full usage guide</a> to learn more.</p>
+<p>Check out <a href="/api">the API</a> to learn more.</p>

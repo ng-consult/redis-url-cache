@@ -2,7 +2,7 @@
 <a class="anchor" id='{{ item.text | downcase | replace: " ", "-" }}'></a>
 <h2>{{item.text}}</h2>
 {% capture path %}{{include.base}}/{{ item.text | downcase | replace: " ", "-" }}.html{% endcapture %}
-<p>{{path}}</p>
+<!--<p>{{path}}</p>-->
 {% include {{path}} %}
 {% if item.subitems %}
 
@@ -10,7 +10,7 @@
 <a class="anchor" id='{{ item.text | downcase | replace: " ", "-"}}.{{ item2.text | downcase | replace: " ", "-"}}'></a>
 <h3>{{item2.text}}</h3>
 {% capture path %}{{include.base}}/{{ item.text | downcase | replace: " ", "-"}}.{{ item2.text | downcase | replace: " ", "-"}}.html{% endcapture %}
-<p>{{path}}</p>
+<!--<p>{{path}}</p>-->
 {% include {{path}} %}
 
 {% if item2.subitems %}
@@ -21,7 +21,7 @@
 <h4>{{item3.text}}</h4>
 
 {% capture path %}{{include.base}}/{{ item.text | downcase | replace: " ", "-"}}.{{ item2.text | downcase | replace: " ", "-"}}.{{ item3.text | downcase | replace: " ", "-"}}.html{% endcapture %}
-<p>{{path}}</p>
+<!--<p>{{path}}</p>-->
 {% include {{path}} %}
 {% endfor %}
 

@@ -2,26 +2,50 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="highlight/highlight.pack.js"></script>
-    <link rel="stylesheet" href="highlight/styles/github.css">
-    <!--<script src="http://localhost:35729/livereload.js"></script>-->
-    <link rel="stylesheet" href="milligram.css">
-    <link rel="stylesheet" href="bootstrap-grid.css">
-    <script src="jquery.min.js"></script>
 
-    <script>hljs.initHighlightingOnLoad();</script>
-    <meta name="viewport" content="width=device-width"/>
+    {% seo %}
 
+    {% include head.html %}
 
     <script type="text/javascript">
 
         /**
          * COPYRIGHT ANTOINE LUCAS 2016
          */
-        $(document).ready(function () {
+        //$(document).ready(function () {
 
+            /*
+            var trigger = $('#hamburger'),
+                    overlay = $('.overlay'),
+                    isClosed = false;
+
+            console.log(trigger);
+
+            trigger.on('click', function () {
+                hamburger_cross();
+            });
+
+            function hamburger_cross() {
+
+                if (isClosed == true) {
+                    overlay.hide();
+                    trigger.removeClass('is-open');
+                    trigger.addClass('is-closed');
+                    isClosed = false;
+                } else {
+                    overlay.show();
+                    trigger.removeClass('is-closed');
+                    trigger.addClass('is-open');
+                    isClosed = true;
+                }
+            }
+
+            $('[data-toggle="offcanvas"]').on('click', function () {
+                $('#wrapper').toggleClass('toggled');
+            });
+*/
+
+            /*
             // swipe detection
             var touchsurface = document.body,
                     mq = window.matchMedia("(max-width: 960px)"),
@@ -76,6 +100,7 @@
                         $(this).prev().find('a span').eq(0).toggleClass('active');
                         activeNav = index;
                     }
+                    return false;
                 }).bind(this));
             });
 
@@ -105,7 +130,7 @@
             touchsurface.addEventListener('touchcancel', function (e) {
                 cancelled = true;
             });
-            
+
             //starts the swip detection
             touchsurface.addEventListener('touchstart', function (e) {
                 ignore = $(e.path[0]).hasClass('hljs'); //makes sure we can still scroll on code
@@ -174,7 +199,9 @@
 </head>
 <body>
 
+<header>
 {% include header.html %}
+</header>
 <div class="container" id="container">
     {{ content }}
 </div>

@@ -2,23 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="highlight/highlight.pack.js"></script>
-    <link rel="stylesheet" href="highlight/styles/github.css">
-   <!-- <script src="http://localhost:35729/livereload.js"></script>-->
-    <link rel="stylesheet" href="milligram.css">
-    <link rel="stylesheet" href="bootstrap-grid.css">
-    <script src="hammer.js"></script>
-    <script src="jquery.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <meta name="viewport" content="width=device-width" />
-
+    {% seo %}
+    {% include head.html %}
 
 </head>
-<body>
+<body class="home">
 
+<header>
 {% include header_home.html %}
+</header>
 <div class="container">
     {{ content }}
 </div>

@@ -1,0 +1,24 @@
+<p>
+    Several cacheEngines can share the same instance, which helps improves performances.
+    Although it isn't not really possible yet to share cache between different instance, it is on the roadmap.
+</p>
+
+<pre><code lang="javascript">
+  //will loads the CacheRules related to REST caching strategies
+  const instance1 = new Instance('REST', redisConf, err =>{});
+
+  //will loads the CacheRules related to HTML caching strategies
+  const instance2 = new Instance('HTML', redisConf, err =>{});
+
+  // cacheEngine 1 & 2 will share the same instance
+  const cacheEngine1 = new CacheEngine('http://domain1.com', instance1);
+  const cacheEngine2 = new CacheEngine('http://domain2.com', instance1);
+
+  // While cacheEngine 3 will have its own storage space
+  const cacheEngine3 = new CacheEngine('http://domain1.com', instance2);
+
+
+
+</code></pre>
+
+<p>This helps to logically cluster Redis storage as well as complex Cache Rule configs in very complex scenarios</p>

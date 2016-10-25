@@ -10,13 +10,10 @@
         - text: getStoredHostnames
         - text: getStoredURLs
 
-- text: Cache Rule Creator
+- text: Cache Creator
   subitems:
     - text: Introduction
-    - text: Methods
-      subitems:
-      - text: constructr
-      - text: importRules
+    - text: createCache
 - text: Cache Rule Manager
   subitems:
     - text: Usage
@@ -32,6 +29,10 @@
       - text: removeRule
       - text: setDefault
       - text: getRules
+- text: Config
+  subitems:
+    - text: Redis Config
+    - text: Cache Rules
 - text: Instance
   subitems:
     - text: Usage
@@ -59,4 +60,5 @@
         - text: getCategory
         - text: getTTL
         - text: getInstanceName
+        - text: setCacheCategory
 

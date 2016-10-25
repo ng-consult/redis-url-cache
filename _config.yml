@@ -1,2 +1,4 @@
 auto: true
 livereload: true
+gems:
+  - jekyll-seo-tag
