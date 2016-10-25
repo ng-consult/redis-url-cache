@@ -2,65 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d716df28-9200-4b84-928c-a79444771267" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redis-url-cache-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/cache-creator.introduction.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/config.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.setcachecategory.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/head.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/nav2.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.introduction.html" afterPath="$PROJECT_DIR$/_includes/api/config.redis-config.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.constructr.html" afterPath="$PROJECT_DIR$/_includes/api/config.cache-rules.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.html" afterPath="$PROJECT_DIR$/_includes/api/cache-creator.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-creator.methods.importrules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-creator.createcache.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_data/api.yml" afterPath="$PROJECT_DIR$/_data/api.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.cleardomain.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.cleardomain.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.clearinstance.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.clearinstance.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.constructor.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.constructor.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredhostnames.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredhostnames.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredurls.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.getstoredurls.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.methods.url.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.methods.url.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-engine.promise-and-callback-support.html" afterPath="$PROJECT_DIR$/_includes/api/cache-engine.promise-and-callback-support.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addalwaysrule.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addalwaysrule.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addmaxagerule.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addmaxagerule.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addneverrule.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.addneverrule.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.getrules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.getrules.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeall.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeall.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallalwaysrules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallalwaysrules.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallmaxagerules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallmaxagerules.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallneverrules.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removeallneverrules.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removerule.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.removerule.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.setdefault.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.methods.setdefault.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/cache-rule-manager.usage.html" afterPath="$PROJECT_DIR$/_includes/api/cache-rule-manager.usage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.constructor.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.constructor.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.getconfig.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.getconfig.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.getinstancename.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.getinstancename.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.getmanager.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.getmanager.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.methods.publish.html" afterPath="$PROJECT_DIR$/_includes/api/instance.methods.publish.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/instance.usage.html" afterPath="$PROJECT_DIR$/_includes/api/instance.usage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.getcategory.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.getcategory.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.getdomain.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.getdomain.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.getinstancename.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.getinstancename.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.getttl.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.getttl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.other-methods.geturl.html" afterPath="$PROJECT_DIR$/_includes/api/url.other-methods.geturl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.promises-and-callbacks-support.html" afterPath="$PROJECT_DIR$/_includes/api/url.promises-and-callbacks-support.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.delete.html" afterPath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.delete.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.get.html" afterPath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.get.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.has.html" afterPath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.has.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.set.html" afterPath="$PROJECT_DIR$/_includes/api/url.setters-and-getters.set.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/content.html" afterPath="$PROJECT_DIR$/_includes/content.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/footer.html" afterPath="$PROJECT_DIR$/_includes/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/header.html" afterPath="$PROJECT_DIR$/_includes/header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/header_home.html" afterPath="$PROJECT_DIR$/_includes/header_home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/default.html" afterPath="$PROJECT_DIR$/_layouts/default.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/home.html" afterPath="$PROJECT_DIR$/_layouts/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api.html" afterPath="$PROJECT_DIR$/api.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/milligram.css" afterPath="$PROJECT_DIR$/milligram.css" />
     </list>
     <ignored path="simple-url-cache.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,11 +36,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="head.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/head.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_layouts/default.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2472">
-              <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+            <state relative-caret-position="663">
+              <caret line="78" column="14" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -134,11 +86,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="10" column="82" selection-start-line="10" selection-start-column="82" selection-end-line="10" selection-end-column="82" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header_home.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/header_home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -157,8 +119,8 @@
       <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_includes/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+            <state relative-caret-position="136">
+              <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#nav#0;n#!!top" expanded="true" />
               </folding>
@@ -230,9 +192,9 @@
         <option value="$PROJECT_DIR$/_includes/nav2.html" />
         <option value="$PROJECT_DIR$/_includes/content.html" />
         <option value="$PROJECT_DIR$/_includes/header.html" />
-        <option value="$PROJECT_DIR$/_layouts/default.html" />
         <option value="$PROJECT_DIR$/api.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/_layouts/default.html" />
       </list>
     </option>
   </component>
@@ -421,12 +383,12 @@
       <workItem from="1475756133366" duration="19626000" />
       <workItem from="1476681835377" duration="568000" />
       <workItem from="1477286798171" duration="10963000" />
-      <workItem from="1477368353402" duration="5872000" />
+      <workItem from="1477368353402" duration="6149000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71197000" />
+    <option name="totallyTimeSpent" value="71474000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1164" extended-state="6" />
@@ -738,14 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/header_home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -770,14 +724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_includes/nav2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -797,28 +743,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#nav#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_includes/nav.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_layouts/default.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2472">
-          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -843,6 +771,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="82" selection-start-line="10" selection-start-column="82" selection-end-line="10" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/head.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/header_home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#nav#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_layouts/default.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="78" column="14" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
           <folding />
         </state>
       </provider>
