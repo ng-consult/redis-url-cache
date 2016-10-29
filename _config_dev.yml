@@ -1,7 +1,7 @@
 auto: true
 livereload: true
-url: "https://ng-consult.github.io"
-baseurl: "/redis-url-cache/"
+url: "http://localhost:4000"
+baseurl: ""
 gems:
   - jekyll-seo-tag
   - jekyll-sitemap
