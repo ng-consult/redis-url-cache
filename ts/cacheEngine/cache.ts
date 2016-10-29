@@ -56,7 +56,7 @@ export class UrlCommon {
             return stored.test(this._domain);
         }
     }
-    public setCacheCategory(): void  {
+    setCacheCategory(): void  {
         let key,
             domain,
             i;

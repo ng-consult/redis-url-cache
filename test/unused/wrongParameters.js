@@ -1,7 +1,5 @@
 
 var chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 
 var debug = require('debug')('simple-url-cache-test');
 var expect = chai.expect;
@@ -19,11 +17,11 @@ module.exports = function(storageType) {
                 alwaysRules: [],
                 neverRules: []
             }
-            
+
             it('constructor', function() {
                 expect(new simpleUrlCache()).to.throw;
                 expect(new simpleUrlCache(null, null, null, null)).to.throw;
-                
+
                 expect(new simpleUrlCache('domain', 'instance', {}, {})).to.throw;
                 expect(new simpleUrlCache('domain', 'instance', {}, {})).to.throw;
                 expect(new simpleUrlCache('aaa')).to.throw;

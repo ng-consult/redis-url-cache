@@ -7,8 +7,6 @@ var weirdUrls = require('./helper/weirdUrls');
 var common = require('./helper/commonCB');
 
 var chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 
 var expect = chai.expect;
 
