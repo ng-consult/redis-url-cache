@@ -2,12 +2,6 @@
 // Project: https://github.com/a-lucas/simple-url-cache
 // Definitions by: Antoine LUCAS <https://github.com/a-lucas>
 
-// Support AMD require
-declare module 'redis-url-cache' {
-    export = RedisUrlCache;
-}
-
-declare namespace RedisUrlCache {
     interface RegexRule {
         regex:RegExp,
         ignoreQuery?:boolean
@@ -185,6 +179,9 @@ declare namespace RedisUrlCache {
     }
 
     export class CacheEngineCB {
+
+        static helpers: CacheHelpers
+        
         /**
          *
          * @param defaultDomain This is the default domain when the url doesn't contain any host information.
@@ -252,4 +249,3 @@ declare namespace RedisUrlCache {
 
         getManager():CacheRuleManager
     }
-}
