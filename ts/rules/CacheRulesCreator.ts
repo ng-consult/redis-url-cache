@@ -2,7 +2,7 @@ import {RedisStorageConfig, CacheRules} from "../interfaces";
 import {RedisPool} from "../redis/pool";
 import Helpers from "../helpers";
 import * as  redis from 'redis';
-const debug = require('debug')('simple-url-cache');
+const debug = require('debug')('redis-url-cache');
 
 class CacheRulesCreator {
 

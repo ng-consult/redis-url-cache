@@ -2,7 +2,12 @@
 // Project: https://github.com/a-lucas/simple-url-cache
 // Definitions by: Antoine LUCAS <https://github.com/a-lucas>
 
-export namespace RedisUrlCache {
+// Support AMD require
+declare module 'redis-url-cache' {
+    export = RedisUrlCache;
+}
+
+declare namespace RedisUrlCache {
     interface RegexRule {
         regex:RegExp,
         ignoreQuery?:boolean
@@ -47,7 +52,7 @@ export namespace RedisUrlCache {
         on_existing_regex?:option_on_existing_regex //when adding a regex , and a similar is found, either replace it, ignore it, or throw an error
         on_publish_update?:boolean // when the cacheEngine.publish( is called, will scann all existing created url objects, and re-calculate the url's category
     }
-    
+
     export interface CacheRules {
         maxAge:DomainRule<MaxAgeRegexRule>[],
         always:DomainRule<RegexRule>[],
@@ -135,7 +140,16 @@ export namespace RedisUrlCache {
         set(html:string, extra: Object, force:boolean, cb:CallBackBooleanParam):void
     }
 
+    export interface CacheHelpers {
+        validateRedisStorageConfig(config: any): void,
+        validateCacheConfig(config: any): void,
+        unserializeRegex(regex: string): RegExp,
+        unserializeCacheRules(rules: any): CacheRules
+    }
+
     export class CacheEnginePromise {
+
+         static helpers: CacheHelpers
         /**
          *
          * @param defaultDomain This is the default domain when the url doesn't contain any host information.
@@ -227,7 +241,7 @@ export namespace RedisUrlCache {
         removeAllAlwaysRules():void
     }
 
-    export class CacheRulesCreator {
+    export class CacheCreator {
         static createCache(instanceName: string, force: boolean, redisConfig: RedisStorageConfig, rules: CacheRules, cb: Function);
     }
 

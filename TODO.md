@@ -1,30 +1,34 @@
 ### Bugs
 
-#### ignoreQuery
-Some conflicts may arise with the ignoreQuery
+
+#### todo
+
+- implement ignore query param 
+
+Some conflicts may arise when `ignoreQuery=false`
 
 for example : 
 
-
-/aaa?key1=value matches /aaa/ with ignoreQuery and will store the key /aaa?key1=value
-/aaa?key2=value matches /aaa/ with ignoreQuery and will store the key /aaa?key2=value
+/aaa?key1=value matches /aaa/ with ignoreQuery=false and will store the key /aaa?key1=value
+/aaa?key2=value matches /aaa/ with ignoreQuery=false and will store the key /aaa?key2=value
 
 In scenario where cache is canceled with 
-/aaa?timestamp=12345 , the url will be cached many times blowing up storage
+/aaa?key=1&timestamp=12345 , the url will be cached many times blowing up storage
 
+Solution: {
+    ignoreQuery: *, //same as ignoreQuery = false
+    ignoreQuery: [timestamp, expire] // ignoreQuery = false, but will ignorethese two parameter names 
+}
+todo: Order the query param name a->z & upperCase -> lowerCase when url()
 
 #### publish
 
 Must go trough all existing cached URL and clear the urls that shouldnt be cached anymore otherwise, get() & has() will return the wrong result
 
-
-
 #### testing
 
-- Test validation errors
 - Test the redis pool
 - test the redis call back errors
-
 
 - coverage
     - cacheEngine 
@@ -64,25 +68,6 @@ Must go trough all existing cached URL and clear the urls that shouldnt be cache
         - import rule: redis cb error
         
 
-#### fixes
-
-- Fix the redis pool
-
-#### todo
-
-- regexes per domain too
-- ignore query param
-
-never: [
-    domain: /aaa/,
-    rules: [
-        {
-            regex: /bbb/,
-            ignore_query: true
-        }
-    ]
-    
-]
 
 
 

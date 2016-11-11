@@ -1,11 +1,11 @@
 "use strict";
-var CacheEngine = require('./../dist/redis-cache').RedisUrlCache.CacheEngineCB;
-var Instance = require('./../dist/redis-cache').RedisUrlCache.Instance;
-var CacheCreator = require('./../dist/redis-cache').RedisUrlCache.CacheCreator;
+var CacheEngine = require('./../dist/redis-cache').CacheEngineCB;
+var Instance = require('./../dist/redis-cache').Instance;
+var CacheCreator = require('./../dist/redis-cache').CacheCreator;
 var chai = require('chai');
 var expect = chai.expect;
 var redis = require('redis');
-var debug = require('debug')('simple-url-cache-test');
+var debug = require('debug')('redis-url-cache-test');
 var common = require('./helper/commonCB');
 
 var cacheRules = require('./helper/cacheRules');

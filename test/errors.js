@@ -2,10 +2,10 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var CacheCreator = require('./../dist/redis-cache').RedisUrlCache.CacheCreator;
-var CacheEnginePromise = require('./../dist/redis-cache').RedisUrlCache.CacheEnginePromise;
-var CacheEngineCB = require('./../dist/redis-cache').RedisUrlCache.CacheEngineCB;
-var Instance = require('./../dist/redis-cache').RedisUrlCache.Instance;
+var CacheCreator = require('./../dist/redis-cache').CacheCreator;
+var CacheEnginePromise = require('./../dist/redis-cache').CacheEnginePromise;
+var CacheEngineCB = require('./../dist/redis-cache').CacheEngineCB;
+var Instance = require('./../dist/redis-cache').Instance;
 
 
 var storageConfig = {

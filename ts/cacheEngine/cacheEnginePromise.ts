@@ -6,7 +6,7 @@ import CacheEngine from "./CacheEngine";
 import RedisStorageInstancePromise from "../redis/instancePromise";
 import Instance from "../instance";
 
-const debug = dbug('simple-url-cache');
+const debug = dbug('redis-url-cache');
 
 class CacheEnginePromise extends CacheEngine{
 
@@ -82,7 +82,7 @@ class CacheEnginePromise extends CacheEngine{
             //debug('This url', url, ' has no domain, using defaultDomain = ', this.defaultDomain);
             parsedURL.domain = this.defaultDomain;
         }
-        
+
         const cache = new UrlPromise(parsedURL.domain, this.storageInstance, this.instanceName, parsedURL.relativeURL);
         this.addUrl(cache);
         return cache;

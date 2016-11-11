@@ -1,6 +1,6 @@
 "use strict";
 
-var debug = require('debug')('simple-url-cache-test');
+var debug = require('debug')('redis-url-cache-test');
 var Instance = require('./../../dist/redis-cache').Instance;
 var cacheRules = require('./../helper/cacheRules');
 var shared = require('mocha-shared');

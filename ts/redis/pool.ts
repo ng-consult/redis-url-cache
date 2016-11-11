@@ -2,7 +2,7 @@ import * as  redis from 'redis';
 import {RedisStorageConfig} from './../interfaces';
 import * as dbug from 'debug';
 
-const debug = dbug('simple-url-cache-REDIS');
+const debug = dbug('redis-url-cache-REDIS');
 
 export class RedisPool {
 

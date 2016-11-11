@@ -4,7 +4,7 @@ import {RedisPool} from "./redis/pool";
 import CacheEngine from './cacheEngine/CacheEngine';
 import CacheRuleManager from './rules/CacheRuleManager';
 
-const debug = require('debug')('simple-url-cache');
+const debug = require('debug')('redis-url-cache');
 
 export default class Instance {
 

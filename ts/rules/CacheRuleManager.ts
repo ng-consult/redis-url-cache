@@ -1,9 +1,9 @@
 import {CacheRules, option_on_existing_regex, RegexRule, MaxAgeRegexRule, DomainRule} from "../interfaces";
 import Helpers from "../helpers";
-const debug = require('debug')('simple-url-cache');
+const debug = require('debug')('redis-url-cache');
 
 export default class CacheRuleManager {
-    
+
     constructor(public cacheRules: CacheRules, private on_existing_regex: option_on_existing_regex) {}
 
     addMaxAgeRule( domain: string | RegExp, regex: RegExp, maxAge: number, ignoreQuery?:boolean) {

@@ -1,10 +1,44 @@
-import {RedisStorageConfig, parsedURL} from './interfaces';
+import {RedisStorageConfig, parsedURL, CacheRules} from './interfaces';
 import * as nodeurl from 'url';
 
-const debug = require('debug')('simple-url-cache');
+const debug = require('debug')('redis-url-cache');
 
 export default class Helpers {
 
+    static unserializeRegex(input: string): RegExp{
+        console.log('GOing to unserialize regex', input);
+        const match = input.match(new RegExp('^/(.*?)/([gimy]*)$'));
+        console.log(match[0], match[1], match[2]);
+        // sanity check here
+        if(match.length === 3 && typeof match[1] === 'string' && typeof match[2] === 'string') {
+            return new RegExp(match[1], match[2]);
+        }
+        throw new Error('The regex string is not a valid regex: ' + input);
+    }
+
+    static unserializeCacheRules(rules): CacheRules {
+        let index,
+            ruleIndex,
+            domain,
+            regex;
+
+        const types = ['always', 'never', 'maxAge'];
+
+        types.forEach( (type) => {
+
+            for(index in rules[type]) {
+
+                rules[type][index].domain = Helpers.unserializeRegex(rules[type][index].domain);
+
+                for(ruleIndex in rules[type][index].rules) {
+                    regex = Helpers.unserializeRegex(rules[type][index].rules[ruleIndex].regex);
+                    rules[type][index].rules[ruleIndex].regex = regex;
+                }
+            }
+        });
+        return rules;
+    }
+    
     static isRedis(storageConfig:RedisStorageConfig): storageConfig is RedisStorageConfig {
         return typeof (<RedisStorageConfig>storageConfig).host !== 'undefined';
     }

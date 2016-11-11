@@ -1,10 +1,10 @@
 "use strict";
 var redis = require('redis');
-var CacheCreator = require('./../../dist/redis-cache').RedisUrlCache.CacheCreator;
+var CacheCreator = require('./../../dist/redis-cache').CacheCreator;
 
 var chai = require('chai');
 
-var debug = require('debug')('simple-url-cache-test');
+var debug = require('debug')('redis-url-cache-test');
 var expect = chai.expect;
 
 //Meeds context Sharing

@@ -1,7 +1,7 @@
 
 var chai = require('chai');
 
-var debug = require('debug')('simple-url-cache-test');
+var debug = require('debug')('redis-url-cache-test');
 var expect = chai.expect;
 var simpleUrlCache = require('./../../dist/simple-cache.min');
 

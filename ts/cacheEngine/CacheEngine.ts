@@ -1,7 +1,7 @@
 import Helpers from "../helpers";
 import Instance from "../instance";
 import {UrlCommon} from "./cache";
-const debug = require('debug')('simple-url-cache');
+const debug = require('debug')('redis-url-cache');
 
 export default class CacheEngine {
 
@@ -9,13 +9,15 @@ export default class CacheEngine {
 
     static helpers = {
         validateRedisStorageConfig: Helpers.validateRedisStorageConfig,
-        validateCacheConfig: Helpers.validateCacheConfig
+        validateCacheConfig: Helpers.validateCacheConfig,
+        unserializeRegex: Helpers.unserializeRegex,
+        unserializeCacheRules: Helpers.unserializeCacheRules
     };
 
     static hashKey: string = 'url-cache:';
 
     protected instanceName: string;
-    
+
     constructor(protected defaultDomain:string, protected instanceDefinition: Instance) {
         Helpers.isNotUndefined(defaultDomain, instanceDefinition);
         Helpers.isStringDefined(defaultDomain);

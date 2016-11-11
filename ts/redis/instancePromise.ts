@@ -4,7 +4,7 @@ import {Promise} from 'es6-promise';
 import RedisStorageInstanceCB from "./instanceCB";
 import Instance from "../instance";
 import {StoragePromise} from "../abstract/storage";
-const debug = debg('simple-url-cache-REDIS');
+const debug = debg('redis-url-cache-REDIS');
 
 export default class RedisStoragePromise extends StoragePromise {
 
@@ -13,7 +13,7 @@ export default class RedisStoragePromise extends StoragePromise {
 
     constructor(private instance: Instance) {
         super();
-        this.hashKey = 'simple-url-cache:' + instance.getInstanceName();
+        this.hashKey = 'redis-url-cache:' + instance.getInstanceName();
         this.cbInstance = new RedisStorageInstanceCB(instance);
         this.method = 'promise';
     }
@@ -24,13 +24,13 @@ export default class RedisStoragePromise extends StoragePromise {
 
     clearCache():Promise<boolean> {
         return new Promise((resolve, reject) => {
-            
+
             this.cbInstance.clearCache( (err, results) => {
                 if (err) {
                     debug(err);
                     reject(err);
                 } else {
-                    resolve(results);    
+                    resolve(results);
                 }
             });
         });
@@ -38,7 +38,7 @@ export default class RedisStoragePromise extends StoragePromise {
 
     clearDomain(domain: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            
+
             this.cbInstance.clearDomain(domain, (err, results) => {
                 if (err) {
                     debug(err);
@@ -144,7 +144,7 @@ export default class RedisStoragePromise extends StoragePromise {
     }
 
     /**
-     * HMSET simple-url-cache:instance domain "domain:instance"
+     * HMSET debug-url-cache:instance domain "domain:instance"
      * HMSET domain:instance key value
      * -> if 0, then resolve(true)
      *      HGET domain:instance:key

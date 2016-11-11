@@ -1,9 +1,9 @@
 "use strict";
 
-var CacheEngine = require('./../dist/redis-cache').RedisUrlCache.CacheEngineCB;
+var CacheEngine = require('./../dist/redis-cache').CacheEngineCB;
 
-var Instance = require('./../dist/redis-cache').RedisUrlCache.Instance;
-var CacheCreator = require('./../dist/redis-cache').RedisUrlCache.CacheCreator;
+var Instance = require('./../dist/redis-cache').Instance;
+var CacheCreator = require('./../dist/redis-cache').CacheCreator;
 
 var cacheRules = require('./helper/cacheRules');
 var oneInstance = require('./helper/oneInstance');
@@ -146,7 +146,7 @@ describe('INITIALIZING CacheEngines and Instances', function () {
             done();
         });
     });
-    
+
     it('should initialize instance2 & redis2 OK', function (done) {
         instance2 = new Instance(instanceName2, storageConfig, {
             on_existing_regex: 'replace',

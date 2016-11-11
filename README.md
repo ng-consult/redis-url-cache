@@ -1,13 +1,9 @@
-# Redis Url Cache [![Build Status](https://travis-ci.org/a-lucas/redis-url-cache.svg?branch=master)](https://travis-ci.org/a-lucas/redis-url-cache)  [![codecov](https://codecov.io/gh/a-lucas/redis-url-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/a-lucas/redis-url-cache)
+# Redis Url Cache [![Build Status](https://travis-ci.org/a-lucas/redis-url-cache.svg?branch=master)](https://travis-ci.org/ng-consult/redis-url-cache)  
+[![codecov](https://codecov.io/gh/a-lucas/redis-url-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/a-lucas/redis-url-cache)
 
-
-Conditionally cache your URL's content on REDIS with RegExp. Supports ocnfig change propagation, cache instance sharing and isolation.
-
+    Conditionally cache your URL's content on REDIS with RegExp. Supports ocnfig change propagation, cache instance sharing and isolation.
 
 **Official website:**   https://ng-consult.github.io/redis-url-cache/
-
-
-
 
 <!--
 ## Adding Storages

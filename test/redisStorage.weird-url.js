@@ -1,7 +1,7 @@
 "use strict";
 
-var CacheEngine = require('./../dist/redis-cache').RedisUrlCache.CacheEnginePromise;
-var Instance = require('./../dist/redis-cache').RedisUrlCache.Instance;
+var CacheEngine = require('./../dist/redis-cache').CacheEnginePromise;
+var Instance = require('./../dist/redis-cache').Instance;
 
 var weirdUrls = require('./helper/weirdUrls');
 var common = require('./helper/commonCB');

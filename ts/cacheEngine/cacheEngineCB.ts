@@ -7,7 +7,7 @@ import CacheEngine from "./CacheEngine";
 import Instance from "../instance";
 
 import * as dbug from 'debug';
-const debug = dbug('simple-url-cache');
+const debug = dbug('redis-url-cache');
 
 class CacheEngineCB extends CacheEngine{
 

@@ -4,7 +4,7 @@ import {Promise} from 'es6-promise';
 import RedisStoragePromise from "../redis/instancePromise";
 import RedisStorageCB from "../redis/instanceCB";
 
-var debug = require('debug')('simple-url-cache');
+var debug = require('debug')('redis-url-cache');
 
 export class UrlCommon {
 
@@ -126,7 +126,7 @@ export class UrlPromise extends UrlCommon {
     set = (content : string, extra: Object, force?: boolean): Promise<boolean> => {
         Helpers.isStringDefined(content);
         Helpers.isOptionalBoolean(force);
-        
+
         if(typeof force === 'undefined') {
             force = false;
         }

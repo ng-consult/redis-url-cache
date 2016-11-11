@@ -5,7 +5,7 @@ import * as debg from 'debug';
 import Instance from "../instance";
 import CacheEngine from "../cacheEngine/CacheEngine";
 import {StorageCB} from "../abstract/storage";
-const debug = debg('simple-url-cache-REDIS');
+const debug = debg('redis-url-cache-REDIS');
 
 export default class RedisStorageCB extends StorageCB {
 
@@ -102,7 +102,7 @@ export default class RedisStorageCB extends StorageCB {
 
             //debug('found these urls in ', this.getDomainHashKey(domain), urls);
             let nb = 0;
-            
+
             urls.forEach(url => {
                 this._conn.get(this.getUrlKey(domain, url), (err, data) => {
                     if (err) return cb(err);
@@ -131,7 +131,7 @@ export default class RedisStorageCB extends StorageCB {
     getCacheRules(): CacheRules {
         return this.instance.getManager().getRules();
     }
-    
+
     /**
      *
      * DEL domain:instance:key
@@ -231,7 +231,7 @@ export default class RedisStorageCB extends StorageCB {
     }
 
     /**
-     * HMSET simple-url-cache:instance domain "domain:instance"
+     * HMSET debug-url-cache:instance domain "domain:instance"
      * HMSET domain:instance key value
      * -> if 0, then resolve(true)
      *      HGET domain:instance:key

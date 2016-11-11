@@ -3,7 +3,7 @@ import CacheEngineCB from './cacheEngine/cacheEngineCB';
 import Instance from './instance';
 import CacheCreator from './rules/CacheRulesCreator';
 
-module.exports.RedisUrlCache = {
+export = {
     CacheEnginePromise: CacheEnginePromise,
     CacheEngineCB : CacheEngineCB,
     Instance : Instance,

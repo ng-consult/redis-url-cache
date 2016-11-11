@@ -1,7 +1,7 @@
 
 var chai = require('chai');
 
-var debug = require('debug')('simple-url-cache-test');
+var debug = require('debug')('redis-url-cache-test');
 var expect = chai.expect;
 
 
@@ -226,7 +226,7 @@ function DELETE_ALL(cacheEngine) {
 function RECREATE_CONFIG(instanceName, storageConfig, cacheRules) {
 
     describe('Creating a new Config for '+ instanceName, function () {
-        
+
 
         it('We delete redis Exiting Cache Config', function (done) {
             const client = redis.createClient(storageConfig);
