@@ -6,9 +6,7 @@ const debug = require('debug')('redis-url-cache');
 export default class Helpers {
 
     static unserializeRegex(input: string): RegExp{
-        console.log('GOing to unserialize regex', input);
         const match = input.match(new RegExp('^/(.*?)/([gimy]*)$'));
-        console.log(match[0], match[1], match[2]);
         // sanity check here
         if(match.length === 3 && typeof match[1] === 'string' && typeof match[2] === 'string') {
             return new RegExp(match[1], match[2]);
@@ -38,7 +36,7 @@ export default class Helpers {
         });
         return rules;
     }
-    
+
     static isRedis(storageConfig:RedisStorageConfig): storageConfig is RedisStorageConfig {
         return typeof (<RedisStorageConfig>storageConfig).host !== 'undefined';
     }

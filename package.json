@@ -1,6 +1,6 @@
 {
   "name": "redis-url-cache",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A simple cache engine used to store html document with URL keys",
   "main": "dist/redis-cache.js",
   "scripts": {
